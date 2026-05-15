@@ -1,0 +1,721 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "OpenSky Network API",
+    "description": "Retrieve state vectors, flights, and tracks for the whole network, a particular sensor, or a specific aircraft. Rate limits apply for certain API calls, and restrictions vary for anonymous and OpenSky users.",
+    "version": "1.4.0",
+    "contact": {
+      "url": "https://openskynetwork.github.io/opensky-api/rest.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://opensky-network.org/api",
+      "description": "OpenSky Network API"
+    }
+  ],
+  "paths": {
+    "/states/all": {
+      "get": {
+        "summary": "Get all state vectors",
+        "description": "Retrieve any state vector of the OpenSky network. Rate limits apply for this call. For API calls without rate limitation, see Own State Vectors.",
+        "operationId": "getAllStates",
+        "parameters": [
+          {
+            "name": "time",
+            "in": "query",
+            "description": "The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "icao24",
+            "in": "query",
+            "description": "One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": true
+          },
+          {
+            "name": "lamin",
+            "in": "query",
+            "description": "Lower bound for the latitude in decimal degrees",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "lomin",
+            "in": "query",
+            "description": "Lower bound for the longitude in decimal degrees",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "lamax",
+            "in": "query",
+            "description": "Upper bound for the latitude in decimal degrees",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "lomax",
+            "in": "query",
+            "description": "Upper bound for the longitude in decimal degrees",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "extended",
+            "in": "query",
+            "description": "Set to 1 to include aircraft category information",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with state vectors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StateVectorResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Rate-Limit-Remaining": {
+                "description": "Number of remaining API credits",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "headers": {
+              "X-Rate-Limit-Retry-After-Seconds": {
+                "description": "Number of seconds until credits become available again",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/states/own": {
+      "get": {
+        "summary": "Get own state vectors",
+        "description": "Retrieve state vectors for your own sensors without rate limitations. Authentication is required for this operation.",
+        "operationId": "getOwnStates",
+        "parameters": [
+          {
+            "name": "time",
+            "in": "query",
+            "description": "The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "icao24",
+            "in": "query",
+            "description": "One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": true
+          },
+          {
+            "name": "serials",
+            "in": "query",
+            "description": "Retrieve only states of a subset of your receivers. You can pass this argument several times to filter state of more than one of your receivers.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with state vectors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StateVectorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - Authentication required"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/flights/all": {
+      "get": {
+        "summary": "Get flights in time interval",
+        "description": "Retrieve flights for a certain time interval. Rate limits and API credits apply.",
+        "operationId": "getFlightsInInterval",
+        "parameters": [
+          {
+            "name": "begin",
+            "in": "query",
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with flights data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/flights/aircraft": {
+      "get": {
+        "summary": "Get flights by aircraft",
+        "description": "Retrieve flights for a particular aircraft within a time interval",
+        "operationId": "getFlightsByAircraft",
+        "parameters": [
+          {
+            "name": "icao24",
+            "in": "query",
+            "description": "ICAO24 transponder address represented by a hex string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "begin",
+            "in": "query",
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with flights data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/flights/arrival": {
+      "get": {
+        "summary": "Get arrivals by airport",
+        "description": "Retrieve flights arriving at a particular airport within a time interval",
+        "operationId": "getArrivalsByAirport",
+        "parameters": [
+          {
+            "name": "airport",
+            "in": "query",
+            "description": "ICAO airport code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "begin",
+            "in": "query",
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with arrivals data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/flights/departure": {
+      "get": {
+        "summary": "Get departures by airport",
+        "description": "Retrieve flights departing from a particular airport within a time interval",
+        "operationId": "getDeparturesByAirport",
+        "parameters": [
+          {
+            "name": "airport",
+            "in": "query",
+            "description": "ICAO airport code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "begin",
+            "in": "query",
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with departures data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/tracks/all": {
+      "get": {
+        "summary": "Get track by aircraft",
+        "description": "Retrieve the trajectory for a certain aircraft at a given time. Rate limits and API credits apply.",
+        "operationId": "getTrackByAircraft",
+        "parameters": [
+          {
+            "name": "icao24",
+            "in": "query",
+            "description": "ICAO24 transponder address represented by a hex string",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "time",
+            "in": "query",
+            "description": "Unix timestamp (seconds) for which the track should be retrieved",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with track data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Track"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "404": {
+            "description": "Not Found - No track found for the given aircraft and time"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StateVectorResponse": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "integer",
+            "description": "The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [time - 1, time]."
+          },
+          "states": {
+            "type": "array",
+            "description": "Array of state vectors",
+            "items": {
+              "$ref": "#/components/schemas/StateVector"
+            }
+          }
+        }
+      },
+      "StateVector": {
+        "type": "array",
+        "description": "State vector representing an aircraft's state",
+        "items": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "minItems": 17,
+        "maxItems": 18,
+        "example": [
+          "abc9f3",
+          "CALLSIGN",
+          "United States",
+          1458564121,
+          1458564121,
+          -100.5,
+          40.5,
+          1500,
+          false,
+          150,
+          90,
+          5,
+          [
+            1,
+            2,
+            3
+          ],
+          1520,
+          "1234",
+          false,
+          0,
+          3
+        ]
+      },
+      "Flight": {
+        "type": "object",
+        "properties": {
+          "icao24": {
+            "type": "string",
+            "description": "Unique ICAO 24-bit address of the transponder in hex string representation"
+          },
+          "firstSeen": {
+            "type": "integer",
+            "description": "Unix timestamp (seconds) of the first position report"
+          },
+          "estDepartureAirport": {
+            "type": "string",
+            "nullable": true,
+            "description": "Estimated departure airport ICAO code"
+          },
+          "lastSeen": {
+            "type": "integer",
+            "description": "Unix timestamp (seconds) of the last position report"
+          },
+          "estArrivalAirport": {
+            "type": "string",
+            "nullable": true,
+            "description": "Estimated arrival airport ICAO code"
+          },
+          "callsign": {
+            "type": "string",
+            "nullable": true,
+            "description": "Callsign of the vehicle (8 chars)"
+          },
+          "estDepartureAirportHorizDistance": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Horizontal distance to estimated departure airport in meters"
+          },
+          "estDepartureAirportVertDistance": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Vertical distance to estimated departure airport in meters"
+          },
+          "estArrivalAirportHorizDistance": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Horizontal distance to estimated arrival airport in meters"
+          },
+          "estArrivalAirportVertDistance": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Vertical distance to estimated arrival airport in meters"
+          },
+          "departureAirportCandidatesCount": {
+            "type": "integer",
+            "description": "Number of candidates for departure airport"
+          },
+          "arrivalAirportCandidatesCount": {
+            "type": "integer",
+            "description": "Number of candidates for arrival airport"
+          }
+        }
+      },
+      "Track": {
+        "type": "object",
+        "properties": {
+          "icao24": {
+            "type": "string",
+            "description": "Unique ICAO 24-bit address of the transponder"
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Unix timestamp (seconds) of the start of the track"
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Unix timestamp (seconds) of the end of the track"
+          },
+          "callsign": {
+            "type": "string",
+            "nullable": true,
+            "description": "Callsign of the vehicle"
+          },
+          "path": {
+            "type": "array",
+            "description": "Array of waypoints representing the aircraft trajectory",
+            "items": {
+              "type": "array",
+              "description": "Waypoint [time, latitude, longitude, altitude, on_ground]",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "minItems": 5,
+              "maxItems": 5
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "Basic authentication using OpenSky username and password (deprecated for new accounts)"
+      },
+      "oauth2": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token"
+      }
+    }
+  }
+}

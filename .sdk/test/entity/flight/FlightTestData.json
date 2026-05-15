@@ -1,0 +1,66 @@
+{
+  "existing": {
+    "flight": {
+      "FLIGHT00": {
+        "arrival_airport_candidates_count": "s78",
+        "callsign": "s79",
+        "departure_airport_candidates_count": "s7a",
+        "est_arrival_airport": "s7b",
+        "est_arrival_airport_horiz_distance": "s7c",
+        "est_arrival_airport_vert_distance": "s7d",
+        "est_departure_airport": "s7e",
+        "est_departure_airport_horiz_distance": "s7f",
+        "est_departure_airport_vert_distance": "s80",
+        "first_seen": "s81",
+        "icao24": "s82",
+        "last_seen": "s83"
+      },
+      "FLIGHT01": {
+        "arrival_airport_candidates_count": "sf0",
+        "callsign": "sf1",
+        "departure_airport_candidates_count": "sf2",
+        "est_arrival_airport": "sf3",
+        "est_arrival_airport_horiz_distance": "sf4",
+        "est_arrival_airport_vert_distance": "sf5",
+        "est_departure_airport": "sf6",
+        "est_departure_airport_horiz_distance": "sf7",
+        "est_departure_airport_vert_distance": "sf8",
+        "first_seen": "sf9",
+        "icao24": "sfa",
+        "last_seen": "sfb"
+      },
+      "FLIGHT02": {
+        "arrival_airport_candidates_count": "s168",
+        "callsign": "s169",
+        "departure_airport_candidates_count": "s16a",
+        "est_arrival_airport": "s16b",
+        "est_arrival_airport_horiz_distance": "s16c",
+        "est_arrival_airport_vert_distance": "s16d",
+        "est_departure_airport": "s16e",
+        "est_departure_airport_horiz_distance": "s16f",
+        "est_departure_airport_vert_distance": "s170",
+        "first_seen": "s171",
+        "icao24": "s172",
+        "last_seen": "s173"
+      }
+    }
+  },
+  "new": {
+    "flight": {
+      "flight_ref01": {
+        "arrival_airport_candidates_count": "s1e0",
+        "callsign": "s1e1",
+        "departure_airport_candidates_count": "s1e2",
+        "est_arrival_airport": "s1e3",
+        "est_arrival_airport_horiz_distance": "s1e4",
+        "est_arrival_airport_vert_distance": "s1e5",
+        "est_departure_airport": "s1e6",
+        "est_departure_airport_horiz_distance": "s1e7",
+        "est_departure_airport_vert_distance": "s1e8",
+        "first_seen": "s1e9",
+        "icao24": "s1ea",
+        "last_seen": "s1eb"
+      }
+    }
+  }
+}

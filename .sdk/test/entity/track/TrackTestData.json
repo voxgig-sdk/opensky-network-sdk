@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "track": {
+      "TRACK00": {
+        "callsign": "s32",
+        "end_time": "s33",
+        "icao24": "s34",
+        "path": [],
+        "start_time": "s36"
+      },
+      "TRACK01": {
+        "callsign": "s64",
+        "end_time": "s65",
+        "icao24": "s66",
+        "path": [],
+        "start_time": "s68"
+      },
+      "TRACK02": {
+        "callsign": "s96",
+        "end_time": "s97",
+        "icao24": "s98",
+        "path": [],
+        "start_time": "s9a"
+      }
+    }
+  },
+  "new": {
+    "track": {
+      "track_ref01": {
+        "callsign": "sc8",
+        "end_time": "sc9",
+        "icao24": "sca",
+        "path": [],
+        "start_time": "scc"
+      }
+    }
+  }
+}

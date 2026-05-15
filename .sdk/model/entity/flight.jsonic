@@ -1,0 +1,253 @@
+# Entity: flight
+
+main: kit: entity: flight: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "arrival_airport_candidates_count"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "callsign"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "departure_airport_candidates_count"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "est_arrival_airport"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "est_arrival_airport_horiz_distance"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "est_arrival_airport_vert_distance"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "est_departure_airport"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "est_departure_airport_horiz_distance"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "est_departure_airport_vert_distance"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "first_seen"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "icao24"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "last_seen"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "flight"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "begin"
+                orig: "begin"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "end"
+                orig: "end"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "icao24"
+                orig: "icao24"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/flights/aircraft"
+          parts: [
+            "flights"
+            "aircraft"
+          ]
+          select: {
+            "$action": "aircraft"
+            exist: [
+              "begin"
+              "end"
+              "icao24"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "airport"
+                orig: "airport"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "begin"
+                orig: "begin"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "end"
+                orig: "end"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/flights/arrival"
+          parts: [
+            "flights"
+            "arrival"
+          ]
+          select: {
+            "$action": "arrival"
+            exist: [
+              "airport"
+              "begin"
+              "end"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "airport"
+                orig: "airport"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "begin"
+                orig: "begin"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "end"
+                orig: "end"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/flights/departure"
+          parts: [
+            "flights"
+            "departure"
+          ]
+          select: {
+            "$action": "departure"
+            exist: [
+              "airport"
+              "begin"
+              "end"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "begin"
+                orig: "begin"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "end"
+                orig: "end"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/flights/all"
+          parts: [
+            "flights"
+            "all"
+          ]
+          select: {
+            "$action": "all"
+            exist: [
+              "begin"
+              "end"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

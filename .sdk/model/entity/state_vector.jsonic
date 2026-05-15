@@ -1,0 +1,151 @@
+# Entity: state_vector
+
+main: kit: entity: state_vector: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "state"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "time"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "state_vector"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "extended"
+                orig: "extended"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "icao24"
+                orig: "icao24"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+              {
+                kind: "query"
+                name: "lamax"
+                orig: "lamax"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "lamin"
+                orig: "lamin"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "lomax"
+                orig: "lomax"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "lomin"
+                orig: "lomin"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "time"
+                orig: "time"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/states/all"
+          parts: [
+            "states"
+            "all"
+          ]
+          select: {
+            exist: [
+              "extended"
+              "icao24"
+              "lamax"
+              "lamin"
+              "lomax"
+              "lomin"
+              "time"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "icao24"
+                orig: "icao24"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+              {
+                kind: "query"
+                name: "serial"
+                orig: "serial"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+              {
+                kind: "query"
+                name: "time"
+                orig: "time"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/states/own"
+          parts: [
+            "states"
+            "own"
+          ]
+          select: {
+            exist: [
+              "icao24"
+              "serial"
+              "time"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

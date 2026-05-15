@@ -1,0 +1,83 @@
+# Entity: track
+
+main: kit: entity: track: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "callsign"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "end_time"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "icao24"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "path"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "start_time"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "track"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "icao24"
+                orig: "icao24"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "time"
+                orig: "time"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/tracks/all"
+          parts: [
+            "tracks"
+            "all"
+          ]
+          select: {
+            "$action": "all"
+            exist: [
+              "icao24"
+              "time"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

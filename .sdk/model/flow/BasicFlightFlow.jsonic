@@ -1,0 +1,22 @@
+# BasicFlightFlow
+
+main: kit: flow: BasicFlightFlow:
+{
+  entity: "flight",
+  kind: "basic",
+  name: "BasicFlightFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "flight_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFlightFlow"
+}

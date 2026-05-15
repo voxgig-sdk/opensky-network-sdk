@@ -1,0 +1,22 @@
+# BasicStateVectorFlow
+
+main: kit: flow: BasicStateVectorFlow:
+{
+  entity: "state_vector",
+  kind: "basic",
+  name: "BasicStateVectorFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "state_vector_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStateVectorFlow"
+}

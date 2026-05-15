@@ -1,0 +1,43 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 7
+  metrics: count: method: 7
+
+  entity: flight: {
+    path: "/flights/aircraft": {
+      action: "aircraft": {}
+      op: list: method: *GET
+    }
+    path: "/flights/all": {
+      action: "all": {}
+      op: list: method: *GET
+    }
+    path: "/flights/arrival": {
+      action: "arrival": {}
+      op: list: method: *GET
+    }
+    path: "/flights/departure": {
+      action: "departure": {}
+      op: list: method: *GET
+    }
+  }
+
+  entity: state_vector: {
+    path: "/states/all": {
+      op: list: method: *GET
+    }
+    path: "/states/own": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: track: {
+    path: "/tracks/all": {
+      action: "all": {}
+      op: list: method: *GET
+    }
+  }
+
+}

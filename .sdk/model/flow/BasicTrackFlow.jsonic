@@ -1,0 +1,22 @@
+# BasicTrackFlow
+
+main: kit: flow: BasicTrackFlow:
+{
+  entity: "track",
+  kind: "basic",
+  name: "BasicTrackFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "track_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTrackFlow"
+}
