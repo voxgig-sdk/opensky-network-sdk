@@ -20,7 +20,7 @@ class TrackDirectTest < Minitest::Test
 
 
     result, err = client.direct({
-      "path" => "tracks/all",
+      "path" => "tracks",
       "method" => "GET",
       "params" => {},
     })

@@ -251,7 +251,7 @@ API path: `/states/all`
 
 Operations: List.
 
-API path: `/tracks/all`
+API path: `/tracks`
 
 
 

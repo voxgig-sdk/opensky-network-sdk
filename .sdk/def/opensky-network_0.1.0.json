@@ -467,7 +467,7 @@
         ]
       }
     },
-    "/tracks/all": {
+    "/tracks": {
       "get": {
         "summary": "Get track by aircraft",
         "description": "Retrieve the trajectory for a certain aircraft at a given time. Rate limits and API credits apply.",

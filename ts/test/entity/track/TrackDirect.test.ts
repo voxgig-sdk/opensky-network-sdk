@@ -40,7 +40,7 @@ describe('TrackDirect', async () => {
     const query: any = {}
 
     const result: any = await client.direct({
-      path: 'tracks/all',
+      path: 'tracks',
       method: 'GET',
       params,
       query,

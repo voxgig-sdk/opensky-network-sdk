@@ -34,8 +34,7 @@ guide: {
   }
 
   entity: track: {
-    path: "/tracks/all": {
-      action: "all": {}
+    path: "/tracks": {
       op: list: method: *GET
     }
   }

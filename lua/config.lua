@@ -549,13 +549,11 @@ local function make_config()
                   },
                 },
                 ["method"] = "GET",
-                ["orig"] = "/tracks/all",
+                ["orig"] = "/tracks",
                 ["parts"] = {
                   "tracks",
-                  "all",
                 },
                 ["select"] = {
-                  ["$action"] = "all",
                   ["exist"] = {
                     "icao24",
                     "time",

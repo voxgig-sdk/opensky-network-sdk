@@ -13,7 +13,7 @@ The API exposes 3 entities:
 | --- | --- | --- |
 | **Flight** |  | `/flights/aircraft` |
 | **StateVector** |  | `/states/all` |
-| **Track** |  | `/tracks/all` |
+| **Track** |  | `/tracks` |
 
 Each entity supports the following operations where available: **load**, **list**, **create**,
 **update**, and **remove**.

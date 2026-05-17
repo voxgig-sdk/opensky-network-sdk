@@ -31,7 +31,7 @@ func TestTrackDirect(t *testing.T) {
 
 
 		result, err := client.Direct(map[string]any{
-			"path":   "tracks/all",
+			"path":   "tracks",
 			"method": "GET",
 			"params": map[string]any{},
 		})

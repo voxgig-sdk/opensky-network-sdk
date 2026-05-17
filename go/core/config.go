@@ -549,13 +549,11 @@ func MakeConfig() map[string]any {
 									},
 								},
 								"method": "GET",
-								"orig": "/tracks/all",
+								"orig": "/tracks",
 								"parts": []any{
 									"tracks",
-									"all",
 								},
 								"select": map[string]any{
-									"$action": "all",
 									"exist": []any{
 										"icao24",
 										"time",

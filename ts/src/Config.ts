@@ -584,13 +584,11 @@ class Config {
                 ]
               },
               "method": "GET",
-              "orig": "/tracks/all",
+              "orig": "/tracks",
               "parts": [
-                "tracks",
-                "all"
+                "tracks"
               ],
               "select": {
-                "$action": "all",
                 "exist": [
                   "icao24",
                   "time"

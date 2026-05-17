@@ -25,7 +25,7 @@ class TrackDirectTest extends TestCase
 
 
         [$result, $err] = $client->direct([
-            "path" => "tracks/all",
+            "path" => "tracks",
             "method" => "GET",
             "params" => [],
         ]);
