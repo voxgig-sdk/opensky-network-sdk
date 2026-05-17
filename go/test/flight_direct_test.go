@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/opensky-network-sdk"
-	"github.com/voxgig-sdk/opensky-network-sdk/core"
+	sdk "github.com/voxgig-sdk/opensky-network-sdk/go"
+	"github.com/voxgig-sdk/opensky-network-sdk/go/core"
 )
 
 func TestFlightDirect(t *testing.T) {

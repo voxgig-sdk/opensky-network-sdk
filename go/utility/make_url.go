@@ -3,9 +3,9 @@ package utility
 import (
 	"regexp"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/opensky-network-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/opensky-network-sdk/core"
+	"github.com/voxgig-sdk/opensky-network-sdk/go/core"
 )
 
 func makeUrlUtil(ctx *core.Context) (string, error) {

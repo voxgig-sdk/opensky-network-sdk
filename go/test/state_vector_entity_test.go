@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/opensky-network-sdk"
-	"github.com/voxgig-sdk/opensky-network-sdk/core"
+	sdk "github.com/voxgig-sdk/opensky-network-sdk/go"
+	"github.com/voxgig-sdk/opensky-network-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/opensky-network-sdk/go/utility/struct"
 )
 
 func TestStateVectorEntity(t *testing.T) {

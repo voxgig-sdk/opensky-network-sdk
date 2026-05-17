@@ -1,10 +1,10 @@
 package voxgigopenskynetworksdk
 
 import (
-	"github.com/voxgig-sdk/opensky-network-sdk/core"
-	"github.com/voxgig-sdk/opensky-network-sdk/entity"
-	"github.com/voxgig-sdk/opensky-network-sdk/feature"
-	_ "github.com/voxgig-sdk/opensky-network-sdk/utility"
+	"github.com/voxgig-sdk/opensky-network-sdk/go/core"
+	"github.com/voxgig-sdk/opensky-network-sdk/go/entity"
+	"github.com/voxgig-sdk/opensky-network-sdk/go/feature"
+	_ "github.com/voxgig-sdk/opensky-network-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

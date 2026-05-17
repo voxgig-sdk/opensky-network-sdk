@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/opensky-network-sdk/core"
+	"github.com/voxgig-sdk/opensky-network-sdk/go/core"
 )
 
 type LogFeature struct {
