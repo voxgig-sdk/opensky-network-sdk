@@ -93,14 +93,12 @@ func flightDirectSetup(mockres any) *flightDirectSetupResult {
 	env := envOverride(map[string]any{
 		"OPENSKYNETWORK_TEST_FLIGHT_ENTID": map[string]any{},
 		"OPENSKYNETWORK_TEST_LIVE":    "FALSE",
-		"OPENSKYNETWORK_APIKEY":       "NONE",
 	})
 
 	live := env["OPENSKYNETWORK_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["OPENSKYNETWORK_APIKEY"],
 		}
 		client := sdk.NewOpenskyNetworkSDK(mergedOpts)
 

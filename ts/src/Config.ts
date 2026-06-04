@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://opensky-network.org/api',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

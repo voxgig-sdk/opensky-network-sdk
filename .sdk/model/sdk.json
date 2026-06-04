@@ -16,7 +16,19 @@
           }
         ],
         "title": "OpenSky Network API",
-        "version": "1.4.0"
+        "version": "1.4.0",
+        "tagline": "Crowdsourced ADS-B aircraft state vectors, flights, and tracks from a global sensor network",
+        "homepage": "https://opensky-network.org/",
+        "docs_url": "https://openskynetwork.github.io/opensky-api/rest.html",
+        "license_short": "Free for non-commercial and academic use; see OpenSky Network terms",
+        "license_md": "- Operated by the [OpenSky Network](https://opensky-network.org/) research association\n- Data is intended for non-commercial and academic use; commercial use requires a separate licence\n- Attribution to the OpenSky Network is expected when using or republishing data\n- See the [REST API documentation](https://openskynetwork.github.io/opensky-api/rest.html) for current terms",
+        "about_md": "The [OpenSky Network](https://opensky-network.org/) is a non-profit, community-driven receiver network that collects ADS-B and Mode S aviation surveillance data from thousands of volunteer sensors worldwide. Its REST API at `https://opensky-network.org/api` exposes that live and historical aircraft data for researchers, hobbyists, and tooling.\n\nWhat you get from the API:\n\n- Real-time **state vectors** for aircraft globally (`/states/all`) or only those visible to your own sensors (`/states/own`), including ICAO24 address, callsign, origin country, position, altitudes, velocity, heading, vertical rate, squawk and category\n- Historical **flights** within a time window (`/flights/all`), by aircraft (`/flights/aircraft`), or by airport arrivals/departures (`/flights/arrival`, `/flights/departure`)\n- Aircraft **tracks** as ordered waypoints (`/tracks` — experimental)\n\nAccess uses OAuth2 client credentials: users obtain a `client_id` and `client_secret` from their OpenSky account and exchange them for a Bearer token (valid ~30 minutes). Requests are metered with a daily credit-based system across separate state, track, and flight buckets, with higher allowances for registered users, active feeders, and licensed users. Query cost depends on the bounding box size, with global queries costing more credits than narrow regional ones.",
+        "entity_desc": {
+          "flight": "Historical flight records for an aircraft or airport, served via `/flights/all`, `/flights/aircraft`, `/flights/arrival`, and `/flights/departure`",
+          "state_vector": "Live position and motion snapshot of an aircraft (ICAO24, callsign, coordinates, altitude, velocity, heading, vertical rate, squawk, category), served via `/states/all` and `/states/own`",
+          "track": "Ordered sequence of waypoints describing an aircraft's trajectory, served via `/tracks` (experimental)"
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +36,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "flight": {
