@@ -10,7 +10,7 @@ The PHP SDK for the OpenskyNetwork API — an entity-oriented client using PHP c
 
 ## Install
 ```bash
-composer require voxgig/opensky-network-sdk
+composer require voxgig-sdk/opensky-network
 ```
 
 

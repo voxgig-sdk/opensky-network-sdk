@@ -10,7 +10,7 @@ The Python SDK for the OpenskyNetwork API — an entity-oriented client followin
 
 ## Install
 ```bash
-pip install opensky-network-sdk
+pip install voxgig-sdk-opensky-network
 ```
 
 Or install from source:

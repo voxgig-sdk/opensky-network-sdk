@@ -10,7 +10,7 @@ The Lua SDK for the OpenskyNetwork API — an entity-oriented client using Lua c
 
 ## Install
 ```bash
-luarocks install opensky-network-sdk
+luarocks install voxgig-sdk-opensky-network
 ```
 
 If the module is not yet published, add the source directory to

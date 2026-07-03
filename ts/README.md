@@ -10,7 +10,7 @@ The TypeScript SDK for the OpenskyNetwork API — a type-safe, entity-oriented c
 
 ## Install
 ```bash
-npm install opensky-network
+npm install @voxgig-sdk/opensky-network
 ```
 ## Tutorial: your first API call
 

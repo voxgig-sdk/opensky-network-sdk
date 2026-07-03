@@ -10,13 +10,13 @@ The Ruby SDK for the OpenskyNetwork API — an entity-oriented client using idio
 
 ## Install
 ```bash
-gem install opensky-network-sdk
+gem install voxgig-sdk-opensky-network
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "opensky-network-sdk"
+gem "voxgig-sdk-opensky-network"
 ```
 
 Then run:
