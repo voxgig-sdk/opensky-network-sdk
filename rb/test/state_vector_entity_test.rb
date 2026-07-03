@@ -83,6 +83,7 @@ def state_vector_basic_setup(extra)
     "OPENSKYNETWORK_TEST_STATE_VECTOR_ENTID" => idmap,
     "OPENSKYNETWORK_TEST_LIVE" => "FALSE",
     "OPENSKYNETWORK_TEST_EXPLAIN" => "FALSE",
+    "OPENSKYNETWORK_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,6 +95,7 @@ def state_vector_basic_setup(extra)
   if env["OPENSKYNETWORK_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["OPENSKYNETWORK_APIKEY"],
       },
       extra || {},
     ])

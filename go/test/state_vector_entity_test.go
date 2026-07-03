@@ -119,6 +119,7 @@ func state_vectorBasicSetup(extra map[string]any) *entityTestSetup {
 		"OPENSKYNETWORK_TEST_STATE_VECTOR_ENTID": idmap,
 		"OPENSKYNETWORK_TEST_LIVE":      "FALSE",
 		"OPENSKYNETWORK_TEST_EXPLAIN":   "FALSE",
+		"OPENSKYNETWORK_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["OPENSKYNETWORK_TEST_STATE_VECTOR_ENTID"])
@@ -129,6 +130,7 @@ func state_vectorBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["OPENSKYNETWORK_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["OPENSKYNETWORK_APIKEY"],
 			},
 			extra,
 		})

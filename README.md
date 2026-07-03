@@ -1,20 +1,8 @@
 # OpenskyNetwork SDK
 
-Crowdsourced ADS-B aircraft state vectors, flights, and tracks from a global sensor network
+OpenSky Network API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About OpenSky Network API
-
-The [OpenSky Network](https://opensky-network.org/) is a non-profit, community-driven receiver network that collects ADS-B and Mode S aviation surveillance data from thousands of volunteer sensors worldwide. Its REST API at `https://opensky-network.org/api` exposes that live and historical aircraft data for researchers, hobbyists, and tooling.
-
-What you get from the API:
-
-- Real-time **state vectors** for aircraft globally (`/states/all`) or only those visible to your own sensors (`/states/own`), including ICAO24 address, callsign, origin country, position, altitudes, velocity, heading, vertical rate, squawk and category
-- Historical **flights** within a time window (`/flights/all`), by aircraft (`/flights/aircraft`), or by airport arrivals/departures (`/flights/arrival`, `/flights/departure`)
-- Aircraft **tracks** as ordered waypoints (`/tracks` — experimental)
-
-Access uses OAuth2 client credentials: users obtain a `client_id` and `client_secret` from their OpenSky account and exchange them for a Bearer token (valid ~30 minutes). Requests are metered with a daily credit-based system across separate state, track, and flight buckets, with higher allowances for registered users, active feeders, and licensed users. Query cost depends on the bounding box size, with global queries costing more credits than narrow regional ones.
 
 ## Try it
 
@@ -48,29 +36,31 @@ gem install opensky-network-sdk
 luarocks install opensky-network-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { OpenskyNetworkSDK } from 'opensky-network'
 
-const client = new OpenskyNetworkSDK({})
+const client = new OpenskyNetworkSDK({
+  apikey: process.env.OPENSKY-NETWORK_APIKEY,
+})
 
 // List all flights
 const flights = await client.Flight().list()
+console.log(flights.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,9 +90,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Flight** | Historical flight records for an aircraft or airport, served via `/flights/all`, `/flights/aircraft`, `/flights/arrival`, and `/flights/departure` | `/flights/aircraft` |
-| **StateVector** | Live position and motion snapshot of an aircraft (ICAO24, callsign, coordinates, altitude, velocity, heading, vertical rate, squawk, category), served via `/states/all` and `/states/own` | `/states/all` |
-| **Track** | Ordered sequence of waypoints describing an aircraft's trajectory, served via `/tracks` (experimental) | `/tracks` |
+| **Flight** |  | `/flights/aircraft` |
+| **StateVector** |  | `/states/all` |
+| **Track** |  | `/tracks` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -112,12 +102,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from openskynetwork_sdk import OpenskyNetworkSDK
 
-client = OpenskyNetworkSDK({})
+client = OpenskyNetworkSDK({
+    "apikey": os.environ.get("OPENSKY-NETWORK_APIKEY"),
+})
 
 # List all flights
-flights, err = client.Flight(None).list(None, None)
+flights, err = client.Flight().list()
+print(flights)
 ```
 
 ### PHP
@@ -126,10 +120,13 @@ flights, err = client.Flight(None).list(None, None)
 <?php
 require_once 'openskynetwork_sdk.php';
 
-$client = new OpenskyNetworkSDK([]);
+$client = new OpenskyNetworkSDK([
+    "apikey" => getenv("OPENSKY-NETWORK_APIKEY"),
+]);
 
 // List all flights
-[$flights, $err] = $client->Flight(null)->list(null, null);
+[$flights, $err] = $client->Flight()->list();
+print_r($flights);
 ```
 
 ### Golang
@@ -137,10 +134,13 @@ $client = new OpenskyNetworkSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/opensky-network-sdk/go"
 
-client := sdk.NewOpenskyNetworkSDK(map[string]any{})
+client := sdk.NewOpenskyNetworkSDK(map[string]any{
+    "apikey": os.Getenv("OPENSKY-NETWORK_APIKEY"),
+})
 
 // List all flights
 flights, err := client.Flight(nil).List(nil, nil)
+fmt.Println(flights)
 ```
 
 ### Ruby
@@ -148,10 +148,13 @@ flights, err := client.Flight(nil).List(nil, nil)
 ```ruby
 require_relative "OpenskyNetwork_sdk"
 
-client = OpenskyNetworkSDK.new({})
+client = OpenskyNetworkSDK.new({
+  "apikey" => ENV["OPENSKY-NETWORK_APIKEY"],
+})
 
 # List all flights
-flights, err = client.Flight(nil).list(nil, nil)
+flights, err = client.Flight().list
+puts flights
 ```
 
 ### Lua
@@ -159,10 +162,13 @@ flights, err = client.Flight(nil).list(nil, nil)
 ```lua
 local sdk = require("opensky-network_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("OPENSKY-NETWORK_APIKEY"),
+})
 
 -- List all flights
-local flights, err = client:Flight(nil):list(nil, nil)
+local flights, err = client:Flight():list()
+print(flights)
 ```
 
 ## Unit testing in offline mode
@@ -181,25 +187,21 @@ const result = await client.Flight().load({ id: 'test01' })
 ### Python
 
 ```python
-client = OpenskyNetworkSDK.test(None, None)
-result, err = client.Flight(None).load(
-    {"id": "test01"}, None
-)
+client = OpenskyNetworkSDK.test()
+result, err = client.Flight().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = OpenskyNetworkSDK::test(null, null);
-[$result, $err] = $client->Flight(null)->load(
-    ["id" => "test01"], null
-);
+$client = OpenskyNetworkSDK::test();
+[$result, $err] = $client->Flight()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Flight(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -208,19 +210,15 @@ result, err := client.Flight(nil).Load(
 ### Ruby
 
 ```ruby
-client = OpenskyNetworkSDK.test(nil, nil)
-result, err = client.Flight(nil).load(
-  { "id" => "test01" }, nil
-)
+client = OpenskyNetworkSDK.test
+result, err = client.Flight().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Flight(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Flight():load({ id = "test01" })
 ```
 
 ## How it works
@@ -324,16 +322,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the OpenSky Network API
-
-- Upstream: [https://opensky-network.org/](https://opensky-network.org/)
-- API docs: [https://openskynetwork.github.io/opensky-api/rest.html](https://openskynetwork.github.io/opensky-api/rest.html)
-
-- Operated by the [OpenSky Network](https://opensky-network.org/) research association
-- Data is intended for non-commercial and academic use; commercial use requires a separate licence
-- Attribution to the OpenSky Network is expected when using or republishing data
-- See the [REST API documentation](https://openskynetwork.github.io/opensky-api/rest.html) for current terms
 
 ---
 

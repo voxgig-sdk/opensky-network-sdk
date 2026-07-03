@@ -93,12 +93,14 @@ func trackDirectSetup(mockres any) *trackDirectSetupResult {
 	env := envOverride(map[string]any{
 		"OPENSKYNETWORK_TEST_TRACK_ENTID": map[string]any{},
 		"OPENSKYNETWORK_TEST_LIVE":    "FALSE",
+		"OPENSKYNETWORK_APIKEY":       "NONE",
 	})
 
 	live := env["OPENSKYNETWORK_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["OPENSKYNETWORK_APIKEY"],
 		}
 		client := sdk.NewOpenskyNetworkSDK(mergedOpts)
 
