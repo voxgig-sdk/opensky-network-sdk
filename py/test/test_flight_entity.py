@@ -50,8 +50,7 @@ class TestFlightEntity:
         flight_ref01_ent = client.Flight(None)
         flight_ref01_match = {}
 
-        flight_ref01_list_result, err = flight_ref01_ent.list(flight_ref01_match, None)
-        assert err is None
+        flight_ref01_list_result = flight_ref01_ent.list(flight_ref01_match, None)
         assert isinstance(flight_ref01_list_result, list)
 
 

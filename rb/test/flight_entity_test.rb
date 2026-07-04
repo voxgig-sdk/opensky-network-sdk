@@ -43,8 +43,7 @@ class FlightEntityTest < Minitest::Test
     flight_ref01_ent = client.Flight(nil)
     flight_ref01_match = {}
 
-    flight_ref01_list_result, err = flight_ref01_ent.list(flight_ref01_match, nil)
-    assert_nil err
+    flight_ref01_list_result = flight_ref01_ent.list(flight_ref01_match, nil)
     assert flight_ref01_list_result.is_a?(Array)
 
   end

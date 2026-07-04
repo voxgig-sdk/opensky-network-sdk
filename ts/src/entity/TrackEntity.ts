@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Track,
+  TrackListMatch,
+} from '../OpenskyNetworkTypes'
 
 // TODO: needs Entity superclass
-class TrackEntity extends OpenskyNetworkEntityBase {
+class TrackEntity extends OpenskyNetworkEntityBase<Track> {
 
   constructor(client: OpenskyNetworkSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class TrackEntity extends OpenskyNetworkEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: TrackListMatch, ctrl?: Control): Promise<Track[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class TrackEntity extends OpenskyNetworkEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Track[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

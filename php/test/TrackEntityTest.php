@@ -50,8 +50,7 @@ class TrackEntityTest extends TestCase
         $track_ref01_ent = $client->Track(null);
         $track_ref01_match = [];
 
-        [$track_ref01_list_result, $err] = $track_ref01_ent->list($track_ref01_match, null);
-        $this->assertNull($err);
+        $track_ref01_list_result = $track_ref01_ent->list($track_ref01_match, null);
         $this->assertIsArray($track_ref01_list_result);
 
     }

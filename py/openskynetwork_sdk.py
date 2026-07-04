@@ -144,16 +144,23 @@ class OpenskyNetworkSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class OpenskyNetworkSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,25 +212,58 @@ class OpenskyNetworkSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def flight(self):
+        """Idiomatic facade: client.flight.list() / client.flight.load({"id": ...})."""
+        from entity.flight_entity import FlightEntity
+        cached = getattr(self, "_flight", None)
+        if cached is None:
+            cached = FlightEntity(self, None)
+            self._flight = cached
+        return cached
 
     def Flight(self, data=None):
+        # Deprecated: use client.flight instead.
         from entity.flight_entity import FlightEntity
         return FlightEntity(self, data)
 
 
+    @property
+    def state_vector(self):
+        """Idiomatic facade: client.state_vector.list() / client.state_vector.load({"id": ...})."""
+        from entity.state_vector_entity import StateVectorEntity
+        cached = getattr(self, "_state_vector", None)
+        if cached is None:
+            cached = StateVectorEntity(self, None)
+            self._state_vector = cached
+        return cached
+
     def StateVector(self, data=None):
+        # Deprecated: use client.state_vector instead.
         from entity.state_vector_entity import StateVectorEntity
         return StateVectorEntity(self, data)
 
 
+    @property
+    def track(self):
+        """Idiomatic facade: client.track.list() / client.track.load({"id": ...})."""
+        from entity.track_entity import TrackEntity
+        cached = getattr(self, "_track", None)
+        if cached is None:
+            cached = TrackEntity(self, None)
+            self._track = cached
+        return cached
+
     def Track(self, data=None):
+        # Deprecated: use client.track instead.
         from entity.track_entity import TrackEntity
         return TrackEntity(self, data)
 

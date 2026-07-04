@@ -134,7 +134,7 @@ Alias for `OpenskyNetworkSDK.test()`.
 ## FlightEntity
 
 ```ts
-const flight = client.Flight()
+const flight = client.flight
 ```
 
 ### Fields
@@ -161,7 +161,7 @@ const flight = client.Flight()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Flight().list()
+const results = await client.flight.list()
 ```
 
 ### Common Methods
@@ -195,7 +195,7 @@ Return a copy of the entity options.
 ## StateVectorEntity
 
 ```ts
-const state_vector = client.StateVector()
+const state_vector = client.state_vector
 ```
 
 ### Fields
@@ -212,7 +212,7 @@ const state_vector = client.StateVector()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.StateVector().list()
+const results = await client.state_vector.list()
 ```
 
 ### Common Methods
@@ -246,7 +246,7 @@ Return a copy of the entity options.
 ## TrackEntity
 
 ```ts
-const track = client.Track()
+const track = client.track
 ```
 
 ### Fields
@@ -266,7 +266,7 @@ const track = client.Track()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Track().list()
+const results = await client.track.list()
 ```
 
 ### Common Methods

@@ -45,6 +45,7 @@ class StateVectorEntity
     end
   end
 
+  # @return [StateVector, Hash] the current StateVector data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class StateVectorEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of StateVector fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class StateVectorEntity
   
 
   
+  # List StateVector items matching the given filter.
+  #
+  # @param reqmatch [StateVectorListMatch, Hash, nil] match filter (any subset of StateVector fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<StateVector>, Array] the matching StateVector items; raises OpenskyNetworkError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

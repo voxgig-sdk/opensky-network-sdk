@@ -92,7 +92,7 @@ same parameters as `direct()`.
 ## FlightEntity
 
 ```lua
-local flight = client:Flight(nil)
+local flight = client:flight(nil)
 ```
 
 ### Fields
@@ -119,7 +119,7 @@ local flight = client:Flight(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Flight():list()
+local results, err = client:flight():list()
 ```
 
 ### Common Methods
@@ -155,7 +155,7 @@ Return the entity name.
 ## StateVectorEntity
 
 ```lua
-local state_vector = client:StateVector(nil)
+local state_vector = client:state_vector(nil)
 ```
 
 ### Fields
@@ -172,7 +172,7 @@ local state_vector = client:StateVector(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:StateVector():list()
+local results, err = client:state_vector():list()
 ```
 
 ### Common Methods
@@ -208,7 +208,7 @@ Return the entity name.
 ## TrackEntity
 
 ```lua
-local track = client:Track(nil)
+local track = client:track(nil)
 ```
 
 ### Fields
@@ -228,7 +228,7 @@ local track = client:Track(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Track():list()
+local results, err = client:track():list()
 ```
 
 ### Common Methods

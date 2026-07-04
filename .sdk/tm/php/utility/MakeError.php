@@ -9,7 +9,7 @@ require_once __DIR__ . '/../core/Error.php';
 
 class OpenskyNetworkMakeError
 {
-    public static function call(?OpenskyNetworkContext $ctx, mixed $err): array
+    public static function call(?OpenskyNetworkContext $ctx, mixed $err): mixed
     {
         if ($ctx === null) {
             require_once __DIR__ . '/../core/Context.php';
@@ -52,8 +52,8 @@ class OpenskyNetworkMakeError
         $ctx->ctrl->err = $sdk_err;
 
         if ($ctx->ctrl->throw_err === false) {
-            return [$result->resdata, null];
+            return $result->resdata;
         }
-        return [null, $sdk_err];
+        throw $sdk_err;
     }
 }

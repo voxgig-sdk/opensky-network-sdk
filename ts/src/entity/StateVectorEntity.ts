@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  StateVector,
+  StateVectorListMatch,
+} from '../OpenskyNetworkTypes'
 
 // TODO: needs Entity superclass
-class StateVectorEntity extends OpenskyNetworkEntityBase {
+class StateVectorEntity extends OpenskyNetworkEntityBase<StateVector> {
 
   constructor(client: OpenskyNetworkSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class StateVectorEntity extends OpenskyNetworkEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: StateVectorListMatch, ctrl?: Control): Promise<StateVector[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class StateVectorEntity extends OpenskyNetworkEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<StateVector[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

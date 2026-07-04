@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch StateVectorListMatch
+---@param ctrl? table
+---@return StateVector[]
+---@return string? err
 function StateVectorEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

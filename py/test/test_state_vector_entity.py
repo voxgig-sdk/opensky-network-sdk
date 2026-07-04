@@ -50,8 +50,7 @@ class TestStateVectorEntity:
         state_vector_ref01_ent = client.StateVector(None)
         state_vector_ref01_match = {}
 
-        state_vector_ref01_list_result, err = state_vector_ref01_ent.list(state_vector_ref01_match, None)
-        assert err is None
+        state_vector_ref01_list_result = state_vector_ref01_ent.list(state_vector_ref01_match, None)
         assert isinstance(state_vector_ref01_list_result, list)
 
 

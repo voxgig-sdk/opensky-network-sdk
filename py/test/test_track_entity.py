@@ -50,8 +50,7 @@ class TestTrackEntity:
         track_ref01_ent = client.Track(None)
         track_ref01_match = {}
 
-        track_ref01_list_result, err = track_ref01_ent.list(track_ref01_match, None)
-        assert err is None
+        track_ref01_list_result = track_ref01_ent.list(track_ref01_match, None)
         assert isinstance(track_ref01_list_result, list)
 
 

@@ -245,16 +245,25 @@ func (sdk *OpenskyNetworkSDK) Direct(fetchargs map[string]any) (map[string]any, 
 }
 
 
+// Flight returns a Flight entity bound to this client.
+// Idiomatic usage: client.Flight(nil).List(nil, nil) or
+// client.Flight(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *OpenskyNetworkSDK) Flight(data map[string]any) OpenskyNetworkEntity {
 	return NewFlightEntityFunc(sdk, data)
 }
 
 
+// StateVector returns a StateVector entity bound to this client.
+// Idiomatic usage: client.StateVector(nil).List(nil, nil) or
+// client.StateVector(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *OpenskyNetworkSDK) StateVector(data map[string]any) OpenskyNetworkEntity {
 	return NewStateVectorEntityFunc(sdk, data)
 }
 
 
+// Track returns a Track entity bound to this client.
+// Idiomatic usage: client.Track(nil).List(nil, nil) or
+// client.Track(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *OpenskyNetworkSDK) Track(data map[string]any) OpenskyNetworkEntity {
 	return NewTrackEntityFunc(sdk, data)
 }

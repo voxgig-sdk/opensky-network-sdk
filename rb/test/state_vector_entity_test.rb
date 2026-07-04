@@ -43,8 +43,7 @@ class StateVectorEntityTest < Minitest::Test
     state_vector_ref01_ent = client.StateVector(nil)
     state_vector_ref01_match = {}
 
-    state_vector_ref01_list_result, err = state_vector_ref01_ent.list(state_vector_ref01_match, nil)
-    assert_nil err
+    state_vector_ref01_list_result = state_vector_ref01_ent.list(state_vector_ref01_match, nil)
     assert state_vector_ref01_list_result.is_a?(Array)
 
   end

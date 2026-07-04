@@ -43,8 +43,7 @@ class TrackEntityTest < Minitest::Test
     track_ref01_ent = client.Track(nil)
     track_ref01_match = {}
 
-    track_ref01_list_result, err = track_ref01_ent.list(track_ref01_match, nil)
-    assert_nil err
+    track_ref01_list_result = track_ref01_ent.list(track_ref01_match, nil)
     assert track_ref01_list_result.is_a?(Array)
 
   end

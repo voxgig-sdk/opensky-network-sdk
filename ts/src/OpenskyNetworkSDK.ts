@@ -4,6 +4,8 @@ import { FlightEntity } from './entity/FlightEntity'
 import { StateVectorEntity } from './entity/StateVectorEntity'
 import { TrackEntity } from './entity/TrackEntity'
 
+export type * from './OpenskyNetworkTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -204,18 +206,42 @@ class OpenskyNetworkSDK {
 
 
 
+  _flight?: FlightEntity
+
+  // Idiomatic facade: `client.flight.list()` / `client.flight.load({ id })`.
+  get flight(): FlightEntity {
+    return (this._flight ??= new FlightEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.flight` instead. */
   Flight(data?: any) {
     const self = this
     return new FlightEntity(self,data)
   }
 
 
+  _state_vector?: StateVectorEntity
+
+  // Idiomatic facade: `client.state_vector.list()` / `client.state_vector.load({ id })`.
+  get state_vector(): StateVectorEntity {
+    return (this._state_vector ??= new StateVectorEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.state_vector` instead. */
   StateVector(data?: any) {
     const self = this
     return new StateVectorEntity(self,data)
   }
 
 
+  _track?: TrackEntity
+
+  // Idiomatic facade: `client.track.list()` / `client.track.load({ id })`.
+  get track(): TrackEntity {
+    return (this._track ??= new TrackEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.track` instead. */
   Track(data?: any) {
     const self = this
     return new TrackEntity(self,data)

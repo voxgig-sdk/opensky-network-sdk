@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch TrackListMatch
+---@param ctrl? table
+---@return Track[]
+---@return string? err
 function TrackEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

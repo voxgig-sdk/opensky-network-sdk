@@ -50,8 +50,7 @@ class FlightEntityTest extends TestCase
         $flight_ref01_ent = $client->Flight(null);
         $flight_ref01_match = [];
 
-        [$flight_ref01_list_result, $err] = $flight_ref01_ent->list($flight_ref01_match, null);
-        $this->assertNull($err);
+        $flight_ref01_list_result = $flight_ref01_ent->list($flight_ref01_match, null);
         $this->assertIsArray($flight_ref01_list_result);
 
     }

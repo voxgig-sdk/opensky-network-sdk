@@ -9,9 +9,12 @@ The TypeScript SDK for the OpenskyNetwork API — a type-safe, entity-oriented c
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/opensky-network
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/opensky-network-sdk/releases](https://github.com/voxgig-sdk/opensky-network-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { OpenskyNetworkSDK } from 'opensky-network'
+import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network'
 
 const client = new OpenskyNetworkSDK({
-  apikey: process.env.OPENSKY-NETWORK_APIKEY,
+  apikey: process.env.OPENSKY_NETWORK_APIKEY,
 })
 ```
 
 ### 2. List flights
 
 ```ts
-const result = await client.Flight().list()
+const result = await client.flight.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -81,7 +84,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = OpenskyNetworkSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.flight.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -98,7 +101,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.flight
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -135,8 +138,8 @@ const client = new OpenskyNetworkSDK({
 Create a `.env.local` file at the project root:
 
 ```
-OPENSKY-NETWORK_TEST_LIVE=TRUE
-OPENSKY-NETWORK_APIKEY=<your-key>
+OPENSKY_NETWORK_TEST_LIVE=TRUE
+OPENSKY_NETWORK_APIKEY=<your-key>
 ```
 
 Then run:
@@ -306,7 +309,7 @@ API path: `/tracks`
 
 ### Flight
 
-Create an instance: `const flight = client.Flight()`
+Create an instance: `const flight = client.flight`
 
 #### Operations
 
@@ -334,13 +337,13 @@ Create an instance: `const flight = client.Flight()`
 #### Example: List
 
 ```ts
-const flights = await client.Flight().list()
+const flights = await client.flight.list()
 ```
 
 
 ### StateVector
 
-Create an instance: `const state_vector = client.StateVector()`
+Create an instance: `const state_vector = client.state_vector`
 
 #### Operations
 
@@ -358,13 +361,13 @@ Create an instance: `const state_vector = client.StateVector()`
 #### Example: List
 
 ```ts
-const state_vectors = await client.StateVector().list()
+const state_vectors = await client.state_vector.list()
 ```
 
 
 ### Track
 
-Create an instance: `const track = client.Track()`
+Create an instance: `const track = client.track`
 
 #### Operations
 
@@ -385,7 +388,7 @@ Create an instance: `const track = client.Track()`
 #### Example: List
 
 ```ts
-const tracks = await client.Track().list()
+const tracks = await client.track.list()
 ```
 
 
@@ -446,7 +449,7 @@ opensky-network/
 Import the SDK from the package root:
 
 ```ts
-import { OpenskyNetworkSDK } from 'opensky-network'
+import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network'
 ```
 
 ### Entity state
@@ -456,11 +459,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const flight = client.flight
+await flight.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// flight.data() now returns the loaded flight data
+// flight.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

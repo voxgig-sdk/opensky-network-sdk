@@ -9,11 +9,9 @@ The Python SDK for the OpenskyNetwork API — an entity-oriented client followin
 
 
 ## Install
-```bash
-pip install voxgig-sdk-opensky-network
-```
-
-Or install from source:
+This package is not yet published to PyPI. Install it from the GitHub
+release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/opensky-network-sdk/releases)) or
+from a source checkout:
 
 ```bash
 pip install -e .
@@ -32,21 +30,20 @@ import os
 from openskynetwork_sdk import OpenskyNetworkSDK
 
 client = OpenskyNetworkSDK({
-    "apikey": os.environ.get("OPENSKY-NETWORK_APIKEY"),
+    "apikey": os.environ.get("OPENSKY_NETWORK_APIKEY"),
 })
 ```
 
 ### 2. List flights
 
 ```python
-result, err = client.Flight().list()
-if err:
-    raise Exception(err)
-
-if isinstance(result, list):
+try:
+    result = client.flight.list()
     for item in result:
         d = item.data_get()
         print(d["id"], d["name"])
+except Exception as err:
+    print(f"list failed: {err}")
 ```
 
 
@@ -57,29 +54,28 @@ if isinstance(result, list):
 For endpoints not covered by entity methods:
 
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
+else:
+    print(result["err"])     # error value
 ```
 
 ### Prepare a request without sending it
 
 ```python
-fetchdef, err = client.prepare({
+# prepare() returns the fetch definition and raises on error.
+fetchdef = client.prepare({
     "path": "/api/resource/{id}",
     "method": "DELETE",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 print(fetchdef["url"])
 print(fetchdef["method"])
@@ -93,7 +89,7 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OpenskyNetworkSDK.test()
 
-result, err = client.OpenskyNetwork().load({"id": "test01"})
+result = client.flight.load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -123,8 +119,8 @@ client = OpenskyNetworkSDK({
 Create a `.env.local` file at the project root:
 
 ```
-OPENSKY-NETWORK_TEST_LIVE=TRUE
-OPENSKY-NETWORK_APIKEY=<your-key>
+OPENSKY_NETWORK_TEST_LIVE=TRUE
+OPENSKY_NETWORK_APIKEY=<your-key>
 ```
 
 Then run:
@@ -170,8 +166,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | --- | --- | --- |
 | `options_map` | `() -> dict` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> (dict, err)` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> (dict, err)` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `Flight` | `(data) -> FlightEntity` | Create a Flight entity instance. |
 | `StateVector` | `(data) -> StateVectorEntity` | Create a StateVector entity instance. |
 | `Track` | `(data) -> TrackEntity` | Create a Track entity instance. |
@@ -182,11 +178,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> (any, err)` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> (any, err)` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> (any, err)` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> (any, err)` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> (any, err)` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -196,8 +192,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`dict` with these keys:
+Entity operations return the bare result data (a `dict` for single-entity
+ops, a `list` for `list`) and raise on error. Wrap calls in
+`try`/`except` to handle failures.
+
+The `direct()` escape hatch never raises — it returns a result `dict`
+you branch on via `result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -263,7 +263,7 @@ API path: `/tracks`
 
 ### Flight
 
-Create an instance: `const flight = client.Flight()`
+Create an instance: `const flight = client.flight`
 
 #### Operations
 
@@ -291,13 +291,13 @@ Create an instance: `const flight = client.Flight()`
 #### Example: List
 
 ```ts
-const flights = await client.Flight().list()
+const flights = await client.flight.list()
 ```
 
 
 ### StateVector
 
-Create an instance: `const state_vector = client.StateVector()`
+Create an instance: `const state_vector = client.state_vector`
 
 #### Operations
 
@@ -315,13 +315,13 @@ Create an instance: `const state_vector = client.StateVector()`
 #### Example: List
 
 ```ts
-const state_vectors = await client.StateVector().list()
+const state_vectors = await client.state_vector.list()
 ```
 
 
 ### Track
 
-Create an instance: `const track = client.Track()`
+Create an instance: `const track = client.track`
 
 #### Operations
 
@@ -342,7 +342,7 @@ Create an instance: `const track = client.Track()`
 #### Example: List
 
 ```ts
-const tracks = await client.Track().list()
+const tracks = await client.track.list()
 ```
 
 
@@ -416,11 +416,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-moon = client.Moon()
-moon.load({"planet_id": "earth", "id": "luna"})
+flight = client.flight
+flight.load({"id": "example_id"})
 
-# moon.data_get() now returns the loaded moon data
-# moon.match_get() returns the last match criteria
+# flight.data_get() now returns the loaded flight data
+# flight.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

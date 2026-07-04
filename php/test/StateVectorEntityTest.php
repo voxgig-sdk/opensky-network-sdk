@@ -50,8 +50,7 @@ class StateVectorEntityTest extends TestCase
         $state_vector_ref01_ent = $client->StateVector(null);
         $state_vector_ref01_match = [];
 
-        [$state_vector_ref01_list_result, $err] = $state_vector_ref01_ent->list($state_vector_ref01_match, null);
-        $this->assertNull($err);
+        $state_vector_ref01_list_result = $state_vector_ref01_ent->list($state_vector_ref01_match, null);
         $this->assertIsArray($state_vector_ref01_list_result);
 
     }
