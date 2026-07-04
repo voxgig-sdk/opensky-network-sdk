@@ -220,57 +220,27 @@ class OpenskyNetworkSDK:
         }
 
 
-    @property
-    def flight(self):
-        """Idiomatic facade: client.flight.list() / client.flight.load({"id": ...})."""
-        from entity.flight_entity import FlightEntity
-        cached = getattr(self, "_flight", None)
-        if cached is None:
-            cached = FlightEntity(self, None)
-            self._flight = cached
-        return cached
-
-    def Flight(self, data=None):
-        # Deprecated: use client.flight instead.
+    def Flight(self, data=None) -> "FlightEntity":
+        """Entity factory: client.Flight().list({}) / client.Flight().load({"id": ...})."""
         from entity.flight_entity import FlightEntity
         return FlightEntity(self, data)
 
 
-    @property
-    def state_vector(self):
-        """Idiomatic facade: client.state_vector.list() / client.state_vector.load({"id": ...})."""
-        from entity.state_vector_entity import StateVectorEntity
-        cached = getattr(self, "_state_vector", None)
-        if cached is None:
-            cached = StateVectorEntity(self, None)
-            self._state_vector = cached
-        return cached
-
-    def StateVector(self, data=None):
-        # Deprecated: use client.state_vector instead.
+    def StateVector(self, data=None) -> "StateVectorEntity":
+        """Entity factory: client.StateVector().list({}) / client.StateVector().load({"id": ...})."""
         from entity.state_vector_entity import StateVectorEntity
         return StateVectorEntity(self, data)
 
 
-    @property
-    def track(self):
-        """Idiomatic facade: client.track.list() / client.track.load({"id": ...})."""
-        from entity.track_entity import TrackEntity
-        cached = getattr(self, "_track", None)
-        if cached is None:
-            cached = TrackEntity(self, None)
-            self._track = cached
-        return cached
-
-    def Track(self, data=None):
-        # Deprecated: use client.track instead.
+    def Track(self, data=None) -> "TrackEntity":
+        """Entity factory: client.Track().list({}) / client.Track().load({"id": ...})."""
         from entity.track_entity import TrackEntity
         return TrackEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "OpenskyNetworkSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class OpenskyNetworkSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.flight_entity import FlightEntity
+    from entity.state_vector_entity import StateVectorEntity
+    from entity.track_entity import TrackEntity

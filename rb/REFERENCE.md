@@ -95,7 +95,7 @@ same parameters as `direct()`. Raises on error.
 ## FlightEntity
 
 ```ruby
-flight = client.flight
+flight = client.Flight
 ```
 
 ### Fields
@@ -122,7 +122,7 @@ flight = client.flight
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.flight.list(nil)
+results = client.Flight.list(nil)
 ```
 
 ### Common Methods
@@ -158,7 +158,7 @@ Return the entity name.
 ## StateVectorEntity
 
 ```ruby
-state_vector = client.state_vector
+state_vector = client.StateVector
 ```
 
 ### Fields
@@ -175,7 +175,7 @@ state_vector = client.state_vector
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.state_vector.list(nil)
+results = client.StateVector.list(nil)
 ```
 
 ### Common Methods
@@ -211,7 +211,7 @@ Return the entity name.
 ## TrackEntity
 
 ```ruby
-track = client.track
+track = client.Track
 ```
 
 ### Fields
@@ -231,7 +231,7 @@ track = client.track
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.track.list(nil)
+results = client.Track.list(nil)
 ```
 
 ### Common Methods

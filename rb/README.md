@@ -30,16 +30,14 @@ client = OpenskyNetworkSDK.new({
 })
 ```
 
-### 2. List flights
+### 2. List flight records
 
 ```ruby
 begin
-  result = client.flight.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Flight records — iterate directly.
+  flights = client.Flight.list
+  flights.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -87,13 +85,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = OpenskyNetworkSDK.test
+client = OpenskyNetworkSDK.test({
+  "entity" => { "flight" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.flight.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+flight = client.Flight.load({ "id" => "test01" })
+puts flight
 ```
 
 ### Use a custom fetch function
@@ -265,7 +267,7 @@ API path: `/tracks`
 
 ### Flight
 
-Create an instance: `const flight = client.flight`
+Create an instance: `flight = client.Flight`
 
 #### Operations
 
@@ -292,14 +294,15 @@ Create an instance: `const flight = client.flight`
 
 #### Example: List
 
-```ts
-const flights = await client.flight.list()
+```ruby
+# list returns an Array of Flight records (raises on error).
+flights = client.Flight.list
 ```
 
 
 ### StateVector
 
-Create an instance: `const state_vector = client.state_vector`
+Create an instance: `state_vector = client.StateVector`
 
 #### Operations
 
@@ -316,14 +319,15 @@ Create an instance: `const state_vector = client.state_vector`
 
 #### Example: List
 
-```ts
-const state_vectors = await client.state_vector.list()
+```ruby
+# list returns an Array of StateVector records (raises on error).
+state_vectors = client.StateVector.list
 ```
 
 
 ### Track
 
-Create an instance: `const track = client.track`
+Create an instance: `track = client.Track`
 
 #### Operations
 
@@ -343,8 +347,9 @@ Create an instance: `const track = client.track`
 
 #### Example: List
 
-```ts
-const tracks = await client.track.list()
+```ruby
+# list returns an Array of Track records (raises on error).
+tracks = client.Track.list
 ```
 
 
@@ -419,7 +424,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-flight = client.flight
+flight = client.Flight
 flight.load({ "id" => "example_id" })
 
 # flight.data_get now returns the loaded flight data

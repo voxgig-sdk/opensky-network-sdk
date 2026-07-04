@@ -208,39 +208,21 @@ class OpenskyNetworkSDK
   end
 
 
-  # Idiomatic facade: client.flight.list / client.flight.load({ "id" => ... })
-  def flight
-    require_relative 'entity/flight_entity'
-    @flight ||= FlightEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.flight instead.
+  # Canonical facade: client.Flight.list / client.Flight.load({ "id" => ... })
   def Flight(data = nil)
     require_relative 'entity/flight_entity'
     FlightEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.state_vector.list / client.state_vector.load({ "id" => ... })
-  def state_vector
-    require_relative 'entity/state_vector_entity'
-    @state_vector ||= StateVectorEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.state_vector instead.
+  # Canonical facade: client.StateVector.list / client.StateVector.load({ "id" => ... })
   def StateVector(data = nil)
     require_relative 'entity/state_vector_entity'
     StateVectorEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.track.list / client.track.load({ "id" => ... })
-  def track
-    require_relative 'entity/track_entity'
-    @track ||= TrackEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.track instead.
+  # Canonical facade: client.Track.list / client.Track.load({ "id" => ... })
   def Track(data = nil)
     require_relative 'entity/track_entity'
     TrackEntity.new(self, data)

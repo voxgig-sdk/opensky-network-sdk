@@ -31,18 +31,16 @@ $client = new OpenskyNetworkSDK([
 ]);
 ```
 
-### 2. List flights
+### 2. List flight records
 
 ```php
 try {
-    $result = $client->flight()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Flight records — iterate directly.
+    $flights = $client->Flight()->list();
+    foreach ($flights as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -88,13 +86,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = OpenskyNetworkSDK::test();
+$client = OpenskyNetworkSDK::test([
+    "entity" => ["flight" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->flight()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$flight = $client->Flight()->load(["id" => "test01"]);
+print_r($flight);
 ```
 
 ### Use a custom fetch function
@@ -270,7 +272,7 @@ API path: `/tracks`
 
 ### Flight
 
-Create an instance: `const flight = client.flight`
+Create an instance: `$flight = $client->Flight();`
 
 #### Operations
 
@@ -297,14 +299,15 @@ Create an instance: `const flight = client.flight`
 
 #### Example: List
 
-```ts
-const flights = await client.flight.list()
+```php
+// list() returns an array of Flight records (throws on error).
+$flights = $client->Flight()->list();
 ```
 
 
 ### StateVector
 
-Create an instance: `const state_vector = client.state_vector`
+Create an instance: `$state_vector = $client->StateVector();`
 
 #### Operations
 
@@ -321,14 +324,15 @@ Create an instance: `const state_vector = client.state_vector`
 
 #### Example: List
 
-```ts
-const state_vectors = await client.state_vector.list()
+```php
+// list() returns an array of StateVector records (throws on error).
+$state_vectors = $client->StateVector()->list();
 ```
 
 
 ### Track
 
-Create an instance: `const track = client.track`
+Create an instance: `$track = $client->Track();`
 
 #### Operations
 
@@ -348,8 +352,9 @@ Create an instance: `const track = client.track`
 
 #### Example: List
 
-```ts
-const tracks = await client.track.list()
+```php
+// list() returns an array of Track records (throws on error).
+$tracks = $client->Track()->list();
 ```
 
 
@@ -424,7 +429,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$flight = $client->flight();
+$flight = $client->Flight();
 $flight->load(["id" => "example_id"]);
 
 // $flight->dataGet() now returns the loaded flight data

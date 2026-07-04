@@ -94,7 +94,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## FlightEntity
 
 ```php
-$flight = $client->flight();
+$flight = $client->Flight();
 ```
 
 ### Fields
@@ -121,7 +121,7 @@ $flight = $client->flight();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->flight()->list([]);
+$results = $client->Flight()->list([]);
 ```
 
 ### Common Methods
@@ -157,7 +157,7 @@ Return the entity name.
 ## StateVectorEntity
 
 ```php
-$state_vector = $client->state_vector();
+$state_vector = $client->StateVector();
 ```
 
 ### Fields
@@ -174,7 +174,7 @@ $state_vector = $client->state_vector();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->state_vector()->list([]);
+$results = $client->StateVector()->list([]);
 ```
 
 ### Common Methods
@@ -210,7 +210,7 @@ Return the entity name.
 ## TrackEntity
 
 ```php
-$track = $client->track();
+$track = $client->Track();
 ```
 
 ### Fields
@@ -230,7 +230,7 @@ $track = $client->track();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->track()->list([]);
+$results = $client->Track()->list([]);
 ```
 
 ### Common Methods

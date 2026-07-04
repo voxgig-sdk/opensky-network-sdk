@@ -233,10 +233,10 @@ class OpenskyNetworkSDK
 
     private $_flight = null;
 
-    // Idiomatic facade: $client->flight()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Flight() (PHP method
-    // names are case-insensitive).
-    public function flight($data = null)
+    // Canonical facade: $client->Flight()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->flight()
+    // resolves here too.
+    public function Flight($data = null)
     {
         require_once __DIR__ . '/entity/flight_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class OpenskyNetworkSDK
 
     private $_state_vector = null;
 
-    // Idiomatic facade: $client->state_vector()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias StateVector() (PHP method
-    // names are case-insensitive).
-    public function state_vector($data = null)
+    // Canonical facade: $client->StateVector()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->state_vector()
+    // resolves here too.
+    public function StateVector($data = null)
     {
         require_once __DIR__ . '/entity/state_vector_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class OpenskyNetworkSDK
 
     private $_track = null;
 
-    // Idiomatic facade: $client->track()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Track() (PHP method
-    // names are case-insensitive).
-    public function track($data = null)
+    // Canonical facade: $client->Track()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->track()
+    // resolves here too.
+    public function Track($data = null)
     {
         require_once __DIR__ . '/entity/track_entity.php';
         if ($data === null) {

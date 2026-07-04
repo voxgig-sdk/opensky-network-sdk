@@ -34,14 +34,16 @@ client = OpenskyNetworkSDK({
 })
 ```
 
-### 2. List flights
+### 2. List flight records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.flight.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    flights = client.Flight().list({})
+    for flight in flights:
+        print(flight)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -89,8 +91,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OpenskyNetworkSDK.test()
 
-result = client.flight.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+flight = client.Flight().load({"id": "test01"})
+# flight contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -263,7 +266,7 @@ API path: `/tracks`
 
 ### Flight
 
-Create an instance: `const flight = client.flight`
+Create an instance: `flight = client.Flight()`
 
 #### Operations
 
@@ -290,14 +293,14 @@ Create an instance: `const flight = client.flight`
 
 #### Example: List
 
-```ts
-const flights = await client.flight.list()
+```python
+flights = client.Flight().list({})
 ```
 
 
 ### StateVector
 
-Create an instance: `const state_vector = client.state_vector`
+Create an instance: `state_vector = client.StateVector()`
 
 #### Operations
 
@@ -314,14 +317,14 @@ Create an instance: `const state_vector = client.state_vector`
 
 #### Example: List
 
-```ts
-const state_vectors = await client.state_vector.list()
+```python
+state_vectors = client.StateVector().list({})
 ```
 
 
 ### Track
 
-Create an instance: `const track = client.track`
+Create an instance: `track = client.Track()`
 
 #### Operations
 
@@ -341,8 +344,8 @@ Create an instance: `const track = client.track`
 
 #### Example: List
 
-```ts
-const tracks = await client.track.list()
+```python
+tracks = client.Track().list({})
 ```
 
 
@@ -416,7 +419,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-flight = client.flight
+flight = client.Flight()
 flight.load({"id": "example_id"})
 
 # flight.data_get() now returns the loaded flight data

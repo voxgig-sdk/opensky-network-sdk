@@ -4,71 +4,69 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Flight:
-    arrival_airport_candidates_count: Optional[int] = None
-    callsign: Optional[str] = None
-    departure_airport_candidates_count: Optional[int] = None
-    est_arrival_airport: Optional[str] = None
-    est_arrival_airport_horiz_distance: Optional[int] = None
-    est_arrival_airport_vert_distance: Optional[int] = None
-    est_departure_airport: Optional[str] = None
-    est_departure_airport_horiz_distance: Optional[int] = None
-    est_departure_airport_vert_distance: Optional[int] = None
-    first_seen: Optional[int] = None
-    icao24: Optional[str] = None
-    last_seen: Optional[int] = None
+class Flight(TypedDict, total=False):
+    arrival_airport_candidates_count: int
+    callsign: str
+    departure_airport_candidates_count: int
+    est_arrival_airport: str
+    est_arrival_airport_horiz_distance: int
+    est_arrival_airport_vert_distance: int
+    est_departure_airport: str
+    est_departure_airport_horiz_distance: int
+    est_departure_airport_vert_distance: int
+    first_seen: int
+    icao24: str
+    last_seen: int
 
 
-@dataclass
-class FlightListMatch:
-    arrival_airport_candidates_count: Optional[int] = None
-    callsign: Optional[str] = None
-    departure_airport_candidates_count: Optional[int] = None
-    est_arrival_airport: Optional[str] = None
-    est_arrival_airport_horiz_distance: Optional[int] = None
-    est_arrival_airport_vert_distance: Optional[int] = None
-    est_departure_airport: Optional[str] = None
-    est_departure_airport_horiz_distance: Optional[int] = None
-    est_departure_airport_vert_distance: Optional[int] = None
-    first_seen: Optional[int] = None
-    icao24: Optional[str] = None
-    last_seen: Optional[int] = None
+class FlightListMatch(TypedDict, total=False):
+    arrival_airport_candidates_count: int
+    callsign: str
+    departure_airport_candidates_count: int
+    est_arrival_airport: str
+    est_arrival_airport_horiz_distance: int
+    est_arrival_airport_vert_distance: int
+    est_departure_airport: str
+    est_departure_airport_horiz_distance: int
+    est_departure_airport_vert_distance: int
+    first_seen: int
+    icao24: str
+    last_seen: int
 
 
-@dataclass
-class StateVector:
-    state: Optional[list] = None
-    time: Optional[int] = None
+class StateVector(TypedDict, total=False):
+    state: list
+    time: int
 
 
-@dataclass
-class StateVectorListMatch:
-    state: Optional[list] = None
-    time: Optional[int] = None
+class StateVectorListMatch(TypedDict, total=False):
+    state: list
+    time: int
 
 
-@dataclass
-class Track:
-    callsign: Optional[str] = None
-    end_time: Optional[int] = None
-    icao24: Optional[str] = None
-    path: Optional[list] = None
-    start_time: Optional[int] = None
+class Track(TypedDict, total=False):
+    callsign: str
+    end_time: int
+    icao24: str
+    path: list
+    start_time: int
 
 
-@dataclass
-class TrackListMatch:
-    callsign: Optional[str] = None
-    end_time: Optional[int] = None
-    icao24: Optional[str] = None
-    path: Optional[list] = None
-    start_time: Optional[int] = None
-
+class TrackListMatch(TypedDict, total=False):
+    callsign: str
+    end_time: int
+    icao24: str
+    path: list
+    start_time: int

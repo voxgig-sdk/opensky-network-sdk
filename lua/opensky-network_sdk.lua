@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:flight():list() / client:flight():load({ id = ... })
-function OpenskyNetworkSDK:flight(data)
+-- Idiomatic facade: client:Flight():list() / client:Flight():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function OpenskyNetworkSDK:Flight(data)
   local EntityMod = require("entity.flight_entity")
   if data == nil then
     if self._flight == nil then
@@ -256,15 +257,10 @@ function OpenskyNetworkSDK:flight(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:flight() instead.
-function OpenskyNetworkSDK:Flight(data)
-  local EntityMod = require("entity.flight_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:state_vector():list() / client:state_vector():load({ id = ... })
-function OpenskyNetworkSDK:state_vector(data)
+-- Idiomatic facade: client:StateVector():list() / client:StateVector():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function OpenskyNetworkSDK:StateVector(data)
   local EntityMod = require("entity.state_vector_entity")
   if data == nil then
     if self._state_vector == nil then
@@ -275,15 +271,10 @@ function OpenskyNetworkSDK:state_vector(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:state_vector() instead.
-function OpenskyNetworkSDK:StateVector(data)
-  local EntityMod = require("entity.state_vector_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:track():list() / client:track():load({ id = ... })
-function OpenskyNetworkSDK:track(data)
+-- Idiomatic facade: client:Track():list() / client:Track():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function OpenskyNetworkSDK:Track(data)
   local EntityMod = require("entity.track_entity")
   if data == nil then
     if self._track == nil then
@@ -291,12 +282,6 @@ function OpenskyNetworkSDK:track(data)
     end
     return self._track
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:track() instead.
-function OpenskyNetworkSDK:Track(data)
-  local EntityMod = require("entity.track_entity")
   return EntityMod.new(self, data)
 end
 

@@ -28,9 +28,11 @@ const client = new OpenskyNetworkSDK({
   apikey: process.env.OPENSKY_NETWORK_APIKEY,
 })
 
-// List all flights
-const flights = await client.flight.list()
-console.log(flights.data)
+// List all flights (returns Flight[])
+const flights = await client.Flight().list()
+for (const flight of flights) {
+  console.log(flight)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -90,9 +92,10 @@ client = OpenskyNetworkSDK({
     "apikey": os.environ.get("OPENSKY_NETWORK_APIKEY"),
 })
 
-# List all flights
-flights = client.flight.list()
-print(flights)
+# List all flights (returns a list, raises on error)
+flights = client.Flight().list({})
+for flight in flights:
+    print(flight)
 ```
 
 ### PHP
@@ -105,8 +108,8 @@ $client = new OpenskyNetworkSDK([
     "apikey" => getenv("OPENSKY_NETWORK_APIKEY"),
 ]);
 
-// List all flights (throws on error)
-$flights = $client->flight()->list();
+// List all flights (returns an array; throws on error)
+$flights = $client->Flight()->list();
 print_r($flights);
 ```
 
@@ -133,8 +136,8 @@ client = OpenskyNetworkSDK.new({
   "apikey" => ENV["OPENSKY_NETWORK_APIKEY"],
 })
 
-# List all flights
-flights = client.flight.list
+# List all flights (returns an Array; raises on error)
+flights = client.Flight.list
 puts flights
 ```
 
@@ -148,7 +151,7 @@ local client = sdk.new({
 })
 
 -- List all flights
-local flights, err = client:flight():list()
+local flights, err = client:Flight():list()
 print(flights)
 ```
 
@@ -161,22 +164,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = OpenskyNetworkSDK.test()
-const result = await client.flight.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const flight = await client.Flight().load({ id: 'test01' })
+// flight is a bare Flight populated with mock data
+console.log(flight)
 ```
 
 ### Python
 
 ```python
 client = OpenskyNetworkSDK.test()
-result = client.flight.load({"id": "test01"})
+flight = client.Flight().load({"id": "test01"})
+print(flight)
 ```
 
 ### PHP
 
 ```php
-$client = OpenskyNetworkSDK::test();
-$result = $client->flight()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = OpenskyNetworkSDK::test([
+    "entity" => ["flight" => ["test01" => ["id" => "test01"]]],
+]);
+$flight = $client->Flight()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -191,15 +199,18 @@ result, err := client.Flight(nil).Load(
 ### Ruby
 
 ```ruby
-client = OpenskyNetworkSDK.test
-result = client.flight.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = OpenskyNetworkSDK.test({
+  "entity" => { "flight" => { "test01" => { "id" => "test01" } } },
+})
+flight = client.Flight.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:flight():load({ id = "test01" })
+local result, err = client:Flight():load({ id = "test01" })
 ```
 
 ## How it works
@@ -247,6 +258,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

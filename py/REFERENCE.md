@@ -89,7 +89,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## FlightEntity
 
 ```python
-flight = client.flight
+flight = client.Flight()
 ```
 
 ### Fields
@@ -116,7 +116,9 @@ flight = client.flight
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.flight.list({})
+results = client.Flight().list({})
+for flight in results:
+    print(flight)
 ```
 
 ### Common Methods
@@ -151,7 +153,7 @@ Return the entity name.
 ## StateVectorEntity
 
 ```python
-state_vector = client.state_vector
+state_vector = client.StateVector()
 ```
 
 ### Fields
@@ -168,7 +170,9 @@ state_vector = client.state_vector
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.state_vector.list({})
+results = client.StateVector().list({})
+for state_vector in results:
+    print(state_vector)
 ```
 
 ### Common Methods
@@ -203,7 +207,7 @@ Return the entity name.
 ## TrackEntity
 
 ```python
-track = client.track
+track = client.Track()
 ```
 
 ### Fields
@@ -223,7 +227,9 @@ track = client.track
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.track.list({})
+results = client.Track().list({})
+for track in results:
+    print(track)
 ```
 
 ### Common Methods
