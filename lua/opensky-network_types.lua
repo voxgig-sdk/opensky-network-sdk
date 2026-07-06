@@ -21,12 +21,26 @@
 ---@field last_seen? number
 
 ---@class FlightListMatch
+---@field arrival_airport_candidates_count? number
+---@field callsign? string
+---@field departure_airport_candidates_count? number
+---@field est_arrival_airport? string
+---@field est_arrival_airport_horiz_distance? number
+---@field est_arrival_airport_vert_distance? number
+---@field est_departure_airport? string
+---@field est_departure_airport_horiz_distance? number
+---@field est_departure_airport_vert_distance? number
+---@field first_seen? number
+---@field icao24? string
+---@field last_seen? number
 
 ---@class StateVector
 ---@field state? table
 ---@field time? number
 
 ---@class StateVectorListMatch
+---@field state? table
+---@field time? number
 
 ---@class Track
 ---@field callsign? string
@@ -36,6 +50,11 @@
 ---@field start_time? number
 
 ---@class TrackListMatch
+---@field callsign? string
+---@field end_time? number
+---@field icao24? string
+---@field path? table
+---@field start_time? number
 
 local M = {}
 

@@ -29,7 +29,7 @@ class Flight
     public ?int $last_seen = null;
 }
 
-/** Match filter for Flight#list (any subset of Flight fields). */
+/** Request payload for Flight#list. */
 class FlightListMatch
 {
     public ?int $arrival_airport_candidates_count = null;
@@ -53,7 +53,7 @@ class StateVector
     public ?int $time = null;
 }
 
-/** Match filter for StateVector#list (any subset of StateVector fields). */
+/** Request payload for StateVector#list. */
 class StateVectorListMatch
 {
     public ?array $state = null;
@@ -70,7 +70,7 @@ class Track
     public ?int $start_time = null;
 }
 
-/** Match filter for Track#list (any subset of Track fields). */
+/** Request payload for Track#list. */
 class TrackListMatch
 {
     public ?string $callsign = null;

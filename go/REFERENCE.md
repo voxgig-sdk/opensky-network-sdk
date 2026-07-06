@@ -106,18 +106,18 @@ flight := client.Flight(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `callsign` | ``$STRING`` | No |  |
-| `departure_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `est_arrival_airport` | ``$STRING`` | No |  |
-| `est_arrival_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_arrival_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport` | ``$STRING`` | No |  |
-| `est_departure_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `first_seen` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `last_seen` | ``$INTEGER`` | No |  |
+| `arrival_airport_candidates_count` | `int` | No |  |
+| `callsign` | `string` | No |  |
+| `departure_airport_candidates_count` | `int` | No |  |
+| `est_arrival_airport` | `string` | No |  |
+| `est_arrival_airport_horiz_distance` | `int` | No |  |
+| `est_arrival_airport_vert_distance` | `int` | No |  |
+| `est_departure_airport` | `string` | No |  |
+| `est_departure_airport_horiz_distance` | `int` | No |  |
+| `est_departure_airport_vert_distance` | `int` | No |  |
+| `first_seen` | `int` | No |  |
+| `icao24` | `string` | No |  |
+| `last_seen` | `int` | No |  |
 
 ### Operations
 
@@ -163,8 +163,8 @@ state_vector := client.StateVector(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | ``$ARRAY`` | No |  |
-| `time` | ``$INTEGER`` | No |  |
+| `state` | `[]any` | No |  |
+| `time` | `int` | No |  |
 
 ### Operations
 
@@ -210,11 +210,11 @@ track := client.Track(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `callsign` | ``$STRING`` | No |  |
-| `end_time` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `path` | ``$ARRAY`` | No |  |
-| `start_time` | ``$INTEGER`` | No |  |
+| `callsign` | `string` | No |  |
+| `end_time` | `int` | No |  |
+| `icao24` | `string` | No |  |
+| `path` | `[]any` | No |  |
+| `start_time` | `int` | No |  |
 
 ### Operations
 

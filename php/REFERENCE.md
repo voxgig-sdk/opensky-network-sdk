@@ -8,7 +8,7 @@ Complete API reference for the OpenskyNetwork PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/opensky-network_sdk.php';
+require_once __DIR__ . '/openskynetwork_sdk.php';
 
 $client = new OpenskyNetworkSDK($options);
 ```
@@ -54,11 +54,11 @@ Create a new `StateVectorEntity` instance. Pass `null` for no initial data.
 
 Create a new `TrackEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): OpenskyNetworkUtility`
 
 Return a copy of the SDK utility object.
 
@@ -101,44 +101,44 @@ $flight = $client->Flight();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `callsign` | ``$STRING`` | No |  |
-| `departure_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `est_arrival_airport` | ``$STRING`` | No |  |
-| `est_arrival_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_arrival_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport` | ``$STRING`` | No |  |
-| `est_departure_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `first_seen` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `last_seen` | ``$INTEGER`` | No |  |
+| `arrival_airport_candidates_count` | `int` | No |  |
+| `callsign` | `string` | No |  |
+| `departure_airport_candidates_count` | `int` | No |  |
+| `est_arrival_airport` | `string` | No |  |
+| `est_arrival_airport_horiz_distance` | `int` | No |  |
+| `est_arrival_airport_vert_distance` | `int` | No |  |
+| `est_departure_airport` | `string` | No |  |
+| `est_departure_airport_horiz_distance` | `int` | No |  |
+| `est_departure_airport_vert_distance` | `int` | No |  |
+| `first_seen` | `int` | No |  |
+| `icao24` | `string` | No |  |
+| `last_seen` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Flight()->list([]);
+$results = $client->Flight()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -147,7 +147,7 @@ Set the entity match criteria.
 Create a new `FlightEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -164,34 +164,34 @@ $state_vector = $client->StateVector();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | ``$ARRAY`` | No |  |
-| `time` | ``$INTEGER`` | No |  |
+| `state` | `array` | No |  |
+| `time` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->StateVector()->list([]);
+$results = $client->StateVector()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -200,7 +200,7 @@ Set the entity match criteria.
 Create a new `StateVectorEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -217,37 +217,37 @@ $track = $client->Track();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `callsign` | ``$STRING`` | No |  |
-| `end_time` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `path` | ``$ARRAY`` | No |  |
-| `start_time` | ``$INTEGER`` | No |  |
+| `callsign` | `string` | No |  |
+| `end_time` | `int` | No |  |
+| `icao24` | `string` | No |  |
+| `path` | `array` | No |  |
+| `start_time` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Track()->list([]);
+$results = $client->Track()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -256,7 +256,7 @@ Set the entity match criteria.
 Create a new `TrackEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

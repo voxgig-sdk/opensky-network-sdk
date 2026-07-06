@@ -24,8 +24,7 @@ type Flight struct {
 	LastSeen *int `json:"last_seen,omitempty"`
 }
 
-// FlightListMatch mirrors the flight fields as an all-optional match
-// filter (Go analog of Partial<Flight>).
+// FlightListMatch is the typed request payload for Flight.ListTyped.
 type FlightListMatch struct {
 	ArrivalAirportCandidatesCount *int `json:"arrival_airport_candidates_count,omitempty"`
 	Callsign *string `json:"callsign,omitempty"`
@@ -47,8 +46,7 @@ type StateVector struct {
 	Time *int `json:"time,omitempty"`
 }
 
-// StateVectorListMatch mirrors the state_vector fields as an all-optional match
-// filter (Go analog of Partial<StateVector>).
+// StateVectorListMatch is the typed request payload for StateVector.ListTyped.
 type StateVectorListMatch struct {
 	State *[]any `json:"state,omitempty"`
 	Time *int `json:"time,omitempty"`
@@ -63,8 +61,7 @@ type Track struct {
 	StartTime *int `json:"start_time,omitempty"`
 }
 
-// TrackListMatch mirrors the track fields as an all-optional match
-// filter (Go analog of Partial<Track>).
+// TrackListMatch is the typed request payload for Track.ListTyped.
 type TrackListMatch struct {
 	Callsign *string `json:"callsign,omitempty"`
 	EndTime *int `json:"end_time,omitempty"`

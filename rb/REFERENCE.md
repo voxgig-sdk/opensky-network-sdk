@@ -8,7 +8,7 @@ Complete API reference for the OpenskyNetwork Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'opensky-network_sdk'
+require_relative 'OpenskyNetwork_sdk'
 
 client = OpenskyNetworkSDK.new(options)
 ```
@@ -102,27 +102,27 @@ flight = client.Flight
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `callsign` | ``$STRING`` | No |  |
-| `departure_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `est_arrival_airport` | ``$STRING`` | No |  |
-| `est_arrival_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_arrival_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport` | ``$STRING`` | No |  |
-| `est_departure_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `first_seen` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `last_seen` | ``$INTEGER`` | No |  |
+| `arrival_airport_candidates_count` | `Integer` | No |  |
+| `callsign` | `String` | No |  |
+| `departure_airport_candidates_count` | `Integer` | No |  |
+| `est_arrival_airport` | `String` | No |  |
+| `est_arrival_airport_horiz_distance` | `Integer` | No |  |
+| `est_arrival_airport_vert_distance` | `Integer` | No |  |
+| `est_departure_airport` | `String` | No |  |
+| `est_departure_airport_horiz_distance` | `Integer` | No |  |
+| `est_departure_airport_vert_distance` | `Integer` | No |  |
+| `first_seen` | `Integer` | No |  |
+| `icao24` | `String` | No |  |
+| `last_seen` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Flight.list(nil)
+results = client.Flight.list
 ```
 
 ### Common Methods
@@ -165,17 +165,17 @@ state_vector = client.StateVector
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | ``$ARRAY`` | No |  |
-| `time` | ``$INTEGER`` | No |  |
+| `state` | `Array` | No |  |
+| `time` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.StateVector.list(nil)
+results = client.StateVector.list
 ```
 
 ### Common Methods
@@ -218,20 +218,20 @@ track = client.Track
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `callsign` | ``$STRING`` | No |  |
-| `end_time` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `path` | ``$ARRAY`` | No |  |
-| `start_time` | ``$INTEGER`` | No |  |
+| `callsign` | `String` | No |  |
+| `end_time` | `Integer` | No |  |
+| `icao24` | `String` | No |  |
+| `path` | `Array` | No |  |
+| `start_time` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Track.list(nil)
+results = client.Track.list
 ```
 
 ### Common Methods

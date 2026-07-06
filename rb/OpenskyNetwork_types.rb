@@ -61,7 +61,7 @@ Flight = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Flight#list (any subset of Flight fields).
+# Request payload for Flight#list.
 #
 # @!attribute [rw] arrival_airport_candidates_count
 #   @return [Integer, nil]
@@ -127,7 +127,7 @@ StateVector = Struct.new(
   keyword_init: true
 )
 
-# Match filter for StateVector#list (any subset of StateVector fields).
+# Request payload for StateVector#list.
 #
 # @!attribute [rw] state
 #   @return [Array, nil]
@@ -165,7 +165,7 @@ Track = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Track#list (any subset of Track fields).
+# Request payload for Track#list.
 #
 # @!attribute [rw] callsign
 #   @return [String, nil]

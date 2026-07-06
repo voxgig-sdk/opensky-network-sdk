@@ -221,19 +221,19 @@ class OpenskyNetworkSDK:
 
 
     def Flight(self, data=None) -> "FlightEntity":
-        """Entity factory: client.Flight().list({}) / client.Flight().load({"id": ...})."""
+        """Entity factory: client.Flight().list() / client.Flight().load({"id": ...})."""
         from entity.flight_entity import FlightEntity
         return FlightEntity(self, data)
 
 
     def StateVector(self, data=None) -> "StateVectorEntity":
-        """Entity factory: client.StateVector().list({}) / client.StateVector().load({"id": ...})."""
+        """Entity factory: client.StateVector().list() / client.StateVector().load({"id": ...})."""
         from entity.state_vector_entity import StateVectorEntity
         return StateVectorEntity(self, data)
 
 
     def Track(self, data=None) -> "TrackEntity":
-        """Entity factory: client.Track().list({}) / client.Track().load({"id": ...})."""
+        """Entity factory: client.Track().list() / client.Track().load({"id": ...})."""
         from entity.track_entity import TrackEntity
         return TrackEntity(self, data)
 

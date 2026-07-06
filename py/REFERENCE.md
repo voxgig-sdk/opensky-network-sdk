@@ -8,7 +8,7 @@ Complete API reference for the OpenskyNetwork Python SDK.
 ### Constructor
 
 ```python
-from opensky-network_sdk import OpenskyNetworkSDK
+from openskynetwork_sdk import OpenskyNetworkSDK
 
 client = OpenskyNetworkSDK(options)
 ```
@@ -96,27 +96,27 @@ flight = client.Flight()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `callsign` | ``$STRING`` | No |  |
-| `departure_airport_candidates_count` | ``$INTEGER`` | No |  |
-| `est_arrival_airport` | ``$STRING`` | No |  |
-| `est_arrival_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_arrival_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport` | ``$STRING`` | No |  |
-| `est_departure_airport_horiz_distance` | ``$INTEGER`` | No |  |
-| `est_departure_airport_vert_distance` | ``$INTEGER`` | No |  |
-| `first_seen` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `last_seen` | ``$INTEGER`` | No |  |
+| `arrival_airport_candidates_count` | `int` | No |  |
+| `callsign` | `str` | No |  |
+| `departure_airport_candidates_count` | `int` | No |  |
+| `est_arrival_airport` | `str` | No |  |
+| `est_arrival_airport_horiz_distance` | `int` | No |  |
+| `est_arrival_airport_vert_distance` | `int` | No |  |
+| `est_departure_airport` | `str` | No |  |
+| `est_departure_airport_horiz_distance` | `int` | No |  |
+| `est_departure_airport_vert_distance` | `int` | No |  |
+| `first_seen` | `int` | No |  |
+| `icao24` | `str` | No |  |
+| `last_seen` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Flight().list({})
+results = client.Flight().list()
 for flight in results:
     print(flight)
 ```
@@ -160,17 +160,17 @@ state_vector = client.StateVector()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | ``$ARRAY`` | No |  |
-| `time` | ``$INTEGER`` | No |  |
+| `state` | `list` | No |  |
+| `time` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.StateVector().list({})
+results = client.StateVector().list()
 for state_vector in results:
     print(state_vector)
 ```
@@ -214,20 +214,20 @@ track = client.Track()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `callsign` | ``$STRING`` | No |  |
-| `end_time` | ``$INTEGER`` | No |  |
-| `icao24` | ``$STRING`` | No |  |
-| `path` | ``$ARRAY`` | No |  |
-| `start_time` | ``$INTEGER`` | No |  |
+| `callsign` | `str` | No |  |
+| `end_time` | `int` | No |  |
+| `icao24` | `str` | No |  |
+| `path` | `list` | No |  |
+| `start_time` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Track().list({})
+results = client.Track().list()
 for track in results:
     print(track)
 ```
