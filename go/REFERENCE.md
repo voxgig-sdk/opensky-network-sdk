@@ -100,6 +100,7 @@ same parameters as `Direct()`.
 
 ```go
 flight := client.Flight(nil)
+fmt.Println(flight.GetName()) // "flight"
 ```
 
 ### Fields
@@ -127,6 +128,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Flight(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -156,7 +161,8 @@ Return the entity name.
 ## StateVectorEntity
 
 ```go
-state_vector := client.StateVector(nil)
+stateVector := client.StateVector(nil)
+fmt.Println(stateVector.GetName()) // "state_vector"
 ```
 
 ### Fields
@@ -174,6 +180,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.StateVector(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -204,6 +214,7 @@ Return the entity name.
 
 ```go
 track := client.Track(nil)
+fmt.Println(track.GetName()) // "track"
 ```
 
 ### Fields
@@ -224,6 +235,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Track(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods

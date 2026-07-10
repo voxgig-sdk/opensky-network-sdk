@@ -354,7 +354,7 @@ fmt.Println(flights) // the array of records
 
 ### StateVector
 
-Create an instance: `state_vector := client.StateVector(nil)`
+Create an instance: `stateVector := client.StateVector(nil)`
 
 #### Operations
 
@@ -372,11 +372,11 @@ Create an instance: `state_vector := client.StateVector(nil)`
 #### Example: List
 
 ```go
-state_vectors, err := client.StateVector(nil).List(nil, nil)
+stateVectors, err := client.StateVector(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(state_vectors) // the array of records
+fmt.Println(stateVectors) // the array of records
 ```
 
 

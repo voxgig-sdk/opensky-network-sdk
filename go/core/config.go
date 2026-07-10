@@ -15,7 +15,7 @@ func MakeConfig() map[string]any {
 		"options": map[string]any{
 			"base": "https://opensky-network.org/api",
 			"auth": map[string]any{
-				"prefix": "Bearer",
+				"prefix": "Basic",
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",

@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -732,14 +729,24 @@
           "url": "https://openskynetwork.github.io/opensky-api/rest.html"
         },
         "description": "Retrieve state vectors, flights, and tracks for the whole network, a particular sensor, or a specific aircraft. Rate limits apply for certain API calls, and restrictions vary for anonymous and OpenSky users.",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "header",
+          "name": "Authorization",
+          "prefix": "Basic",
+          "scheme": "basicAuth",
+          "type": "http"
+        },
         "servers": [
           {
             "description": "OpenSky Network API",
             "url": "https://opensky-network.org/api"
           }
         ],
+        "summary": "Retrieve state vectors, flights, and tracks for the whole network, a particular sensor, or a specific aircraft.",
         "title": "OpenSky Network API",
-        "version": "1.4.0"
+        "version": "1.4.0",
+        "website": "https://opensky-network.org"
       },
       "option": {},
       "target": {
@@ -792,6 +799,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -842,6 +852,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

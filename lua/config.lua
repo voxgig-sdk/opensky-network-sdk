@@ -15,7 +15,7 @@ local function make_config()
     options = {
       base = "https://opensky-network.org/api",
       auth = {
-        prefix = "Bearer",
+        prefix = "Basic",
       },
       headers = {
         ["content-type"] = "application/json",
