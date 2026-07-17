@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- OpenskyNetwork SDK exists test
 
 local sdk = require("opensky-network_sdk")
 
