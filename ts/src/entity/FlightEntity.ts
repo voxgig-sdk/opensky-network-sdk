@@ -37,7 +37,7 @@ class FlightEntity extends OpenskyNetworkEntityBase<Flight> {
 
 
 
-  async list(this: any, reqmatch?: FlightListMatch, ctrl?: Control): Promise<Flight[]> {
+  async list(this: any, reqmatch?: FlightListMatch, ctrl?: Control): Promise<FlightEntity[]> {
 
     const utility = this._utility
 

@@ -102,18 +102,18 @@ flight = client.Flight
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | `Integer` | No |  |
+| `arrivalAirportCandidatesCount` | `Integer` | No |  |
 | `callsign` | `String` | No |  |
-| `departure_airport_candidates_count` | `Integer` | No |  |
-| `est_arrival_airport` | `String` | No |  |
-| `est_arrival_airport_horiz_distance` | `Integer` | No |  |
-| `est_arrival_airport_vert_distance` | `Integer` | No |  |
-| `est_departure_airport` | `String` | No |  |
-| `est_departure_airport_horiz_distance` | `Integer` | No |  |
-| `est_departure_airport_vert_distance` | `Integer` | No |  |
-| `first_seen` | `Integer` | No |  |
+| `departureAirportCandidatesCount` | `Integer` | No |  |
+| `estArrivalAirport` | `String` | No |  |
+| `estArrivalAirportHorizDistance` | `Integer` | No |  |
+| `estArrivalAirportVertDistance` | `Integer` | No |  |
+| `estDepartureAirport` | `String` | No |  |
+| `estDepartureAirportHorizDistance` | `Integer` | No |  |
+| `estDepartureAirportVertDistance` | `Integer` | No |  |
+| `firstSeen` | `Integer` | No |  |
 | `icao24` | `String` | No |  |
-| `last_seen` | `Integer` | No |  |
+| `lastSeen` | `Integer` | No |  |
 
 ### Operations
 
@@ -165,7 +165,7 @@ state_vector = client.StateVector
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | `Array` | No |  |
+| `states` | `Array` | No |  |
 | `time` | `Integer` | No |  |
 
 ### Operations
@@ -219,10 +219,10 @@ track = client.Track
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `callsign` | `String` | No |  |
-| `end_time` | `Integer` | No |  |
+| `endTime` | `Integer` | No |  |
 | `icao24` | `String` | No |  |
 | `path` | `Array` | No |  |
-| `start_time` | `Integer` | No |  |
+| `startTime` | `Integer` | No |  |
 
 ### Operations
 

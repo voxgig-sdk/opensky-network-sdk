@@ -6,7 +6,7 @@ main: kit: entity: flight: {
 
   fields: [
     {
-      name: "arrival_airport_candidates_count"
+      name: "arrivalAirportCandidatesCount"
       req: false
       type: "`$INTEGER`"
     }
@@ -16,42 +16,42 @@ main: kit: entity: flight: {
       type: "`$STRING`"
     }
     {
-      name: "departure_airport_candidates_count"
+      name: "departureAirportCandidatesCount"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "est_arrival_airport"
+      name: "estArrivalAirport"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "est_arrival_airport_horiz_distance"
+      name: "estArrivalAirportHorizDistance"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "est_arrival_airport_vert_distance"
+      name: "estArrivalAirportVertDistance"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "est_departure_airport"
+      name: "estDepartureAirport"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "est_departure_airport_horiz_distance"
+      name: "estDepartureAirportHorizDistance"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "est_departure_airport_vert_distance"
+      name: "estDepartureAirportVertDistance"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "first_seen"
+      name: "firstSeen"
       req: false
       type: "`$INTEGER`"
     }
@@ -61,7 +61,7 @@ main: kit: entity: flight: {
       type: "`$STRING`"
     }
     {
-      name: "last_seen"
+      name: "lastSeen"
       req: false
       type: "`$INTEGER`"
     }

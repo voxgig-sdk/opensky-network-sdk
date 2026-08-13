@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# OpenskyNetwork SDK exists test
 
 import pytest
 from openskynetwork_sdk import OpenskyNetworkSDK

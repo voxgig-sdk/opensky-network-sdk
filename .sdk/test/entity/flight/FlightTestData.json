@@ -2,64 +2,64 @@
   "existing": {
     "flight": {
       "FLIGHT00": {
-        "arrival_airport_candidates_count": "s78",
+        "arrivalAirportCandidatesCount": "s78",
         "callsign": "s79",
-        "departure_airport_candidates_count": "s7a",
-        "est_arrival_airport": "s7b",
-        "est_arrival_airport_horiz_distance": "s7c",
-        "est_arrival_airport_vert_distance": "s7d",
-        "est_departure_airport": "s7e",
-        "est_departure_airport_horiz_distance": "s7f",
-        "est_departure_airport_vert_distance": "s80",
-        "first_seen": "s81",
+        "departureAirportCandidatesCount": "s7a",
+        "estArrivalAirport": "s7b",
+        "estArrivalAirportHorizDistance": "s7c",
+        "estArrivalAirportVertDistance": "s7d",
+        "estDepartureAirport": "s7e",
+        "estDepartureAirportHorizDistance": "s7f",
+        "estDepartureAirportVertDistance": "s80",
+        "firstSeen": "s81",
         "icao24": "s82",
-        "last_seen": "s83"
+        "lastSeen": "s83"
       },
       "FLIGHT01": {
-        "arrival_airport_candidates_count": "sf0",
+        "arrivalAirportCandidatesCount": "sf0",
         "callsign": "sf1",
-        "departure_airport_candidates_count": "sf2",
-        "est_arrival_airport": "sf3",
-        "est_arrival_airport_horiz_distance": "sf4",
-        "est_arrival_airport_vert_distance": "sf5",
-        "est_departure_airport": "sf6",
-        "est_departure_airport_horiz_distance": "sf7",
-        "est_departure_airport_vert_distance": "sf8",
-        "first_seen": "sf9",
+        "departureAirportCandidatesCount": "sf2",
+        "estArrivalAirport": "sf3",
+        "estArrivalAirportHorizDistance": "sf4",
+        "estArrivalAirportVertDistance": "sf5",
+        "estDepartureAirport": "sf6",
+        "estDepartureAirportHorizDistance": "sf7",
+        "estDepartureAirportVertDistance": "sf8",
+        "firstSeen": "sf9",
         "icao24": "sfa",
-        "last_seen": "sfb"
+        "lastSeen": "sfb"
       },
       "FLIGHT02": {
-        "arrival_airport_candidates_count": "s168",
+        "arrivalAirportCandidatesCount": "s168",
         "callsign": "s169",
-        "departure_airport_candidates_count": "s16a",
-        "est_arrival_airport": "s16b",
-        "est_arrival_airport_horiz_distance": "s16c",
-        "est_arrival_airport_vert_distance": "s16d",
-        "est_departure_airport": "s16e",
-        "est_departure_airport_horiz_distance": "s16f",
-        "est_departure_airport_vert_distance": "s170",
-        "first_seen": "s171",
+        "departureAirportCandidatesCount": "s16a",
+        "estArrivalAirport": "s16b",
+        "estArrivalAirportHorizDistance": "s16c",
+        "estArrivalAirportVertDistance": "s16d",
+        "estDepartureAirport": "s16e",
+        "estDepartureAirportHorizDistance": "s16f",
+        "estDepartureAirportVertDistance": "s170",
+        "firstSeen": "s171",
         "icao24": "s172",
-        "last_seen": "s173"
+        "lastSeen": "s173"
       }
     }
   },
   "new": {
     "flight": {
       "flight_ref01": {
-        "arrival_airport_candidates_count": "s1e0",
+        "arrivalAirportCandidatesCount": "s1e0",
         "callsign": "s1e1",
-        "departure_airport_candidates_count": "s1e2",
-        "est_arrival_airport": "s1e3",
-        "est_arrival_airport_horiz_distance": "s1e4",
-        "est_arrival_airport_vert_distance": "s1e5",
-        "est_departure_airport": "s1e6",
-        "est_departure_airport_horiz_distance": "s1e7",
-        "est_departure_airport_vert_distance": "s1e8",
-        "first_seen": "s1e9",
+        "departureAirportCandidatesCount": "s1e2",
+        "estArrivalAirport": "s1e3",
+        "estArrivalAirportHorizDistance": "s1e4",
+        "estArrivalAirportVertDistance": "s1e5",
+        "estDepartureAirport": "s1e6",
+        "estDepartureAirportHorizDistance": "s1e7",
+        "estDepartureAirportVertDistance": "s1e8",
+        "firstSeen": "s1e9",
         "icao24": "s1ea",
-        "last_seen": "s1eb"
+        "lastSeen": "s1eb"
       }
     }
   }

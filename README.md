@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = OpenskyNetworkSDK.test()
-const flights = await client.Flight().list()
-// flights is an array of bare Flight records populated with mock data
-console.log(flights)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = OpenskyNetworkSDK.test({
+  entity: {
+    track: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const tracks = await client.Track().list()
+// tracks is an array of Track entities, populated with mock data
+// — call tracks[0].data() for the record itself
+console.log(tracks)
 ```
 
 ### Python
 
 ```python
 client = OpenskyNetworkSDK.test()
-flights = client.Flight().list()
-print(flights)
+tracks = client.Track().list()
+print(tracks)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(flights)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = OpenskyNetworkSDK::test([
-    "entity" => ["flight" => ["test01" => []]],
+    "entity" => ["track" => ["test01" => []]],
 ]);
-$flights = $client->Flight()->list();
+$tracks = $client->Track()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Flight(nil).List(
+result, err := client.Track(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Flight(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = OpenskyNetworkSDK.test({
-  "entity" => { "flight" => { "test01" => {} } },
+  "entity" => { "track" => { "test01" => {} } },
 })
-flights = client.Flight.list()
+tracks = client.Track.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Flight():list()
+local results, err = client:Track():list()
 ```
 
 ## Packages
@@ -112,7 +121,7 @@ const client = new OpenskyNetworkSDK({
   apikey: process.env.OPENSKY_NETWORK_APIKEY,
 })
 
-// List all flights (returns Flight[])
+// List all flights (returns FlightEntity[] — .data() for the record)
 const flights = await client.Flight().list()
 for (const flight of flights) {
   console.log(flight)
@@ -358,6 +367,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://openskynetwork.github.io/opensky-api/rest.html](https://openskynetwork.github.io/opensky-api/rest.html)
 

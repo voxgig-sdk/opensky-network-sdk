@@ -32,7 +32,7 @@ module OpenskyNetworkConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "arrival_airport_candidates_count",
+              "name" => "arrivalAirportCandidatesCount",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 0,
@@ -46,56 +46,56 @@ module OpenskyNetworkConfig
             },
             {
               "active" => true,
-              "name" => "departure_airport_candidates_count",
+              "name" => "departureAirportCandidatesCount",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 2,
             },
             {
               "active" => true,
-              "name" => "est_arrival_airport",
+              "name" => "estArrivalAirport",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "est_arrival_airport_horiz_distance",
+              "name" => "estArrivalAirportHorizDistance",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 4,
             },
             {
               "active" => true,
-              "name" => "est_arrival_airport_vert_distance",
+              "name" => "estArrivalAirportVertDistance",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 5,
             },
             {
               "active" => true,
-              "name" => "est_departure_airport",
+              "name" => "estDepartureAirport",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 6,
             },
             {
               "active" => true,
-              "name" => "est_departure_airport_horiz_distance",
+              "name" => "estDepartureAirportHorizDistance",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 7,
             },
             {
               "active" => true,
-              "name" => "est_departure_airport_vert_distance",
+              "name" => "estDepartureAirportVertDistance",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 8,
             },
             {
               "active" => true,
-              "name" => "first_seen",
+              "name" => "firstSeen",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 9,
@@ -109,7 +109,7 @@ module OpenskyNetworkConfig
             },
             {
               "active" => true,
-              "name" => "last_seen",
+              "name" => "lastSeen",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 11,
@@ -151,6 +151,7 @@ module OpenskyNetworkConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/aircraft",
                   "parts" => [
@@ -201,6 +202,7 @@ module OpenskyNetworkConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/arrival",
                   "parts" => [
@@ -251,6 +253,7 @@ module OpenskyNetworkConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/departure",
                   "parts" => [
@@ -293,6 +296,7 @@ module OpenskyNetworkConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/all",
                   "parts" => [
@@ -324,7 +328,7 @@ module OpenskyNetworkConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "state",
+              "name" => "states",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 0,
@@ -405,6 +409,7 @@ module OpenskyNetworkConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/states/all",
                   "parts" => [
@@ -424,7 +429,7 @@ module OpenskyNetworkConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.states`",
                   },
                   "index$" => 0,
                 },
@@ -458,6 +463,7 @@ module OpenskyNetworkConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/states/own",
                   "parts" => [
@@ -473,7 +479,7 @@ module OpenskyNetworkConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.states`",
                   },
                   "index$" => 1,
                 },
@@ -496,7 +502,7 @@ module OpenskyNetworkConfig
             },
             {
               "active" => true,
-              "name" => "end_time",
+              "name" => "endTime",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 1,
@@ -517,7 +523,7 @@ module OpenskyNetworkConfig
             },
             {
               "active" => true,
-              "name" => "start_time",
+              "name" => "startTime",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 4,
@@ -551,6 +557,7 @@ module OpenskyNetworkConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/tracks",
                   "parts" => [
@@ -564,7 +571,7 @@ module OpenskyNetworkConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.path`",
                   },
                   "index$" => 0,
                 },

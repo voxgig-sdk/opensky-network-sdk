@@ -31,7 +31,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "arrival_airport_candidates_count",
+						"name": "arrivalAirportCandidatesCount",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 0,
@@ -45,56 +45,56 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "departure_airport_candidates_count",
+						"name": "departureAirportCandidatesCount",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
-						"name": "est_arrival_airport",
+						"name": "estArrivalAirport",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "est_arrival_airport_horiz_distance",
+						"name": "estArrivalAirportHorizDistance",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 4,
 					},
 					map[string]any{
 						"active": true,
-						"name": "est_arrival_airport_vert_distance",
+						"name": "estArrivalAirportVertDistance",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 5,
 					},
 					map[string]any{
 						"active": true,
-						"name": "est_departure_airport",
+						"name": "estDepartureAirport",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 6,
 					},
 					map[string]any{
 						"active": true,
-						"name": "est_departure_airport_horiz_distance",
+						"name": "estDepartureAirportHorizDistance",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 7,
 					},
 					map[string]any{
 						"active": true,
-						"name": "est_departure_airport_vert_distance",
+						"name": "estDepartureAirportVertDistance",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 8,
 					},
 					map[string]any{
 						"active": true,
-						"name": "first_seen",
+						"name": "firstSeen",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 9,
@@ -108,7 +108,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "last_seen",
+						"name": "lastSeen",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 11,
@@ -150,6 +150,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/aircraft",
 								"parts": []any{
@@ -200,6 +201,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/arrival",
 								"parts": []any{
@@ -250,6 +252,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/departure",
 								"parts": []any{
@@ -292,6 +295,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/all",
 								"parts": []any{
@@ -312,7 +316,6 @@ func MakeConfig() map[string]any {
 								"index$": 3,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -323,7 +326,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "state",
+						"name": "states",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 0,
@@ -404,6 +407,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/states/all",
 								"parts": []any{
@@ -423,7 +427,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.states`",
 								},
 								"index$": 0,
 							},
@@ -457,6 +461,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/states/own",
 								"parts": []any{
@@ -472,12 +477,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.states`",
 								},
 								"index$": 1,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -495,7 +499,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "end_time",
+						"name": "endTime",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 1,
@@ -516,7 +520,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "start_time",
+						"name": "startTime",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 4,
@@ -550,6 +554,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/tracks",
 								"parts": []any{
@@ -563,12 +568,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.path`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{

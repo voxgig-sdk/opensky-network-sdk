@@ -37,7 +37,9 @@ const client = new OpenskyNetworkSDK({
 
 ### 2. List flight records
 
-`list()` resolves to an array of Flight objects — iterate it directly:
+`list()` resolves to an array of Flight ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const flights = await client.Flight().list()
@@ -54,8 +56,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const flights = await client.Flight().list()
-  console.log(flights)
+  const tracks = await client.Track().list()
+  console.log(tracks)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -121,9 +123,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = OpenskyNetworkSDK.test()
 
-const flight = await client.Flight().list()
-// flight is a bare entity populated with mock response data
-console.log(flight)
+const track = await client.Track().list()
+// track is the entity, populated with mock response data
+// — call track.data() for the record itself
+console.log(track)
 ```
 
 You can also use the instance method:
@@ -138,7 +141,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Flight()
+const entity = client.Track()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -292,18 +295,18 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `arrival_airport_candidates_count` |  |
+| `arrivalAirportCandidatesCount` |  |
 | `callsign` |  |
-| `departure_airport_candidates_count` |  |
-| `est_arrival_airport` |  |
-| `est_arrival_airport_horiz_distance` |  |
-| `est_arrival_airport_vert_distance` |  |
-| `est_departure_airport` |  |
-| `est_departure_airport_horiz_distance` |  |
-| `est_departure_airport_vert_distance` |  |
-| `first_seen` |  |
+| `departureAirportCandidatesCount` |  |
+| `estArrivalAirport` |  |
+| `estArrivalAirportHorizDistance` |  |
+| `estArrivalAirportVertDistance` |  |
+| `estDepartureAirport` |  |
+| `estDepartureAirportHorizDistance` |  |
+| `estDepartureAirportVertDistance` |  |
+| `firstSeen` |  |
 | `icao24` |  |
-| `last_seen` |  |
+| `lastSeen` |  |
 
 Operations: list.
 
@@ -313,7 +316,7 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `state` |  |
+| `states` |  |
 | `time` |  |
 
 Operations: list.
@@ -325,10 +328,10 @@ API path: `/states/all`
 | Field | Description |
 | --- | --- |
 | `callsign` |  |
-| `end_time` |  |
+| `endTime` |  |
 | `icao24` |  |
 | `path` |  |
-| `start_time` |  |
+| `startTime` |  |
 
 Operations: list.
 
@@ -353,18 +356,18 @@ Create an instance: `const flight = client.Flight()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival_airport_candidates_count` | `number` |  |
+| `arrivalAirportCandidatesCount` | `number` |  |
 | `callsign` | `string` |  |
-| `departure_airport_candidates_count` | `number` |  |
-| `est_arrival_airport` | `string` |  |
-| `est_arrival_airport_horiz_distance` | `number` |  |
-| `est_arrival_airport_vert_distance` | `number` |  |
-| `est_departure_airport` | `string` |  |
-| `est_departure_airport_horiz_distance` | `number` |  |
-| `est_departure_airport_vert_distance` | `number` |  |
-| `first_seen` | `number` |  |
+| `departureAirportCandidatesCount` | `number` |  |
+| `estArrivalAirport` | `string` |  |
+| `estArrivalAirportHorizDistance` | `number` |  |
+| `estArrivalAirportVertDistance` | `number` |  |
+| `estDepartureAirport` | `string` |  |
+| `estDepartureAirportHorizDistance` | `number` |  |
+| `estDepartureAirportVertDistance` | `number` |  |
+| `firstSeen` | `number` |  |
 | `icao24` | `string` |  |
-| `last_seen` | `number` |  |
+| `lastSeen` | `number` |  |
 
 #### Example: List
 
@@ -387,7 +390,7 @@ Create an instance: `const state_vector = client.StateVector()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `state` | `any[]` |  |
+| `states` | `any[]` |  |
 | `time` | `number` |  |
 
 #### Example: List
@@ -412,10 +415,10 @@ Create an instance: `const track = client.Track()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `callsign` | `string` |  |
-| `end_time` | `number` |  |
+| `endTime` | `number` |  |
 | `icao24` | `string` |  |
 | `path` | `any[]` |  |
-| `start_time` | `number` |  |
+| `startTime` | `number` |  |
 
 #### Example: List
 
@@ -493,11 +496,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const flight = client.Flight()
-await flight.list()
+const track = client.Track()
+await track.list()
 
-// flight.data() now returns the flight data from the last `list`
-// flight.match() returns the last match criteria
+// track.data() now returns the track data from the last `list`
+// track.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -15,48 +15,48 @@ declare(strict_types=1);
 /** Flight entity data model. */
 class Flight
 {
-    public ?int $arrival_airport_candidates_count = null;
+    public ?int $arrivalAirportCandidatesCount = null;
     public ?string $callsign = null;
-    public ?int $departure_airport_candidates_count = null;
-    public ?string $est_arrival_airport = null;
-    public ?int $est_arrival_airport_horiz_distance = null;
-    public ?int $est_arrival_airport_vert_distance = null;
-    public ?string $est_departure_airport = null;
-    public ?int $est_departure_airport_horiz_distance = null;
-    public ?int $est_departure_airport_vert_distance = null;
-    public ?int $first_seen = null;
+    public ?int $departureAirportCandidatesCount = null;
+    public ?string $estArrivalAirport = null;
+    public ?int $estArrivalAirportHorizDistance = null;
+    public ?int $estArrivalAirportVertDistance = null;
+    public ?string $estDepartureAirport = null;
+    public ?int $estDepartureAirportHorizDistance = null;
+    public ?int $estDepartureAirportVertDistance = null;
+    public ?int $firstSeen = null;
     public ?string $icao24 = null;
-    public ?int $last_seen = null;
+    public ?int $lastSeen = null;
 }
 
 /** Request payload for Flight#list. */
 class FlightListMatch
 {
-    public ?int $arrival_airport_candidates_count = null;
+    public ?int $arrivalAirportCandidatesCount = null;
     public ?string $callsign = null;
-    public ?int $departure_airport_candidates_count = null;
-    public ?string $est_arrival_airport = null;
-    public ?int $est_arrival_airport_horiz_distance = null;
-    public ?int $est_arrival_airport_vert_distance = null;
-    public ?string $est_departure_airport = null;
-    public ?int $est_departure_airport_horiz_distance = null;
-    public ?int $est_departure_airport_vert_distance = null;
-    public ?int $first_seen = null;
+    public ?int $departureAirportCandidatesCount = null;
+    public ?string $estArrivalAirport = null;
+    public ?int $estArrivalAirportHorizDistance = null;
+    public ?int $estArrivalAirportVertDistance = null;
+    public ?string $estDepartureAirport = null;
+    public ?int $estDepartureAirportHorizDistance = null;
+    public ?int $estDepartureAirportVertDistance = null;
+    public ?int $firstSeen = null;
     public ?string $icao24 = null;
-    public ?int $last_seen = null;
+    public ?int $lastSeen = null;
 }
 
 /** StateVector entity data model. */
 class StateVector
 {
-    public ?array $state = null;
+    public ?array $states = null;
     public ?int $time = null;
 }
 
 /** Request payload for StateVector#list. */
 class StateVectorListMatch
 {
-    public ?array $state = null;
+    public ?array $states = null;
     public ?int $time = null;
 }
 
@@ -64,19 +64,19 @@ class StateVectorListMatch
 class Track
 {
     public ?string $callsign = null;
-    public ?int $end_time = null;
+    public ?int $endTime = null;
     public ?string $icao24 = null;
     public ?array $path = null;
-    public ?int $start_time = null;
+    public ?int $startTime = null;
 }
 
 /** Request payload for Track#list. */
 class TrackListMatch
 {
     public ?string $callsign = null;
-    public ?int $end_time = null;
+    public ?int $endTime = null;
     public ?string $icao24 = null;
     public ?array $path = null;
-    public ?int $start_time = null;
+    public ?int $startTime = null;
 }
 

@@ -40,7 +40,7 @@ try {
     // list() returns an array of Flight records — iterate directly.
     $flights = $client->Flight()->list();
     foreach ($flights as $item) {
-        echo $item["arrival_airport_candidates_count"] . "\n";
+        echo $item["arrivalAirportCandidatesCount"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -55,7 +55,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $flights = $client->Flight()->list();
+    $tracks = $client->Track()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -127,9 +127,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = OpenskyNetworkSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$flight = $client->Flight()->list();
-print_r($flight);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$track = $client->Track()->list();
+print_r($track);
 ```
 
 ### Use a custom fetch function
@@ -230,7 +231,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -252,18 +253,18 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `arrival_airport_candidates_count` |  |
+| `arrivalAirportCandidatesCount` |  |
 | `callsign` |  |
-| `departure_airport_candidates_count` |  |
-| `est_arrival_airport` |  |
-| `est_arrival_airport_horiz_distance` |  |
-| `est_arrival_airport_vert_distance` |  |
-| `est_departure_airport` |  |
-| `est_departure_airport_horiz_distance` |  |
-| `est_departure_airport_vert_distance` |  |
-| `first_seen` |  |
+| `departureAirportCandidatesCount` |  |
+| `estArrivalAirport` |  |
+| `estArrivalAirportHorizDistance` |  |
+| `estArrivalAirportVertDistance` |  |
+| `estDepartureAirport` |  |
+| `estDepartureAirportHorizDistance` |  |
+| `estDepartureAirportVertDistance` |  |
+| `firstSeen` |  |
 | `icao24` |  |
-| `last_seen` |  |
+| `lastSeen` |  |
 
 Operations: List.
 
@@ -273,7 +274,7 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `state` |  |
+| `states` |  |
 | `time` |  |
 
 Operations: List.
@@ -285,10 +286,10 @@ API path: `/states/all`
 | Field | Description |
 | --- | --- |
 | `callsign` |  |
-| `end_time` |  |
+| `endTime` |  |
 | `icao24` |  |
 | `path` |  |
-| `start_time` |  |
+| `startTime` |  |
 
 Operations: List.
 
@@ -313,18 +314,18 @@ Create an instance: `$flight = $client->Flight();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival_airport_candidates_count` | `int` |  |
+| `arrivalAirportCandidatesCount` | `int` |  |
 | `callsign` | `string` |  |
-| `departure_airport_candidates_count` | `int` |  |
-| `est_arrival_airport` | `string` |  |
-| `est_arrival_airport_horiz_distance` | `int` |  |
-| `est_arrival_airport_vert_distance` | `int` |  |
-| `est_departure_airport` | `string` |  |
-| `est_departure_airport_horiz_distance` | `int` |  |
-| `est_departure_airport_vert_distance` | `int` |  |
-| `first_seen` | `int` |  |
+| `departureAirportCandidatesCount` | `int` |  |
+| `estArrivalAirport` | `string` |  |
+| `estArrivalAirportHorizDistance` | `int` |  |
+| `estArrivalAirportVertDistance` | `int` |  |
+| `estDepartureAirport` | `string` |  |
+| `estDepartureAirportHorizDistance` | `int` |  |
+| `estDepartureAirportVertDistance` | `int` |  |
+| `firstSeen` | `int` |  |
 | `icao24` | `string` |  |
-| `last_seen` | `int` |  |
+| `lastSeen` | `int` |  |
 
 #### Example: List
 
@@ -348,7 +349,7 @@ Create an instance: `$state_vector = $client->StateVector();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `state` | `array` |  |
+| `states` | `array` |  |
 | `time` | `int` |  |
 
 #### Example: List
@@ -374,10 +375,10 @@ Create an instance: `$track = $client->Track();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `callsign` | `string` |  |
-| `end_time` | `int` |  |
+| `endTime` | `int` |  |
 | `icao24` | `string` |  |
 | `path` | `array` |  |
-| `start_time` | `int` |  |
+| `startTime` | `int` |  |
 
 #### Example: List
 
@@ -463,11 +464,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$flight = $client->Flight();
-$flight->list();
+$track = $client->Track();
+$track->list();
 
-// $flight->data_get() now returns the flight data from the last list
-// $flight->match_get() returns the last match criteria
+// $track->data_get() now returns the track data from the last list
+// $track->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

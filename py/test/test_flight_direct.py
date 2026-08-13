@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from openskynetwork_sdk.utility.voxgig_struct import voxgig_struct as vs
 from openskynetwork_sdk import OpenskyNetworkSDK
-from core import helpers
+from openskynetwork_sdk.core import helpers
 from test import runner
 
 
@@ -58,16 +58,16 @@ def _flight_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "OPENSKYNETWORK_TEST_FLIGHT_ENTID": {},
-        "OPENSKYNETWORK_TEST_LIVE": "FALSE",
-        "OPENSKYNETWORK_APIKEY": "NONE",
+        "OPENSKY_NETWORK_TEST_FLIGHT_ENTID": {},
+        "OPENSKY_NETWORK_TEST_LIVE": "FALSE",
+        "OPENSKY_NETWORK_APIKEY": "NONE",
     })
 
-    live = env.get("OPENSKYNETWORK_TEST_LIVE") == "TRUE"
+    live = env.get("OPENSKY_NETWORK_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("OPENSKYNETWORK_APIKEY"),
+            "apikey": env.get("OPENSKY_NETWORK_APIKEY"),
         }
         client = OpenskyNetworkSDK(merged_opts)
         return {

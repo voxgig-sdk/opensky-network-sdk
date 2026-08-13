@@ -39,7 +39,7 @@ begin
   # list returns an Array of Flight records — iterate directly.
   flights = client.Flight.list
   flights.each do |item|
-    puts "#{item["arrival_airport_candidates_count"]}"
+    puts "#{item["arrivalAirportCandidatesCount"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -53,7 +53,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  flights = client.Flight.list()
+  tracks = client.Track.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -121,9 +121,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = OpenskyNetworkSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-flight = client.Flight.list()
-puts flight
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+track = client.Track.list()
+puts track
 ```
 
 ### Use a custom fetch function
@@ -242,18 +243,18 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `arrival_airport_candidates_count` |  |
+| `arrivalAirportCandidatesCount` |  |
 | `callsign` |  |
-| `departure_airport_candidates_count` |  |
-| `est_arrival_airport` |  |
-| `est_arrival_airport_horiz_distance` |  |
-| `est_arrival_airport_vert_distance` |  |
-| `est_departure_airport` |  |
-| `est_departure_airport_horiz_distance` |  |
-| `est_departure_airport_vert_distance` |  |
-| `first_seen` |  |
+| `departureAirportCandidatesCount` |  |
+| `estArrivalAirport` |  |
+| `estArrivalAirportHorizDistance` |  |
+| `estArrivalAirportVertDistance` |  |
+| `estDepartureAirport` |  |
+| `estDepartureAirportHorizDistance` |  |
+| `estDepartureAirportVertDistance` |  |
+| `firstSeen` |  |
 | `icao24` |  |
-| `last_seen` |  |
+| `lastSeen` |  |
 
 Operations: List.
 
@@ -263,7 +264,7 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `state` |  |
+| `states` |  |
 | `time` |  |
 
 Operations: List.
@@ -275,10 +276,10 @@ API path: `/states/all`
 | Field | Description |
 | --- | --- |
 | `callsign` |  |
-| `end_time` |  |
+| `endTime` |  |
 | `icao24` |  |
 | `path` |  |
-| `start_time` |  |
+| `startTime` |  |
 
 Operations: List.
 
@@ -303,18 +304,18 @@ Create an instance: `flight = client.Flight`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival_airport_candidates_count` | `Integer` |  |
+| `arrivalAirportCandidatesCount` | `Integer` |  |
 | `callsign` | `String` |  |
-| `departure_airport_candidates_count` | `Integer` |  |
-| `est_arrival_airport` | `String` |  |
-| `est_arrival_airport_horiz_distance` | `Integer` |  |
-| `est_arrival_airport_vert_distance` | `Integer` |  |
-| `est_departure_airport` | `String` |  |
-| `est_departure_airport_horiz_distance` | `Integer` |  |
-| `est_departure_airport_vert_distance` | `Integer` |  |
-| `first_seen` | `Integer` |  |
+| `departureAirportCandidatesCount` | `Integer` |  |
+| `estArrivalAirport` | `String` |  |
+| `estArrivalAirportHorizDistance` | `Integer` |  |
+| `estArrivalAirportVertDistance` | `Integer` |  |
+| `estDepartureAirport` | `String` |  |
+| `estDepartureAirportHorizDistance` | `Integer` |  |
+| `estDepartureAirportVertDistance` | `Integer` |  |
+| `firstSeen` | `Integer` |  |
 | `icao24` | `String` |  |
-| `last_seen` | `Integer` |  |
+| `lastSeen` | `Integer` |  |
 
 #### Example: List
 
@@ -338,7 +339,7 @@ Create an instance: `state_vector = client.StateVector`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `state` | `Array` |  |
+| `states` | `Array` |  |
 | `time` | `Integer` |  |
 
 #### Example: List
@@ -364,10 +365,10 @@ Create an instance: `track = client.Track`
 | Field | Type | Description |
 | --- | --- | --- |
 | `callsign` | `String` |  |
-| `end_time` | `Integer` |  |
+| `endTime` | `Integer` |  |
 | `icao24` | `String` |  |
 | `path` | `Array` |  |
-| `start_time` | `Integer` |  |
+| `startTime` | `Integer` |  |
 
 #### Example: List
 
@@ -453,11 +454,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-flight = client.Flight
-flight.list()
+track = client.Track
+track.list()
 
-# flight.data_get now returns the flight data from the last list
-# flight.match_get returns the last match criteria
+# track.data_get now returns the track data from the last list
+# track.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -26,8 +26,8 @@ import {
 describe('StateVectorEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when OPENSKYNETWORK_TEST_LIVE=TRUE.
-  afterEach(liveDelay('OPENSKYNETWORK_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when OPENSKY_NETWORK_TEST_LIVE=TRUE.
+  afterEach(liveDelay('OPENSKY_NETWORK_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = OpenskyNetworkSDK.test()
@@ -63,7 +63,7 @@ describe('StateVectorEntity', async () => {
     const state_vector_ref01_ent = client.StateVector()
     const state_vector_ref01_match: any = {}
 
-    const state_vector_ref01_list = await state_vector_ref01_ent.list(state_vector_ref01_match)
+    const state_vector_ref01_list = (await state_vector_ref01_ent.list(state_vector_ref01_match)).map((e: any) => e.data())
 
 
   })

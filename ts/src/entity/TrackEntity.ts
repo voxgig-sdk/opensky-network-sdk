@@ -37,7 +37,7 @@ class TrackEntity extends OpenskyNetworkEntityBase<Track> {
 
 
 
-  async list(this: any, reqmatch?: TrackListMatch, ctrl?: Control): Promise<Track[]> {
+  async list(this: any, reqmatch?: TrackListMatch, ctrl?: Control): Promise<TrackEntity[]> {
 
     const utility = this._utility
 

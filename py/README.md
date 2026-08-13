@@ -60,8 +60,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    flights = client.Flight().list()
-    print(flights)
+    tracks = client.Track().list()
+    print(tracks)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -127,9 +127,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OpenskyNetworkSDK.test()
 
-# Entity ops return the bare record and raise on error.
-flight = client.Flight().list()
-# flight contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+track = client.Track().list()
+# track contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -227,7 +228,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -249,18 +250,18 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `arrival_airport_candidates_count` |  |
+| `arrivalAirportCandidatesCount` |  |
 | `callsign` |  |
-| `departure_airport_candidates_count` |  |
-| `est_arrival_airport` |  |
-| `est_arrival_airport_horiz_distance` |  |
-| `est_arrival_airport_vert_distance` |  |
-| `est_departure_airport` |  |
-| `est_departure_airport_horiz_distance` |  |
-| `est_departure_airport_vert_distance` |  |
-| `first_seen` |  |
+| `departureAirportCandidatesCount` |  |
+| `estArrivalAirport` |  |
+| `estArrivalAirportHorizDistance` |  |
+| `estArrivalAirportVertDistance` |  |
+| `estDepartureAirport` |  |
+| `estDepartureAirportHorizDistance` |  |
+| `estDepartureAirportVertDistance` |  |
+| `firstSeen` |  |
 | `icao24` |  |
-| `last_seen` |  |
+| `lastSeen` |  |
 
 Operations: List.
 
@@ -270,7 +271,7 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `state` |  |
+| `states` |  |
 | `time` |  |
 
 Operations: List.
@@ -282,10 +283,10 @@ API path: `/states/all`
 | Field | Description |
 | --- | --- |
 | `callsign` |  |
-| `end_time` |  |
+| `endTime` |  |
 | `icao24` |  |
 | `path` |  |
-| `start_time` |  |
+| `startTime` |  |
 
 Operations: List.
 
@@ -310,18 +311,18 @@ Create an instance: `flight = client.Flight()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival_airport_candidates_count` | `int` |  |
+| `arrivalAirportCandidatesCount` | `int` |  |
 | `callsign` | `str` |  |
-| `departure_airport_candidates_count` | `int` |  |
-| `est_arrival_airport` | `str` |  |
-| `est_arrival_airport_horiz_distance` | `int` |  |
-| `est_arrival_airport_vert_distance` | `int` |  |
-| `est_departure_airport` | `str` |  |
-| `est_departure_airport_horiz_distance` | `int` |  |
-| `est_departure_airport_vert_distance` | `int` |  |
-| `first_seen` | `int` |  |
+| `departureAirportCandidatesCount` | `int` |  |
+| `estArrivalAirport` | `str` |  |
+| `estArrivalAirportHorizDistance` | `int` |  |
+| `estArrivalAirportVertDistance` | `int` |  |
+| `estDepartureAirport` | `str` |  |
+| `estDepartureAirportHorizDistance` | `int` |  |
+| `estDepartureAirportVertDistance` | `int` |  |
+| `firstSeen` | `int` |  |
 | `icao24` | `str` |  |
-| `last_seen` | `int` |  |
+| `lastSeen` | `int` |  |
 
 #### Example: List
 
@@ -344,7 +345,7 @@ Create an instance: `state_vector = client.StateVector()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `state` | `list` |  |
+| `states` | `list` |  |
 | `time` | `int` |  |
 
 #### Example: List
@@ -369,10 +370,10 @@ Create an instance: `track = client.Track()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `callsign` | `str` |  |
-| `end_time` | `int` |  |
+| `endTime` | `int` |  |
 | `icao24` | `str` |  |
 | `path` | `list` |  |
-| `start_time` | `int` |  |
+| `startTime` | `int` |  |
 
 #### Example: List
 
@@ -456,11 +457,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-flight = client.Flight()
-flight.list()
+track = client.Track()
+track.list()
 
-# flight.data_get() now returns the flight data from the last list
-# flight.match_get() returns the last match criteria
+# track.data_get() now returns the track data from the last list
+# track.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

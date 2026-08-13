@@ -31,7 +31,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "arrival_airport_candidates_count",
+            ["name"] = "arrivalAirportCandidatesCount",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 0,
@@ -45,56 +45,56 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "departure_airport_candidates_count",
+            ["name"] = "departureAirportCandidatesCount",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 2,
           },
           {
             ["active"] = true,
-            ["name"] = "est_arrival_airport",
+            ["name"] = "estArrivalAirport",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 3,
           },
           {
             ["active"] = true,
-            ["name"] = "est_arrival_airport_horiz_distance",
+            ["name"] = "estArrivalAirportHorizDistance",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 4,
           },
           {
             ["active"] = true,
-            ["name"] = "est_arrival_airport_vert_distance",
+            ["name"] = "estArrivalAirportVertDistance",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 5,
           },
           {
             ["active"] = true,
-            ["name"] = "est_departure_airport",
+            ["name"] = "estDepartureAirport",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 6,
           },
           {
             ["active"] = true,
-            ["name"] = "est_departure_airport_horiz_distance",
+            ["name"] = "estDepartureAirportHorizDistance",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 7,
           },
           {
             ["active"] = true,
-            ["name"] = "est_departure_airport_vert_distance",
+            ["name"] = "estDepartureAirportVertDistance",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 8,
           },
           {
             ["active"] = true,
-            ["name"] = "first_seen",
+            ["name"] = "firstSeen",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 9,
@@ -108,7 +108,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "last_seen",
+            ["name"] = "lastSeen",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 11,
@@ -150,6 +150,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/aircraft",
                 ["parts"] = {
@@ -200,6 +201,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/arrival",
                 ["parts"] = {
@@ -250,6 +252,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/departure",
                 ["parts"] = {
@@ -292,6 +295,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/all",
                 ["parts"] = {
@@ -323,7 +327,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "state",
+            ["name"] = "states",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -404,6 +408,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/states/all",
                 ["parts"] = {
@@ -423,7 +428,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.states`",
                 },
                 ["index$"] = 0,
               },
@@ -457,6 +462,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/states/own",
                 ["parts"] = {
@@ -472,7 +478,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.states`",
                 },
                 ["index$"] = 1,
               },
@@ -495,7 +501,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "end_time",
+            ["name"] = "endTime",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 1,
@@ -516,7 +522,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "start_time",
+            ["name"] = "startTime",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 4,
@@ -550,6 +556,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/tracks",
                 ["parts"] = {
@@ -563,7 +570,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.path`",
                 },
                 ["index$"] = 0,
               },

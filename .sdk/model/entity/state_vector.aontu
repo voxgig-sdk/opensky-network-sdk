@@ -6,7 +6,7 @@ main: kit: entity: state_vector: {
 
   fields: [
     {
-      name: "state"
+      name: "states"
       req: false
       type: "`$ARRAY`"
     }
@@ -95,7 +95,7 @@ main: kit: entity: state_vector: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.states`"
           }
         }
         {
@@ -139,7 +139,7 @@ main: kit: entity: state_vector: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.states`"
           }
         }
       ]

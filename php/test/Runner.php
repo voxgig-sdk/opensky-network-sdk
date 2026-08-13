@@ -43,8 +43,8 @@ class OpenskyNetworkTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('OPENSKYNETWORK_TEST_LIVE');
-        $override = self::getenv('OPENSKYNETWORK_TEST_OVERRIDE');
+        $live = self::getenv('OPENSKY_NETWORK_TEST_LIVE');
+        $override = self::getenv('OPENSKY_NETWORK_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class OpenskyNetworkTestRunner
             }
         }
 
-        $explain = self::getenv('OPENSKYNETWORK_TEST_EXPLAIN');
+        $explain = self::getenv('OPENSKY_NETWORK_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['OPENSKYNETWORK_TEST_EXPLAIN'] = $explain;
+            $m['OPENSKY_NETWORK_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

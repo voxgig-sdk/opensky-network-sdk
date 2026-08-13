@@ -62,8 +62,8 @@ function makeCtrl(explain: boolean) {
 // Overrides configuration values with environment variables if available
 function envOverride(m: Record<string, any>) {
   if (
-    'TRUE' === process.env.OPENSKYNETWORK_TEST_LIVE ||
-    'TRUE' === process.env.OPENSKYNETWORK_TEST_OVERRIDE
+    'TRUE' === process.env.OPENSKY_NETWORK_TEST_LIVE ||
+    'TRUE' === process.env.OPENSKY_NETWORK_TEST_OVERRIDE
   ) {
     Object.entries(m).map(n => {
       let envval = process.env[n[0]]
@@ -74,7 +74,7 @@ function envOverride(m: Record<string, any>) {
     })
   }
 
-  m.OPENSKYNETWORK_TEST_EXPLAIN = process.env.OPENSKYNETWORK_TEST_EXPLAIN || m.OPENSKYNETWORK_TEST_EXPLAIN
+  m.OPENSKY_NETWORK_TEST_EXPLAIN = process.env.OPENSKY_NETWORK_TEST_EXPLAIN || m.OPENSKY_NETWORK_TEST_EXPLAIN
 
   return m
 }

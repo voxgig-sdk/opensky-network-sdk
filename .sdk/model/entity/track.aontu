@@ -11,7 +11,7 @@ main: kit: entity: track: {
       type: "`$STRING`"
     }
     {
-      name: "end_time"
+      name: "endTime"
       req: false
       type: "`$INTEGER`"
     }
@@ -26,7 +26,7 @@ main: kit: entity: track: {
       type: "`$ARRAY`"
     }
     {
-      name: "start_time"
+      name: "startTime"
       req: false
       type: "`$INTEGER`"
     }
@@ -69,7 +69,7 @@ main: kit: entity: track: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.path`"
           }
         }
       ]

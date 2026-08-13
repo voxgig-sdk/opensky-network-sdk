@@ -141,18 +141,41 @@ const flight = client.Flight()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | `number` | No |  |
+| `arrivalAirportCandidatesCount` | `number` | No |  |
 | `callsign` | `string` | No |  |
-| `departure_airport_candidates_count` | `number` | No |  |
-| `est_arrival_airport` | `string` | No |  |
-| `est_arrival_airport_horiz_distance` | `number` | No |  |
-| `est_arrival_airport_vert_distance` | `number` | No |  |
-| `est_departure_airport` | `string` | No |  |
-| `est_departure_airport_horiz_distance` | `number` | No |  |
-| `est_departure_airport_vert_distance` | `number` | No |  |
-| `first_seen` | `number` | No |  |
+| `departureAirportCandidatesCount` | `number` | No |  |
+| `estArrivalAirport` | `string` | No |  |
+| `estArrivalAirportHorizDistance` | `number` | No |  |
+| `estArrivalAirportVertDistance` | `number` | No |  |
+| `estDepartureAirport` | `string` | No |  |
+| `estDepartureAirportHorizDistance` | `number` | No |  |
+| `estDepartureAirportVertDistance` | `number` | No |  |
+| `firstSeen` | `number` | No |  |
 | `icao24` | `string` | No |  |
-| `last_seen` | `number` | No |  |
+| `lastSeen` | `number` | No |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `aircraft` | `/flights/aircraft` | `client.Flight().list({ $action: 'aircraft', ... })` |
+| `all` | `/flights/all` | `client.Flight().list({ $action: 'all', ... })` |
+| `arrival` | `/flights/arrival` | `client.Flight().list({ $action: 'arrival', ... })` |
+| `departure` | `/flights/departure` | `client.Flight().list({ $action: 'departure', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Flight record — check the API definition for its shape.
+
+```ts
+const result = await client.Flight().list({
+  $action: 'aircraft',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -202,7 +225,7 @@ const state_vector = client.StateVector()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | `any[]` | No |  |
+| `states` | `any[]` | No |  |
 | `time` | `number` | No |  |
 
 ### Operations
@@ -254,10 +277,10 @@ const track = client.Track()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `callsign` | `string` | No |  |
-| `end_time` | `number` | No |  |
+| `endTime` | `number` | No |  |
 | `icao24` | `string` | No |  |
 | `path` | `any[]` | No |  |
-| `start_time` | `number` | No |  |
+| `startTime` | `number` | No |  |
 
 ### Operations
 

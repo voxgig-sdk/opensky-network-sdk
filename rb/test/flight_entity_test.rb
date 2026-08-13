@@ -62,7 +62,7 @@ class FlightEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set OPENSKYNETWORK_TEST_FLIGHT_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set OPENSKY_NETWORK_TEST_FLIGHT_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -111,39 +111,39 @@ def flight_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["OPENSKYNETWORK_TEST_FLIGHT_ENTID"]
+  entid_env_raw = ENV["OPENSKY_NETWORK_TEST_FLIGHT_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "OPENSKYNETWORK_TEST_FLIGHT_ENTID" => idmap,
-    "OPENSKYNETWORK_TEST_LIVE" => "FALSE",
-    "OPENSKYNETWORK_TEST_EXPLAIN" => "FALSE",
-    "OPENSKYNETWORK_APIKEY" => "NONE",
+    "OPENSKY_NETWORK_TEST_FLIGHT_ENTID" => idmap,
+    "OPENSKY_NETWORK_TEST_LIVE" => "FALSE",
+    "OPENSKY_NETWORK_TEST_EXPLAIN" => "FALSE",
+    "OPENSKY_NETWORK_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["OPENSKYNETWORK_TEST_FLIGHT_ENTID"])
+    env["OPENSKY_NETWORK_TEST_FLIGHT_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["OPENSKYNETWORK_TEST_LIVE"] == "TRUE"
+  if env["OPENSKY_NETWORK_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["OPENSKYNETWORK_APIKEY"],
+        "apikey" => env["OPENSKY_NETWORK_APIKEY"],
       },
       extra || {},
     ])
     client = OpenskyNetworkSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["OPENSKYNETWORK_TEST_LIVE"] == "TRUE"
+  live = env["OPENSKY_NETWORK_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["OPENSKYNETWORK_TEST_EXPLAIN"] == "TRUE",
+    explain: env["OPENSKY_NETWORK_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

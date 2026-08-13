@@ -10,132 +10,132 @@
 
 # Flight entity data model.
 #
-# @!attribute [rw] arrival_airport_candidates_count
+# @!attribute [rw] arrivalAirportCandidatesCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] callsign
 #   @return [String, nil]
 #
-# @!attribute [rw] departure_airport_candidates_count
+# @!attribute [rw] departureAirportCandidatesCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_arrival_airport
+# @!attribute [rw] estArrivalAirport
 #   @return [String, nil]
 #
-# @!attribute [rw] est_arrival_airport_horiz_distance
+# @!attribute [rw] estArrivalAirportHorizDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_arrival_airport_vert_distance
+# @!attribute [rw] estArrivalAirportVertDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_departure_airport
+# @!attribute [rw] estDepartureAirport
 #   @return [String, nil]
 #
-# @!attribute [rw] est_departure_airport_horiz_distance
+# @!attribute [rw] estDepartureAirportHorizDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_departure_airport_vert_distance
+# @!attribute [rw] estDepartureAirportVertDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] first_seen
+# @!attribute [rw] firstSeen
 #   @return [Integer, nil]
 #
 # @!attribute [rw] icao24
 #   @return [String, nil]
 #
-# @!attribute [rw] last_seen
+# @!attribute [rw] lastSeen
 #   @return [Integer, nil]
 Flight = Struct.new(
-  :arrival_airport_candidates_count,
+  :arrivalAirportCandidatesCount,
   :callsign,
-  :departure_airport_candidates_count,
-  :est_arrival_airport,
-  :est_arrival_airport_horiz_distance,
-  :est_arrival_airport_vert_distance,
-  :est_departure_airport,
-  :est_departure_airport_horiz_distance,
-  :est_departure_airport_vert_distance,
-  :first_seen,
+  :departureAirportCandidatesCount,
+  :estArrivalAirport,
+  :estArrivalAirportHorizDistance,
+  :estArrivalAirportVertDistance,
+  :estDepartureAirport,
+  :estDepartureAirportHorizDistance,
+  :estDepartureAirportVertDistance,
+  :firstSeen,
   :icao24,
-  :last_seen,
+  :lastSeen,
   keyword_init: true
 )
 
 # Request payload for Flight#list.
 #
-# @!attribute [rw] arrival_airport_candidates_count
+# @!attribute [rw] arrivalAirportCandidatesCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] callsign
 #   @return [String, nil]
 #
-# @!attribute [rw] departure_airport_candidates_count
+# @!attribute [rw] departureAirportCandidatesCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_arrival_airport
+# @!attribute [rw] estArrivalAirport
 #   @return [String, nil]
 #
-# @!attribute [rw] est_arrival_airport_horiz_distance
+# @!attribute [rw] estArrivalAirportHorizDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_arrival_airport_vert_distance
+# @!attribute [rw] estArrivalAirportVertDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_departure_airport
+# @!attribute [rw] estDepartureAirport
 #   @return [String, nil]
 #
-# @!attribute [rw] est_departure_airport_horiz_distance
+# @!attribute [rw] estDepartureAirportHorizDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] est_departure_airport_vert_distance
+# @!attribute [rw] estDepartureAirportVertDistance
 #   @return [Integer, nil]
 #
-# @!attribute [rw] first_seen
+# @!attribute [rw] firstSeen
 #   @return [Integer, nil]
 #
 # @!attribute [rw] icao24
 #   @return [String, nil]
 #
-# @!attribute [rw] last_seen
+# @!attribute [rw] lastSeen
 #   @return [Integer, nil]
 FlightListMatch = Struct.new(
-  :arrival_airport_candidates_count,
+  :arrivalAirportCandidatesCount,
   :callsign,
-  :departure_airport_candidates_count,
-  :est_arrival_airport,
-  :est_arrival_airport_horiz_distance,
-  :est_arrival_airport_vert_distance,
-  :est_departure_airport,
-  :est_departure_airport_horiz_distance,
-  :est_departure_airport_vert_distance,
-  :first_seen,
+  :departureAirportCandidatesCount,
+  :estArrivalAirport,
+  :estArrivalAirportHorizDistance,
+  :estArrivalAirportVertDistance,
+  :estDepartureAirport,
+  :estDepartureAirportHorizDistance,
+  :estDepartureAirportVertDistance,
+  :firstSeen,
   :icao24,
-  :last_seen,
+  :lastSeen,
   keyword_init: true
 )
 
 # StateVector entity data model.
 #
-# @!attribute [rw] state
+# @!attribute [rw] states
 #   @return [Array, nil]
 #
 # @!attribute [rw] time
 #   @return [Integer, nil]
 StateVector = Struct.new(
-  :state,
+  :states,
   :time,
   keyword_init: true
 )
 
 # Request payload for StateVector#list.
 #
-# @!attribute [rw] state
+# @!attribute [rw] states
 #   @return [Array, nil]
 #
 # @!attribute [rw] time
 #   @return [Integer, nil]
 StateVectorListMatch = Struct.new(
-  :state,
+  :states,
   :time,
   keyword_init: true
 )
@@ -145,7 +145,7 @@ StateVectorListMatch = Struct.new(
 # @!attribute [rw] callsign
 #   @return [String, nil]
 #
-# @!attribute [rw] end_time
+# @!attribute [rw] endTime
 #   @return [Integer, nil]
 #
 # @!attribute [rw] icao24
@@ -154,14 +154,14 @@ StateVectorListMatch = Struct.new(
 # @!attribute [rw] path
 #   @return [Array, nil]
 #
-# @!attribute [rw] start_time
+# @!attribute [rw] startTime
 #   @return [Integer, nil]
 Track = Struct.new(
   :callsign,
-  :end_time,
+  :endTime,
   :icao24,
   :path,
-  :start_time,
+  :startTime,
   keyword_init: true
 )
 
@@ -170,7 +170,7 @@ Track = Struct.new(
 # @!attribute [rw] callsign
 #   @return [String, nil]
 #
-# @!attribute [rw] end_time
+# @!attribute [rw] endTime
 #   @return [Integer, nil]
 #
 # @!attribute [rw] icao24
@@ -179,14 +179,14 @@ Track = Struct.new(
 # @!attribute [rw] path
 #   @return [Array, nil]
 #
-# @!attribute [rw] start_time
+# @!attribute [rw] startTime
 #   @return [Integer, nil]
 TrackListMatch = Struct.new(
   :callsign,
-  :end_time,
+  :endTime,
   :icao24,
   :path,
-  :start_time,
+  :startTime,
   keyword_init: true
 )
 

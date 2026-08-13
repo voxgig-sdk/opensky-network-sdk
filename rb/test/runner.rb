@@ -23,8 +23,8 @@ module OpenskyNetworkTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("OPENSKYNETWORK_TEST_LIVE")
-    override = getenv("OPENSKYNETWORK_TEST_OVERRIDE")
+    live = getenv("OPENSKY_NETWORK_TEST_LIVE")
+    override = getenv("OPENSKY_NETWORK_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module OpenskyNetworkTestRunner
       end
     end
 
-    explain = getenv("OPENSKYNETWORK_TEST_EXPLAIN")
-    m["OPENSKYNETWORK_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("OPENSKY_NETWORK_TEST_EXPLAIN")
+    m["OPENSKY_NETWORK_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

@@ -2,15 +2,15 @@
   "existing": {
     "state_vector": {
       "STATE_VECTOR00": {
-        "state": [],
+        "states": [],
         "time": "s15"
       },
       "STATE_VECTOR01": {
-        "state": [],
+        "states": [],
         "time": "s29"
       },
       "STATE_VECTOR02": {
-        "state": [],
+        "states": [],
         "time": "s3d"
       }
     }
@@ -18,7 +18,7 @@
   "new": {
     "state_vector": {
       "state_vector_ref01": {
-        "state": [],
+        "states": [],
         "time": "s51"
       }
     }

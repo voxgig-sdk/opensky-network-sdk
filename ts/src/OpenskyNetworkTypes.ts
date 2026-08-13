@@ -6,58 +6,64 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Flight {
-  arrival_airport_candidates_count?: number
+  arrivalAirportCandidatesCount?: number
   callsign?: string
-  departure_airport_candidates_count?: number
-  est_arrival_airport?: string
-  est_arrival_airport_horiz_distance?: number
-  est_arrival_airport_vert_distance?: number
-  est_departure_airport?: string
-  est_departure_airport_horiz_distance?: number
-  est_departure_airport_vert_distance?: number
-  first_seen?: number
+  departureAirportCandidatesCount?: number
+  estArrivalAirport?: string
+  estArrivalAirportHorizDistance?: number
+  estArrivalAirportVertDistance?: number
+  estDepartureAirport?: string
+  estDepartureAirportHorizDistance?: number
+  estDepartureAirportVertDistance?: number
+  firstSeen?: number
   icao24?: string
-  last_seen?: number
+  lastSeen?: number
 }
 
 export interface FlightListMatch {
-  arrival_airport_candidates_count?: number
+  arrivalAirportCandidatesCount?: number
   callsign?: string
-  departure_airport_candidates_count?: number
-  est_arrival_airport?: string
-  est_arrival_airport_horiz_distance?: number
-  est_arrival_airport_vert_distance?: number
-  est_departure_airport?: string
-  est_departure_airport_horiz_distance?: number
-  est_departure_airport_vert_distance?: number
-  first_seen?: number
+  departureAirportCandidatesCount?: number
+  estArrivalAirport?: string
+  estArrivalAirportHorizDistance?: number
+  estArrivalAirportVertDistance?: number
+  estDepartureAirport?: string
+  estDepartureAirportHorizDistance?: number
+  estDepartureAirportVertDistance?: number
+  firstSeen?: number
   icao24?: string
-  last_seen?: number
+  lastSeen?: number
+
+  // Selects a custom action instead of the plain list:
+  //   'aircraft' | 'all' | 'arrival' | 'departure'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface StateVector {
-  state?: any[]
+  states?: any[]
   time?: number
 }
 
 export interface StateVectorListMatch {
-  state?: any[]
+  states?: any[]
   time?: number
 }
 
 export interface Track {
   callsign?: string
-  end_time?: number
+  endTime?: number
   icao24?: string
   path?: any[]
-  start_time?: number
+  startTime?: number
 }
 
 export interface TrackListMatch {
   callsign?: string
-  end_time?: number
+  endTime?: number
   icao24?: string
   path?: any[]
-  start_time?: number
+  startTime?: number
 }
 

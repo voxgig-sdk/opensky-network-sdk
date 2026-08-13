@@ -27,15 +27,18 @@ guide: {
   entity: state_vector: {
     path: "/states/all": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.states`")|top
     }
     path: "/states/own": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.states`")|top
     }
   }
 
   entity: track: {
     path: "/tracks": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.path`")|top
     }
   }
 

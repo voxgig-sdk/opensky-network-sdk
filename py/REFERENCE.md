@@ -96,18 +96,18 @@ flight = client.Flight()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | `int` | No |  |
+| `arrivalAirportCandidatesCount` | `int` | No |  |
 | `callsign` | `str` | No |  |
-| `departure_airport_candidates_count` | `int` | No |  |
-| `est_arrival_airport` | `str` | No |  |
-| `est_arrival_airport_horiz_distance` | `int` | No |  |
-| `est_arrival_airport_vert_distance` | `int` | No |  |
-| `est_departure_airport` | `str` | No |  |
-| `est_departure_airport_horiz_distance` | `int` | No |  |
-| `est_departure_airport_vert_distance` | `int` | No |  |
-| `first_seen` | `int` | No |  |
+| `departureAirportCandidatesCount` | `int` | No |  |
+| `estArrivalAirport` | `str` | No |  |
+| `estArrivalAirportHorizDistance` | `int` | No |  |
+| `estArrivalAirportVertDistance` | `int` | No |  |
+| `estDepartureAirport` | `str` | No |  |
+| `estDepartureAirportHorizDistance` | `int` | No |  |
+| `estDepartureAirportVertDistance` | `int` | No |  |
+| `firstSeen` | `int` | No |  |
 | `icao24` | `str` | No |  |
-| `last_seen` | `int` | No |  |
+| `lastSeen` | `int` | No |  |
 
 ### Operations
 
@@ -160,7 +160,7 @@ state_vector = client.StateVector()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | `list` | No |  |
+| `states` | `list` | No |  |
 | `time` | `int` | No |  |
 
 ### Operations
@@ -215,10 +215,10 @@ track = client.Track()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `callsign` | `str` | No |  |
-| `end_time` | `int` | No |  |
+| `endTime` | `int` | No |  |
 | `icao24` | `str` | No |  |
 | `path` | `list` | No |  |
-| `start_time` | `int` | No |  |
+| `startTime` | `int` | No |  |
 
 ### Operations
 

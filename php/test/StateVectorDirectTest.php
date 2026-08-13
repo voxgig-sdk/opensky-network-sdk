@@ -66,16 +66,16 @@ function state_vector_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "OPENSKYNETWORK_TEST_STATE_VECTOR_ENTID" => [],
-        "OPENSKYNETWORK_TEST_LIVE" => "FALSE",
-        "OPENSKYNETWORK_APIKEY" => "NONE",
+        "OPENSKY_NETWORK_TEST_STATE_VECTOR_ENTID" => [],
+        "OPENSKY_NETWORK_TEST_LIVE" => "FALSE",
+        "OPENSKY_NETWORK_APIKEY" => "NONE",
     ]);
 
-    $live = $env["OPENSKYNETWORK_TEST_LIVE"] === "TRUE";
+    $live = $env["OPENSKY_NETWORK_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["OPENSKYNETWORK_APIKEY"],
+            "apikey" => $env["OPENSKY_NETWORK_APIKEY"],
         ];
         $client = new OpenskyNetworkSDK($merged_opts);
         return [

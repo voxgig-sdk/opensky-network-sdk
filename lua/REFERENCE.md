@@ -99,18 +99,18 @@ local flight = client:Flight(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival_airport_candidates_count` | `number` | No |  |
+| `arrivalAirportCandidatesCount` | `number` | No |  |
 | `callsign` | `string` | No |  |
-| `departure_airport_candidates_count` | `number` | No |  |
-| `est_arrival_airport` | `string` | No |  |
-| `est_arrival_airport_horiz_distance` | `number` | No |  |
-| `est_arrival_airport_vert_distance` | `number` | No |  |
-| `est_departure_airport` | `string` | No |  |
-| `est_departure_airport_horiz_distance` | `number` | No |  |
-| `est_departure_airport_vert_distance` | `number` | No |  |
-| `first_seen` | `number` | No |  |
+| `departureAirportCandidatesCount` | `number` | No |  |
+| `estArrivalAirport` | `string` | No |  |
+| `estArrivalAirportHorizDistance` | `number` | No |  |
+| `estArrivalAirportVertDistance` | `number` | No |  |
+| `estDepartureAirport` | `string` | No |  |
+| `estDepartureAirportHorizDistance` | `number` | No |  |
+| `estDepartureAirportVertDistance` | `number` | No |  |
+| `firstSeen` | `number` | No |  |
 | `icao24` | `string` | No |  |
-| `last_seen` | `number` | No |  |
+| `lastSeen` | `number` | No |  |
 
 ### Operations
 
@@ -162,7 +162,7 @@ local state_vector = client:StateVector(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `state` | `table` | No |  |
+| `states` | `table` | No |  |
 | `time` | `number` | No |  |
 
 ### Operations
@@ -216,10 +216,10 @@ local track = client:Track(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `callsign` | `string` | No |  |
-| `end_time` | `number` | No |  |
+| `endTime` | `number` | No |  |
 | `icao24` | `string` | No |  |
 | `path` | `table` | No |  |
-| `start_time` | `number` | No |  |
+| `startTime` | `number` | No |  |
 
 ### Operations
 

@@ -37,7 +37,7 @@ class StateVectorEntity extends OpenskyNetworkEntityBase<StateVector> {
 
 
 
-  async list(this: any, reqmatch?: StateVectorListMatch, ctrl?: Control): Promise<StateVector[]> {
+  async list(this: any, reqmatch?: StateVectorListMatch, ctrl?: Control): Promise<StateVectorEntity[]> {
 
     const utility = this._utility
 

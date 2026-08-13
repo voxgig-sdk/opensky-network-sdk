@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ OpenskyNetworkUtility.registrar = ->(u) {
   u.prepare_params = OpenskyNetworkUtilities::PrepareParams
   u.prepare_path = OpenskyNetworkUtilities::PreparePath
   u.prepare_query = OpenskyNetworkUtilities::PrepareQuery
+  u.graphql_body = OpenskyNetworkUtilities::GraphqlBody
+  u.graphql_errors = OpenskyNetworkUtilities::GraphqlErrors
   u.result_basic = OpenskyNetworkUtilities::ResultBasic
   u.result_body = OpenskyNetworkUtilities::ResultBody
   u.result_headers = OpenskyNetworkUtilities::ResultHeaders

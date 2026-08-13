@@ -26,8 +26,8 @@ import {
 describe('TrackEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when OPENSKYNETWORK_TEST_LIVE=TRUE.
-  afterEach(liveDelay('OPENSKYNETWORK_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when OPENSKY_NETWORK_TEST_LIVE=TRUE.
+  afterEach(liveDelay('OPENSKY_NETWORK_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = OpenskyNetworkSDK.test()
@@ -63,7 +63,7 @@ describe('TrackEntity', async () => {
     const track_ref01_ent = client.Track()
     const track_ref01_match: any = {}
 
-    const track_ref01_list = await track_ref01_ent.list(track_ref01_match)
+    const track_ref01_list = (await track_ref01_ent.list(track_ref01_match)).map((e: any) => e.data())
 
 
   })

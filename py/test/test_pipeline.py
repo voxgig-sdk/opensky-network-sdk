@@ -16,11 +16,11 @@
 import pytest
 
 from openskynetwork_sdk import OpenskyNetworkSDK
-from core.error import OpenskyNetworkError
-from core.result import OpenskyNetworkResult
-from core.response import OpenskyNetworkResponse
-from core.spec import OpenskyNetworkSpec
-from feature.base_feature import OpenskyNetworkBaseFeature
+from openskynetwork_sdk.core.error import OpenskyNetworkError
+from openskynetwork_sdk.core.result import OpenskyNetworkResult
+from openskynetwork_sdk.core.response import OpenskyNetworkResponse
+from openskynetwork_sdk.core.spec import OpenskyNetworkSpec
+from openskynetwork_sdk.feature.base_feature import OpenskyNetworkBaseFeature
 
 
 def _client():

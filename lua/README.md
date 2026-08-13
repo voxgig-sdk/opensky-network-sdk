@@ -56,7 +56,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local flights, err = client:Flight():list()
+local tracks, err = client:Track():list()
 if err then error(err) end
 ```
 
@@ -114,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Flight():list()
+local result, err = client:Track():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -224,9 +224,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local flight, err = client:Flight():load()
+    local flight, err = client:Flight():list()
     if err then error(err) end
-    -- flight is the loaded record
+    -- flight is the record list
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -237,18 +237,18 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `arrival_airport_candidates_count` |  |
+| `arrivalAirportCandidatesCount` |  |
 | `callsign` |  |
-| `departure_airport_candidates_count` |  |
-| `est_arrival_airport` |  |
-| `est_arrival_airport_horiz_distance` |  |
-| `est_arrival_airport_vert_distance` |  |
-| `est_departure_airport` |  |
-| `est_departure_airport_horiz_distance` |  |
-| `est_departure_airport_vert_distance` |  |
-| `first_seen` |  |
+| `departureAirportCandidatesCount` |  |
+| `estArrivalAirport` |  |
+| `estArrivalAirportHorizDistance` |  |
+| `estArrivalAirportVertDistance` |  |
+| `estDepartureAirport` |  |
+| `estDepartureAirportHorizDistance` |  |
+| `estDepartureAirportVertDistance` |  |
+| `firstSeen` |  |
 | `icao24` |  |
-| `last_seen` |  |
+| `lastSeen` |  |
 
 Operations: List.
 
@@ -258,7 +258,7 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `state` |  |
+| `states` |  |
 | `time` |  |
 
 Operations: List.
@@ -270,10 +270,10 @@ API path: `/states/all`
 | Field | Description |
 | --- | --- |
 | `callsign` |  |
-| `end_time` |  |
+| `endTime` |  |
 | `icao24` |  |
 | `path` |  |
-| `start_time` |  |
+| `startTime` |  |
 
 Operations: List.
 
@@ -298,18 +298,18 @@ Create an instance: `local flight = client:Flight(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival_airport_candidates_count` | `number` |  |
+| `arrivalAirportCandidatesCount` | `number` |  |
 | `callsign` | `string` |  |
-| `departure_airport_candidates_count` | `number` |  |
-| `est_arrival_airport` | `string` |  |
-| `est_arrival_airport_horiz_distance` | `number` |  |
-| `est_arrival_airport_vert_distance` | `number` |  |
-| `est_departure_airport` | `string` |  |
-| `est_departure_airport_horiz_distance` | `number` |  |
-| `est_departure_airport_vert_distance` | `number` |  |
-| `first_seen` | `number` |  |
+| `departureAirportCandidatesCount` | `number` |  |
+| `estArrivalAirport` | `string` |  |
+| `estArrivalAirportHorizDistance` | `number` |  |
+| `estArrivalAirportVertDistance` | `number` |  |
+| `estDepartureAirport` | `string` |  |
+| `estDepartureAirportHorizDistance` | `number` |  |
+| `estDepartureAirportVertDistance` | `number` |  |
+| `firstSeen` | `number` |  |
 | `icao24` | `string` |  |
-| `last_seen` | `number` |  |
+| `lastSeen` | `number` |  |
 
 #### Example: List
 
@@ -332,7 +332,7 @@ Create an instance: `local state_vector = client:StateVector(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `state` | `table` |  |
+| `states` | `table` |  |
 | `time` | `number` |  |
 
 #### Example: List
@@ -357,10 +357,10 @@ Create an instance: `local track = client:Track(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `callsign` | `string` |  |
-| `end_time` | `number` |  |
+| `endTime` | `number` |  |
 | `icao24` | `string` |  |
 | `path` | `table` |  |
-| `start_time` | `number` |  |
+| `startTime` | `number` |  |
 
 #### Example: List
 
@@ -445,11 +445,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local flight = client:Flight()
-flight:list()
+local track = client:Track()
+track:list()
 
--- flight:data_get() now returns the flight data from the last list
--- flight:match_get() returns the last match criteria
+-- track:data_get() now returns the track data from the last list
+-- track:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

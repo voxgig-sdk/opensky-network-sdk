@@ -7,54 +7,54 @@
 -- edit by hand.
 
 ---@class Flight
----@field arrival_airport_candidates_count? number
+---@field arrivalAirportCandidatesCount? number
 ---@field callsign? string
----@field departure_airport_candidates_count? number
----@field est_arrival_airport? string
----@field est_arrival_airport_horiz_distance? number
----@field est_arrival_airport_vert_distance? number
----@field est_departure_airport? string
----@field est_departure_airport_horiz_distance? number
----@field est_departure_airport_vert_distance? number
----@field first_seen? number
+---@field departureAirportCandidatesCount? number
+---@field estArrivalAirport? string
+---@field estArrivalAirportHorizDistance? number
+---@field estArrivalAirportVertDistance? number
+---@field estDepartureAirport? string
+---@field estDepartureAirportHorizDistance? number
+---@field estDepartureAirportVertDistance? number
+---@field firstSeen? number
 ---@field icao24? string
----@field last_seen? number
+---@field lastSeen? number
 
 ---@class FlightListMatch
----@field arrival_airport_candidates_count? number
+---@field arrivalAirportCandidatesCount? number
 ---@field callsign? string
----@field departure_airport_candidates_count? number
----@field est_arrival_airport? string
----@field est_arrival_airport_horiz_distance? number
----@field est_arrival_airport_vert_distance? number
----@field est_departure_airport? string
----@field est_departure_airport_horiz_distance? number
----@field est_departure_airport_vert_distance? number
----@field first_seen? number
+---@field departureAirportCandidatesCount? number
+---@field estArrivalAirport? string
+---@field estArrivalAirportHorizDistance? number
+---@field estArrivalAirportVertDistance? number
+---@field estDepartureAirport? string
+---@field estDepartureAirportHorizDistance? number
+---@field estDepartureAirportVertDistance? number
+---@field firstSeen? number
 ---@field icao24? string
----@field last_seen? number
+---@field lastSeen? number
 
 ---@class StateVector
----@field state? table
+---@field states? table
 ---@field time? number
 
 ---@class StateVectorListMatch
----@field state? table
+---@field states? table
 ---@field time? number
 
 ---@class Track
 ---@field callsign? string
----@field end_time? number
+---@field endTime? number
 ---@field icao24? string
 ---@field path? table
----@field start_time? number
+---@field startTime? number
 
 ---@class TrackListMatch
 ---@field callsign? string
----@field end_time? number
+---@field endTime? number
 ---@field icao24? string
 ---@field path? table
----@field start_time? number
+---@field startTime? number
 
 local M = {}
 

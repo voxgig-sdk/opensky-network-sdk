@@ -71,12 +71,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-flights, err := client.Flight(nil).List(nil, nil)
+tracks, err := client.Track(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = flights
+_ = tracks
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -140,13 +140,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-flight, err := client.Flight(nil).List(
+track, err := client.Track(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(flight) // the returned mock data
+fmt.Println(track) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -267,18 +267,18 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"arrival_airport_candidates_count"` |  |
+| `"arrivalAirportCandidatesCount"` |  |
 | `"callsign"` |  |
-| `"departure_airport_candidates_count"` |  |
-| `"est_arrival_airport"` |  |
-| `"est_arrival_airport_horiz_distance"` |  |
-| `"est_arrival_airport_vert_distance"` |  |
-| `"est_departure_airport"` |  |
-| `"est_departure_airport_horiz_distance"` |  |
-| `"est_departure_airport_vert_distance"` |  |
-| `"first_seen"` |  |
+| `"departureAirportCandidatesCount"` |  |
+| `"estArrivalAirport"` |  |
+| `"estArrivalAirportHorizDistance"` |  |
+| `"estArrivalAirportVertDistance"` |  |
+| `"estDepartureAirport"` |  |
+| `"estDepartureAirportHorizDistance"` |  |
+| `"estDepartureAirportVertDistance"` |  |
+| `"firstSeen"` |  |
 | `"icao24"` |  |
-| `"last_seen"` |  |
+| `"lastSeen"` |  |
 
 Operations: List.
 
@@ -288,7 +288,7 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `"state"` |  |
+| `"states"` |  |
 | `"time"` |  |
 
 Operations: List.
@@ -300,10 +300,10 @@ API path: `/states/all`
 | Field | Description |
 | --- | --- |
 | `"callsign"` |  |
-| `"end_time"` |  |
+| `"endTime"` |  |
 | `"icao24"` |  |
 | `"path"` |  |
-| `"start_time"` |  |
+| `"startTime"` |  |
 
 Operations: List.
 
@@ -328,18 +328,18 @@ Create an instance: `flight := client.Flight(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival_airport_candidates_count` | `int` |  |
+| `arrivalAirportCandidatesCount` | `int` |  |
 | `callsign` | `string` |  |
-| `departure_airport_candidates_count` | `int` |  |
-| `est_arrival_airport` | `string` |  |
-| `est_arrival_airport_horiz_distance` | `int` |  |
-| `est_arrival_airport_vert_distance` | `int` |  |
-| `est_departure_airport` | `string` |  |
-| `est_departure_airport_horiz_distance` | `int` |  |
-| `est_departure_airport_vert_distance` | `int` |  |
-| `first_seen` | `int` |  |
+| `departureAirportCandidatesCount` | `int` |  |
+| `estArrivalAirport` | `string` |  |
+| `estArrivalAirportHorizDistance` | `int` |  |
+| `estArrivalAirportVertDistance` | `int` |  |
+| `estDepartureAirport` | `string` |  |
+| `estDepartureAirportHorizDistance` | `int` |  |
+| `estDepartureAirportVertDistance` | `int` |  |
+| `firstSeen` | `int` |  |
 | `icao24` | `string` |  |
-| `last_seen` | `int` |  |
+| `lastSeen` | `int` |  |
 
 #### Example: List
 
@@ -366,7 +366,7 @@ Create an instance: `stateVector := client.StateVector(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `state` | `[]any` |  |
+| `states` | `[]any` |  |
 | `time` | `int` |  |
 
 #### Example: List
@@ -395,10 +395,10 @@ Create an instance: `track := client.Track(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `callsign` | `string` |  |
-| `end_time` | `int` |  |
+| `endTime` | `int` |  |
 | `icao24` | `string` |  |
 | `path` | `[]any` |  |
-| `start_time` | `int` |  |
+| `startTime` | `int` |  |
 
 #### Example: List
 
@@ -484,11 +484,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-flight := client.Flight(nil)
-flight.List(nil, nil)
+track := client.Track(nil)
+track.List(nil, nil)
 
-// flight.Data() now returns the flight data from the last list
-// flight.Match() returns the last match criteria
+// track.Data() now returns the track data from the last list
+// track.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

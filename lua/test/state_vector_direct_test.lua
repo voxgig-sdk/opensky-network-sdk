@@ -61,16 +61,16 @@ function state_vector_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["OPENSKYNETWORK_TEST_STATE_VECTOR_ENTID"] = {},
-    ["OPENSKYNETWORK_TEST_LIVE"] = "FALSE",
-    ["OPENSKYNETWORK_APIKEY"] = "NONE",
+    ["OPENSKY_NETWORK_TEST_STATE_VECTOR_ENTID"] = {},
+    ["OPENSKY_NETWORK_TEST_LIVE"] = "FALSE",
+    ["OPENSKY_NETWORK_APIKEY"] = "NONE",
   })
 
-  local live = env["OPENSKYNETWORK_TEST_LIVE"] == "TRUE"
+  local live = env["OPENSKY_NETWORK_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["OPENSKYNETWORK_APIKEY"],
+      apikey = env["OPENSKY_NETWORK_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {
