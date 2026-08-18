@@ -1,6 +1,20 @@
 # OpenskyNetwork SDK configuration
 
 module OpenskyNetworkConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
@@ -31,88 +45,52 @@ module OpenskyNetworkConfig
         "flight" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "arrivalAirportCandidatesCount",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "callsign",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "departureAirportCandidatesCount",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "estArrivalAirport",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "estArrivalAirportHorizDistance",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "estArrivalAirportVertDistance",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "estDepartureAirport",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "estDepartureAirportHorizDistance",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "estDepartureAirportVertDistance",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "firstSeen",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "icao24",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "lastSeen",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 11,
             },
           ],
           "name" => "flight",
@@ -122,11 +100,9 @@ module OpenskyNetworkConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "begin",
                         "orig" => "begin",
@@ -134,7 +110,6 @@ module OpenskyNetworkConfig
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "end",
                         "orig" => "end",
@@ -142,7 +117,6 @@ module OpenskyNetworkConfig
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "icao24",
                         "orig" => "icao24",
@@ -170,14 +144,11 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "airport",
                         "orig" => "airport",
@@ -185,7 +156,6 @@ module OpenskyNetworkConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "begin",
                         "orig" => "begin",
@@ -193,7 +163,6 @@ module OpenskyNetworkConfig
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "end",
                         "orig" => "end",
@@ -221,14 +190,11 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "airport",
                         "orig" => "airport",
@@ -236,7 +202,6 @@ module OpenskyNetworkConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "begin",
                         "orig" => "begin",
@@ -244,7 +209,6 @@ module OpenskyNetworkConfig
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "end",
                         "orig" => "end",
@@ -272,14 +236,11 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 2,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "begin",
                         "orig" => "begin",
@@ -287,7 +248,6 @@ module OpenskyNetworkConfig
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "end",
                         "orig" => "end",
@@ -314,10 +274,8 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 3,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -327,18 +285,17 @@ module OpenskyNetworkConfig
         "state_vector" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "states",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 0,
+              "union" => {
+                "branches" => 5,
+                "count" => 1,
+                "depth" => 2,
+              },
             },
             {
-              "active" => true,
               "name" => "time",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 1,
             },
           ],
           "name" => "state_vector",
@@ -348,63 +305,48 @@ module OpenskyNetworkConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "extended",
                         "orig" => "extended",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "icao24",
                         "orig" => "icao24",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "lamax",
                         "orig" => "lamax",
-                        "reqd" => false,
                         "type" => "`$NUMBER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "lamin",
                         "orig" => "lamin",
-                        "reqd" => false,
                         "type" => "`$NUMBER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "lomax",
                         "orig" => "lomax",
-                        "reqd" => false,
                         "type" => "`$NUMBER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "lomin",
                         "orig" => "lomin",
-                        "reqd" => false,
                         "type" => "`$NUMBER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "time",
                         "orig" => "time",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                     ],
@@ -431,34 +373,26 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body.states`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "icao24",
                         "orig" => "icao24",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "serial",
                         "orig" => "serial",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "time",
                         "orig" => "time",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                     ],
@@ -481,10 +415,8 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body.states`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -494,39 +426,29 @@ module OpenskyNetworkConfig
         "track" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "callsign",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "endTime",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "icao24",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "path",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 3,
+              "union" => {
+                "branches" => 3,
+                "count" => 1,
+                "depth" => 2,
+              },
             },
             {
-              "active" => true,
               "name" => "startTime",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
           ],
           "name" => "track",
@@ -536,11 +458,9 @@ module OpenskyNetworkConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "icao24",
                         "orig" => "icao24",
@@ -548,7 +468,6 @@ module OpenskyNetworkConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "time",
                         "orig" => "time",
@@ -573,10 +492,8 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body.path`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {

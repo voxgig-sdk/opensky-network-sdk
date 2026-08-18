@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://opensky-network.org/api',
+    base: "https://opensky-network.org/api",
 
     auth: {
       prefix: 'Basic',
@@ -65,88 +65,52 @@ class Config {
     "flight": {
       "fields": [
         {
-          "active": true,
           "name": "arrivalAirportCandidatesCount",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "callsign",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "departureAirportCandidatesCount",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 2
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "estArrivalAirport",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "estArrivalAirportHorizDistance",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "estArrivalAirportVertDistance",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "estDepartureAirport",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 6
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "estDepartureAirportHorizDistance",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 7
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "estDepartureAirportVertDistance",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 8
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "firstSeen",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 9
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "icao24",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 10
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "lastSeen",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 11
+          "type": "`$INTEGER`"
         }
       ],
       "name": "flight",
@@ -156,11 +120,9 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "begin",
                     "orig": "begin",
@@ -168,7 +130,6 @@ class Config {
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "end",
                     "orig": "end",
@@ -176,7 +137,6 @@ class Config {
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "icao24",
                     "orig": "icao24",
@@ -203,15 +163,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "airport",
                     "orig": "airport",
@@ -219,7 +176,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "begin",
                     "orig": "begin",
@@ -227,7 +183,6 @@ class Config {
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "end",
                     "orig": "end",
@@ -254,15 +209,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "airport",
                     "orig": "airport",
@@ -270,7 +222,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "begin",
                     "orig": "begin",
@@ -278,7 +229,6 @@ class Config {
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "end",
                     "orig": "end",
@@ -305,15 +255,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 2
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "begin",
                     "orig": "begin",
@@ -321,7 +268,6 @@ class Config {
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "end",
                     "orig": "end",
@@ -347,11 +293,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 3
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -361,18 +305,17 @@ class Config {
     "state_vector": {
       "fields": [
         {
-          "active": true,
           "name": "states",
-          "req": false,
           "type": "`$ARRAY`",
-          "index$": 0
+          "union": {
+            "branches": 5,
+            "count": 1,
+            "depth": 2
+          }
         },
         {
-          "active": true,
           "name": "time",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 1
+          "type": "`$INTEGER`"
         }
       ],
       "name": "state_vector",
@@ -382,63 +325,48 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "extended",
                     "orig": "extended",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "icao24",
                     "orig": "icao24",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "lamax",
                     "orig": "lamax",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "lamin",
                     "orig": "lamin",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "lomax",
                     "orig": "lomax",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "lomin",
                     "orig": "lomin",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "time",
                     "orig": "time",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   }
                 ]
@@ -464,35 +392,27 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.states`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "icao24",
                     "orig": "icao24",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "serial",
                     "orig": "serial",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "time",
                     "orig": "time",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   }
                 ]
@@ -514,11 +434,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.states`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -528,39 +446,29 @@ class Config {
     "track": {
       "fields": [
         {
-          "active": true,
           "name": "callsign",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "endTime",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 1
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "icao24",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "path",
-          "req": false,
           "type": "`$ARRAY`",
-          "index$": 3
+          "union": {
+            "branches": 3,
+            "count": 1,
+            "depth": 2
+          }
         },
         {
-          "active": true,
           "name": "startTime",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "type": "`$INTEGER`"
         }
       ],
       "name": "track",
@@ -570,11 +478,9 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "icao24",
                     "orig": "icao24",
@@ -582,7 +488,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "time",
                     "orig": "time",
@@ -606,11 +511,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.path`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {

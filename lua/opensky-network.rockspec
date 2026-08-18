@@ -23,6 +23,7 @@ build = {
   modules = {
     ["opensky-network_sdk"] = "opensky-network_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

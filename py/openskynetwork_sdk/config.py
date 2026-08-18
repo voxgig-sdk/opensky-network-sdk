@@ -1,7 +1,30 @@
 # OpenskyNetwork SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "OpenskyNetwork",
@@ -31,88 +54,52 @@ def make_config():
       "flight": {
         "fields": [
           {
-            "active": True,
             "name": "arrivalAirportCandidatesCount",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "callsign",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "departureAirportCandidatesCount",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "estArrivalAirport",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "estArrivalAirportHorizDistance",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "estArrivalAirportVertDistance",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "estDepartureAirport",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "estDepartureAirportHorizDistance",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "estDepartureAirportVertDistance",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "firstSeen",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "icao24",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "lastSeen",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 11,
           },
         ],
         "name": "flight",
@@ -122,11 +109,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "begin",
                       "orig": "begin",
@@ -134,7 +119,6 @@ def make_config():
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "end",
                       "orig": "end",
@@ -142,7 +126,6 @@ def make_config():
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "icao24",
                       "orig": "icao24",
@@ -170,14 +153,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "airport",
                       "orig": "airport",
@@ -185,7 +165,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "begin",
                       "orig": "begin",
@@ -193,7 +172,6 @@ def make_config():
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "end",
                       "orig": "end",
@@ -221,14 +199,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "airport",
                       "orig": "airport",
@@ -236,7 +211,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "begin",
                       "orig": "begin",
@@ -244,7 +218,6 @@ def make_config():
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "end",
                       "orig": "end",
@@ -272,14 +245,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 2,
               },
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "begin",
                       "orig": "begin",
@@ -287,7 +257,6 @@ def make_config():
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "end",
                       "orig": "end",
@@ -314,10 +283,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 3,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -327,18 +294,17 @@ def make_config():
       "state_vector": {
         "fields": [
           {
-            "active": True,
             "name": "states",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 0,
+            "union": {
+              "branches": 5,
+              "count": 1,
+              "depth": 2,
+            },
           },
           {
-            "active": True,
             "name": "time",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 1,
           },
         ],
         "name": "state_vector",
@@ -348,63 +314,48 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "extended",
                       "orig": "extended",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "icao24",
                       "orig": "icao24",
-                      "reqd": False,
                       "type": "`$ARRAY`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "lamax",
                       "orig": "lamax",
-                      "reqd": False,
                       "type": "`$NUMBER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "lamin",
                       "orig": "lamin",
-                      "reqd": False,
                       "type": "`$NUMBER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "lomax",
                       "orig": "lomax",
-                      "reqd": False,
                       "type": "`$NUMBER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "lomin",
                       "orig": "lomin",
-                      "reqd": False,
                       "type": "`$NUMBER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "time",
                       "orig": "time",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                   ],
@@ -431,34 +382,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.states`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "icao24",
                       "orig": "icao24",
-                      "reqd": False,
                       "type": "`$ARRAY`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "serial",
                       "orig": "serial",
-                      "reqd": False,
                       "type": "`$ARRAY`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "time",
                       "orig": "time",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                   ],
@@ -481,10 +424,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.states`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -494,39 +435,29 @@ def make_config():
       "track": {
         "fields": [
           {
-            "active": True,
             "name": "callsign",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "endTime",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "icao24",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "path",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 3,
+            "union": {
+              "branches": 3,
+              "count": 1,
+              "depth": 2,
+            },
           },
           {
-            "active": True,
             "name": "startTime",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 4,
           },
         ],
         "name": "track",
@@ -536,11 +467,9 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "icao24",
                       "orig": "icao24",
@@ -548,7 +477,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "time",
                       "orig": "time",
@@ -573,10 +501,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.path`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {

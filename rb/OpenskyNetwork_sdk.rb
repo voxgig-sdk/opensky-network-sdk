@@ -28,7 +28,7 @@ class OpenskyNetworkSDK
     utility = OpenskyNetworkUtility.new
     @_utility = utility
 
-    config = OpenskyNetworkConfig.make_config
+    config = OpenskyNetworkConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

@@ -40,7 +40,7 @@ class OpenskyNetworkSDK
         $utility = new OpenskyNetworkUtility();
         $this->_utility = $utility;
 
-        $config = OpenskyNetworkConfig::make_config();
+        $config = OpenskyNetworkConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

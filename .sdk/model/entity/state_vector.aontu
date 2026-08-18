@@ -9,6 +9,11 @@ main: kit: entity: state_vector: {
       name: "states"
       req: false
       type: "`$ARRAY`"
+      union: {
+        branches: 5
+        count: 1
+        depth: 2
+      }
     }
     {
       name: "time"
