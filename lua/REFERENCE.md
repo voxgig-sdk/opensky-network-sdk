@@ -99,18 +99,18 @@ local flight = client:Flight(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrivalAirportCandidatesCount` | `number` | No |  |
-| `callsign` | `string` | No |  |
-| `departureAirportCandidatesCount` | `number` | No |  |
-| `estArrivalAirport` | `string` | No |  |
-| `estArrivalAirportHorizDistance` | `number` | No |  |
-| `estArrivalAirportVertDistance` | `number` | No |  |
-| `estDepartureAirport` | `string` | No |  |
-| `estDepartureAirportHorizDistance` | `number` | No |  |
-| `estDepartureAirportVertDistance` | `number` | No |  |
-| `firstSeen` | `number` | No |  |
-| `icao24` | `string` | No |  |
-| `lastSeen` | `number` | No |  |
+| `arrivalAirportCandidatesCount` | `number` | No | Number of candidates for arrival airport |
+| `callsign` | `string` | No | Callsign of the vehicle (8 chars) |
+| `departureAirportCandidatesCount` | `number` | No | Number of candidates for departure airport |
+| `estArrivalAirport` | `string` | No | Estimated arrival airport ICAO code |
+| `estArrivalAirportHorizDistance` | `number` | No | Horizontal distance to estimated arrival airport in meters |
+| `estArrivalAirportVertDistance` | `number` | No | Vertical distance to estimated arrival airport in meters |
+| `estDepartureAirport` | `string` | No | Estimated departure airport ICAO code |
+| `estDepartureAirportHorizDistance` | `number` | No | Horizontal distance to estimated departure airport in meters |
+| `estDepartureAirportVertDistance` | `number` | No | Vertical distance to estimated departure airport in meters |
+| `firstSeen` | `number` | No | Unix timestamp (seconds) of the first position report |
+| `icao24` | `string` | No | Unique ICAO 24-bit address of the transponder in hex string representation |
+| `lastSeen` | `number` | No | Unix timestamp (seconds) of the last position report |
 
 ### Operations
 
@@ -162,8 +162,8 @@ local state_vector = client:StateVector(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `states` | `table` | No |  |
-| `time` | `number` | No |  |
+| `states` | `table` | No | Array of state vectors |
+| `time` | `number` | No | The time which the state vectors in this response are associated with. |
 
 ### Operations
 
@@ -215,11 +215,11 @@ local track = client:Track(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `callsign` | `string` | No |  |
-| `endTime` | `number` | No |  |
-| `icao24` | `string` | No |  |
-| `path` | `table` | No |  |
-| `startTime` | `number` | No |  |
+| `callsign` | `string` | No | Callsign of the vehicle |
+| `endTime` | `number` | No | Unix timestamp (seconds) of the end of the track |
+| `icao24` | `string` | No | Unique ICAO 24-bit address of the transponder |
+| `path` | `table` | No | Array of waypoints representing the aircraft trajectory |
+| `startTime` | `number` | No | Unix timestamp (seconds) of the start of the track |
 
 ### Operations
 

@@ -8,6 +8,7 @@ main: kit: entity: state_vector: {
     {
       name: "states"
       req: false
+      short: "Array of state vectors"
       type: "`$ARRAY`"
       union: {
         branches: 5
@@ -18,6 +19,7 @@ main: kit: entity: state_vector: {
     {
       name: "time"
       req: false
+      short: "The time which the state vectors in this response are associated with."
       type: "`$INTEGER`"
     }
   ]

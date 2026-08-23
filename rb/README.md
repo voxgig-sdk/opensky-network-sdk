@@ -243,18 +243,18 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `arrivalAirportCandidatesCount` |  |
-| `callsign` |  |
-| `departureAirportCandidatesCount` |  |
-| `estArrivalAirport` |  |
-| `estArrivalAirportHorizDistance` |  |
-| `estArrivalAirportVertDistance` |  |
-| `estDepartureAirport` |  |
-| `estDepartureAirportHorizDistance` |  |
-| `estDepartureAirportVertDistance` |  |
-| `firstSeen` |  |
-| `icao24` |  |
-| `lastSeen` |  |
+| `arrivalAirportCandidatesCount` | Number of candidates for arrival airport |
+| `callsign` | Callsign of the vehicle (8 chars) |
+| `departureAirportCandidatesCount` | Number of candidates for departure airport |
+| `estArrivalAirport` | Estimated arrival airport ICAO code |
+| `estArrivalAirportHorizDistance` | Horizontal distance to estimated arrival airport in meters |
+| `estArrivalAirportVertDistance` | Vertical distance to estimated arrival airport in meters |
+| `estDepartureAirport` | Estimated departure airport ICAO code |
+| `estDepartureAirportHorizDistance` | Horizontal distance to estimated departure airport in meters |
+| `estDepartureAirportVertDistance` | Vertical distance to estimated departure airport in meters |
+| `firstSeen` | Unix timestamp (seconds) of the first position report |
+| `icao24` | Unique ICAO 24-bit address of the transponder in hex string representation |
+| `lastSeen` | Unix timestamp (seconds) of the last position report |
 
 Operations: List.
 
@@ -264,8 +264,8 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `states` |  |
-| `time` |  |
+| `states` | Array of state vectors |
+| `time` | The time which the state vectors in this response are associated with. |
 
 Operations: List.
 
@@ -275,11 +275,11 @@ API path: `/states/all`
 
 | Field | Description |
 | --- | --- |
-| `callsign` |  |
-| `endTime` |  |
-| `icao24` |  |
-| `path` |  |
-| `startTime` |  |
+| `callsign` | Callsign of the vehicle |
+| `endTime` | Unix timestamp (seconds) of the end of the track |
+| `icao24` | Unique ICAO 24-bit address of the transponder |
+| `path` | Array of waypoints representing the aircraft trajectory |
+| `startTime` | Unix timestamp (seconds) of the start of the track |
 
 Operations: List.
 
@@ -304,18 +304,18 @@ Create an instance: `flight = client.Flight`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrivalAirportCandidatesCount` | `Integer` |  |
-| `callsign` | `String` |  |
-| `departureAirportCandidatesCount` | `Integer` |  |
-| `estArrivalAirport` | `String` |  |
-| `estArrivalAirportHorizDistance` | `Integer` |  |
-| `estArrivalAirportVertDistance` | `Integer` |  |
-| `estDepartureAirport` | `String` |  |
-| `estDepartureAirportHorizDistance` | `Integer` |  |
-| `estDepartureAirportVertDistance` | `Integer` |  |
-| `firstSeen` | `Integer` |  |
-| `icao24` | `String` |  |
-| `lastSeen` | `Integer` |  |
+| `arrivalAirportCandidatesCount` | `Integer` | Number of candidates for arrival airport |
+| `callsign` | `String` | Callsign of the vehicle (8 chars) |
+| `departureAirportCandidatesCount` | `Integer` | Number of candidates for departure airport |
+| `estArrivalAirport` | `String` | Estimated arrival airport ICAO code |
+| `estArrivalAirportHorizDistance` | `Integer` | Horizontal distance to estimated arrival airport in meters |
+| `estArrivalAirportVertDistance` | `Integer` | Vertical distance to estimated arrival airport in meters |
+| `estDepartureAirport` | `String` | Estimated departure airport ICAO code |
+| `estDepartureAirportHorizDistance` | `Integer` | Horizontal distance to estimated departure airport in meters |
+| `estDepartureAirportVertDistance` | `Integer` | Vertical distance to estimated departure airport in meters |
+| `firstSeen` | `Integer` | Unix timestamp (seconds) of the first position report |
+| `icao24` | `String` | Unique ICAO 24-bit address of the transponder in hex string representation |
+| `lastSeen` | `Integer` | Unix timestamp (seconds) of the last position report |
 
 #### Example: List
 
@@ -339,8 +339,8 @@ Create an instance: `state_vector = client.StateVector`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `states` | `Array` |  |
-| `time` | `Integer` |  |
+| `states` | `Array` | Array of state vectors |
+| `time` | `Integer` | The time which the state vectors in this response are associated with. |
 
 #### Example: List
 
@@ -364,11 +364,11 @@ Create an instance: `track = client.Track`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `callsign` | `String` |  |
-| `endTime` | `Integer` |  |
-| `icao24` | `String` |  |
-| `path` | `Array` |  |
-| `startTime` | `Integer` |  |
+| `callsign` | `String` | Callsign of the vehicle |
+| `endTime` | `Integer` | Unix timestamp (seconds) of the end of the track |
+| `icao24` | `String` | Unique ICAO 24-bit address of the transponder |
+| `path` | `Array` | Array of waypoints representing the aircraft trajectory |
+| `startTime` | `Integer` | Unix timestamp (seconds) of the start of the track |
 
 #### Example: List
 

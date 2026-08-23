@@ -102,18 +102,18 @@ flight = client.Flight
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrivalAirportCandidatesCount` | `Integer` | No |  |
-| `callsign` | `String` | No |  |
-| `departureAirportCandidatesCount` | `Integer` | No |  |
-| `estArrivalAirport` | `String` | No |  |
-| `estArrivalAirportHorizDistance` | `Integer` | No |  |
-| `estArrivalAirportVertDistance` | `Integer` | No |  |
-| `estDepartureAirport` | `String` | No |  |
-| `estDepartureAirportHorizDistance` | `Integer` | No |  |
-| `estDepartureAirportVertDistance` | `Integer` | No |  |
-| `firstSeen` | `Integer` | No |  |
-| `icao24` | `String` | No |  |
-| `lastSeen` | `Integer` | No |  |
+| `arrivalAirportCandidatesCount` | `Integer` | No | Number of candidates for arrival airport |
+| `callsign` | `String` | No | Callsign of the vehicle (8 chars) |
+| `departureAirportCandidatesCount` | `Integer` | No | Number of candidates for departure airport |
+| `estArrivalAirport` | `String` | No | Estimated arrival airport ICAO code |
+| `estArrivalAirportHorizDistance` | `Integer` | No | Horizontal distance to estimated arrival airport in meters |
+| `estArrivalAirportVertDistance` | `Integer` | No | Vertical distance to estimated arrival airport in meters |
+| `estDepartureAirport` | `String` | No | Estimated departure airport ICAO code |
+| `estDepartureAirportHorizDistance` | `Integer` | No | Horizontal distance to estimated departure airport in meters |
+| `estDepartureAirportVertDistance` | `Integer` | No | Vertical distance to estimated departure airport in meters |
+| `firstSeen` | `Integer` | No | Unix timestamp (seconds) of the first position report |
+| `icao24` | `String` | No | Unique ICAO 24-bit address of the transponder in hex string representation |
+| `lastSeen` | `Integer` | No | Unix timestamp (seconds) of the last position report |
 
 ### Operations
 
@@ -165,8 +165,8 @@ state_vector = client.StateVector
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `states` | `Array` | No |  |
-| `time` | `Integer` | No |  |
+| `states` | `Array` | No | Array of state vectors |
+| `time` | `Integer` | No | The time which the state vectors in this response are associated with. |
 
 ### Operations
 
@@ -218,11 +218,11 @@ track = client.Track
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `callsign` | `String` | No |  |
-| `endTime` | `Integer` | No |  |
-| `icao24` | `String` | No |  |
-| `path` | `Array` | No |  |
-| `startTime` | `Integer` | No |  |
+| `callsign` | `String` | No | Callsign of the vehicle |
+| `endTime` | `Integer` | No | Unix timestamp (seconds) of the end of the track |
+| `icao24` | `String` | No | Unique ICAO 24-bit address of the transponder |
+| `path` | `Array` | No | Array of waypoints representing the aircraft trajectory |
+| `startTime` | `Integer` | No | Unix timestamp (seconds) of the start of the track |
 
 ### Operations
 

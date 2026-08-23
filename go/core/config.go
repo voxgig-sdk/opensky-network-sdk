@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "OpenskyNetwork",
+			"slug": "opensky-network",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -38,50 +41,62 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "arrivalAirportCandidatesCount",
+						"short": "Number of candidates for arrival airport",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "callsign",
+						"short": "Callsign of the vehicle (8 chars)",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "departureAirportCandidatesCount",
+						"short": "Number of candidates for departure airport",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "estArrivalAirport",
+						"short": "Estimated arrival airport ICAO code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "estArrivalAirportHorizDistance",
+						"short": "Horizontal distance to estimated arrival airport in meters",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "estArrivalAirportVertDistance",
+						"short": "Vertical distance to estimated arrival airport in meters",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "estDepartureAirport",
+						"short": "Estimated departure airport ICAO code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "estDepartureAirportHorizDistance",
+						"short": "Horizontal distance to estimated departure airport in meters",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "estDepartureAirportVertDistance",
+						"short": "Vertical distance to estimated departure airport in meters",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "firstSeen",
+						"short": "Unix timestamp (seconds) of the first position report",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "icao24",
+						"short": "Unique ICAO 24-bit address of the transponder in hex string representation",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "lastSeen",
+						"short": "Unix timestamp (seconds) of the last position report",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -278,6 +293,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "states",
+						"short": "Array of state vectors",
 						"type": "`$ARRAY`",
 						"union": map[string]any{
 							"branches": 5,
@@ -287,6 +303,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "time",
+						"short": "The time which the state vectors in this response are associated with.",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -419,18 +436,22 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "callsign",
+						"short": "Callsign of the vehicle",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "endTime",
+						"short": "Unix timestamp (seconds) of the end of the track",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "icao24",
+						"short": "Unique ICAO 24-bit address of the transponder",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "path",
+						"short": "Array of waypoints representing the aircraft trajectory",
 						"type": "`$ARRAY`",
 						"union": map[string]any{
 							"branches": 3,
@@ -440,6 +461,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "startTime",
+						"short": "Unix timestamp (seconds) of the start of the track",
 						"type": "`$INTEGER`",
 					},
 				},

@@ -6,7 +6,7 @@ The Golang SDK for the OpenskyNetwork API — an entity-oriented client using st
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Flight(nil)` — each with the same small set of operations (`List`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -267,18 +267,18 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"arrivalAirportCandidatesCount"` |  |
-| `"callsign"` |  |
-| `"departureAirportCandidatesCount"` |  |
-| `"estArrivalAirport"` |  |
-| `"estArrivalAirportHorizDistance"` |  |
-| `"estArrivalAirportVertDistance"` |  |
-| `"estDepartureAirport"` |  |
-| `"estDepartureAirportHorizDistance"` |  |
-| `"estDepartureAirportVertDistance"` |  |
-| `"firstSeen"` |  |
-| `"icao24"` |  |
-| `"lastSeen"` |  |
+| `"arrivalAirportCandidatesCount"` | Number of candidates for arrival airport |
+| `"callsign"` | Callsign of the vehicle (8 chars) |
+| `"departureAirportCandidatesCount"` | Number of candidates for departure airport |
+| `"estArrivalAirport"` | Estimated arrival airport ICAO code |
+| `"estArrivalAirportHorizDistance"` | Horizontal distance to estimated arrival airport in meters |
+| `"estArrivalAirportVertDistance"` | Vertical distance to estimated arrival airport in meters |
+| `"estDepartureAirport"` | Estimated departure airport ICAO code |
+| `"estDepartureAirportHorizDistance"` | Horizontal distance to estimated departure airport in meters |
+| `"estDepartureAirportVertDistance"` | Vertical distance to estimated departure airport in meters |
+| `"firstSeen"` | Unix timestamp (seconds) of the first position report |
+| `"icao24"` | Unique ICAO 24-bit address of the transponder in hex string representation |
+| `"lastSeen"` | Unix timestamp (seconds) of the last position report |
 
 Operations: List.
 
@@ -288,8 +288,8 @@ API path: `/flights/aircraft`
 
 | Field | Description |
 | --- | --- |
-| `"states"` |  |
-| `"time"` |  |
+| `"states"` | Array of state vectors |
+| `"time"` | The time which the state vectors in this response are associated with. |
 
 Operations: List.
 
@@ -299,11 +299,11 @@ API path: `/states/all`
 
 | Field | Description |
 | --- | --- |
-| `"callsign"` |  |
-| `"endTime"` |  |
-| `"icao24"` |  |
-| `"path"` |  |
-| `"startTime"` |  |
+| `"callsign"` | Callsign of the vehicle |
+| `"endTime"` | Unix timestamp (seconds) of the end of the track |
+| `"icao24"` | Unique ICAO 24-bit address of the transponder |
+| `"path"` | Array of waypoints representing the aircraft trajectory |
+| `"startTime"` | Unix timestamp (seconds) of the start of the track |
 
 Operations: List.
 
@@ -328,18 +328,18 @@ Create an instance: `flight := client.Flight(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrivalAirportCandidatesCount` | `int` |  |
-| `callsign` | `string` |  |
-| `departureAirportCandidatesCount` | `int` |  |
-| `estArrivalAirport` | `string` |  |
-| `estArrivalAirportHorizDistance` | `int` |  |
-| `estArrivalAirportVertDistance` | `int` |  |
-| `estDepartureAirport` | `string` |  |
-| `estDepartureAirportHorizDistance` | `int` |  |
-| `estDepartureAirportVertDistance` | `int` |  |
-| `firstSeen` | `int` |  |
-| `icao24` | `string` |  |
-| `lastSeen` | `int` |  |
+| `arrivalAirportCandidatesCount` | `int` | Number of candidates for arrival airport |
+| `callsign` | `string` | Callsign of the vehicle (8 chars) |
+| `departureAirportCandidatesCount` | `int` | Number of candidates for departure airport |
+| `estArrivalAirport` | `string` | Estimated arrival airport ICAO code |
+| `estArrivalAirportHorizDistance` | `int` | Horizontal distance to estimated arrival airport in meters |
+| `estArrivalAirportVertDistance` | `int` | Vertical distance to estimated arrival airport in meters |
+| `estDepartureAirport` | `string` | Estimated departure airport ICAO code |
+| `estDepartureAirportHorizDistance` | `int` | Horizontal distance to estimated departure airport in meters |
+| `estDepartureAirportVertDistance` | `int` | Vertical distance to estimated departure airport in meters |
+| `firstSeen` | `int` | Unix timestamp (seconds) of the first position report |
+| `icao24` | `string` | Unique ICAO 24-bit address of the transponder in hex string representation |
+| `lastSeen` | `int` | Unix timestamp (seconds) of the last position report |
 
 #### Example: List
 
@@ -366,8 +366,8 @@ Create an instance: `stateVector := client.StateVector(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `states` | `[]any` |  |
-| `time` | `int` |  |
+| `states` | `[]any` | Array of state vectors |
+| `time` | `int` | The time which the state vectors in this response are associated with. |
 
 #### Example: List
 
@@ -394,11 +394,11 @@ Create an instance: `track := client.Track(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `callsign` | `string` |  |
-| `endTime` | `int` |  |
-| `icao24` | `string` |  |
-| `path` | `[]any` |  |
-| `startTime` | `int` |  |
+| `callsign` | `string` | Callsign of the vehicle |
+| `endTime` | `int` | Unix timestamp (seconds) of the end of the track |
+| `icao24` | `string` | Unique ICAO 24-bit address of the transponder |
+| `path` | `[]any` | Array of waypoints representing the aircraft trajectory |
+| `startTime` | `int` | Unix timestamp (seconds) of the start of the track |
 
 #### Example: List
 

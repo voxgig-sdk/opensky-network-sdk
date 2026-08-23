@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'OpenskyNetwork',
+        slug: "opensky-network",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -66,50 +77,62 @@ class Config {
       "fields": [
         {
           "name": "arrivalAirportCandidatesCount",
+          "short": "Number of candidates for arrival airport",
           "type": "`$INTEGER`"
         },
         {
           "name": "callsign",
+          "short": "Callsign of the vehicle (8 chars)",
           "type": "`$STRING`"
         },
         {
           "name": "departureAirportCandidatesCount",
+          "short": "Number of candidates for departure airport",
           "type": "`$INTEGER`"
         },
         {
           "name": "estArrivalAirport",
+          "short": "Estimated arrival airport ICAO code",
           "type": "`$STRING`"
         },
         {
           "name": "estArrivalAirportHorizDistance",
+          "short": "Horizontal distance to estimated arrival airport in meters",
           "type": "`$INTEGER`"
         },
         {
           "name": "estArrivalAirportVertDistance",
+          "short": "Vertical distance to estimated arrival airport in meters",
           "type": "`$INTEGER`"
         },
         {
           "name": "estDepartureAirport",
+          "short": "Estimated departure airport ICAO code",
           "type": "`$STRING`"
         },
         {
           "name": "estDepartureAirportHorizDistance",
+          "short": "Horizontal distance to estimated departure airport in meters",
           "type": "`$INTEGER`"
         },
         {
           "name": "estDepartureAirportVertDistance",
+          "short": "Vertical distance to estimated departure airport in meters",
           "type": "`$INTEGER`"
         },
         {
           "name": "firstSeen",
+          "short": "Unix timestamp (seconds) of the first position report",
           "type": "`$INTEGER`"
         },
         {
           "name": "icao24",
+          "short": "Unique ICAO 24-bit address of the transponder in hex string representation",
           "type": "`$STRING`"
         },
         {
           "name": "lastSeen",
+          "short": "Unix timestamp (seconds) of the last position report",
           "type": "`$INTEGER`"
         }
       ],
@@ -306,6 +329,7 @@ class Config {
       "fields": [
         {
           "name": "states",
+          "short": "Array of state vectors",
           "type": "`$ARRAY`",
           "union": {
             "branches": 5,
@@ -315,6 +339,7 @@ class Config {
         },
         {
           "name": "time",
+          "short": "The time which the state vectors in this response are associated with.",
           "type": "`$INTEGER`"
         }
       ],
@@ -447,18 +472,22 @@ class Config {
       "fields": [
         {
           "name": "callsign",
+          "short": "Callsign of the vehicle",
           "type": "`$STRING`"
         },
         {
           "name": "endTime",
+          "short": "Unix timestamp (seconds) of the end of the track",
           "type": "`$INTEGER`"
         },
         {
           "name": "icao24",
+          "short": "Unique ICAO 24-bit address of the transponder",
           "type": "`$STRING`"
         },
         {
           "name": "path",
+          "short": "Array of waypoints representing the aircraft trajectory",
           "type": "`$ARRAY`",
           "union": {
             "branches": 3,
@@ -468,6 +497,7 @@ class Config {
         },
         {
           "name": "startTime",
+          "short": "Unix timestamp (seconds) of the start of the track",
           "type": "`$INTEGER`"
         }
       ],

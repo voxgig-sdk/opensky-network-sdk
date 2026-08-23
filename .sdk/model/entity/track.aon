@@ -8,21 +8,25 @@ main: kit: entity: track: {
     {
       name: "callsign"
       req: false
+      short: "Callsign of the vehicle"
       type: "`$STRING`"
     }
     {
       name: "endTime"
       req: false
+      short: "Unix timestamp (seconds) of the end of the track"
       type: "`$INTEGER`"
     }
     {
       name: "icao24"
       req: false
+      short: "Unique ICAO 24-bit address of the transponder"
       type: "`$STRING`"
     }
     {
       name: "path"
       req: false
+      short: "Array of waypoints representing the aircraft trajectory"
       type: "`$ARRAY`"
       union: {
         branches: 3
@@ -33,6 +37,7 @@ main: kit: entity: track: {
     {
       name: "startTime"
       req: false
+      short: "Unix timestamp (seconds) of the start of the track"
       type: "`$INTEGER`"
     }
   ]

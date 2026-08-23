@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "OpenskyNetwork",
+      slug = "opensky-network",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -34,50 +37,62 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "arrivalAirportCandidatesCount",
+            ["short"] = "Number of candidates for arrival airport",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "callsign",
+            ["short"] = "Callsign of the vehicle (8 chars)",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "departureAirportCandidatesCount",
+            ["short"] = "Number of candidates for departure airport",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "estArrivalAirport",
+            ["short"] = "Estimated arrival airport ICAO code",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "estArrivalAirportHorizDistance",
+            ["short"] = "Horizontal distance to estimated arrival airport in meters",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "estArrivalAirportVertDistance",
+            ["short"] = "Vertical distance to estimated arrival airport in meters",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "estDepartureAirport",
+            ["short"] = "Estimated departure airport ICAO code",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "estDepartureAirportHorizDistance",
+            ["short"] = "Horizontal distance to estimated departure airport in meters",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "estDepartureAirportVertDistance",
+            ["short"] = "Vertical distance to estimated departure airport in meters",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "firstSeen",
+            ["short"] = "Unix timestamp (seconds) of the first position report",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "icao24",
+            ["short"] = "Unique ICAO 24-bit address of the transponder in hex string representation",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "lastSeen",
+            ["short"] = "Unix timestamp (seconds) of the last position report",
             ["type"] = "`$INTEGER`",
           },
         },
@@ -274,6 +289,7 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "states",
+            ["short"] = "Array of state vectors",
             ["type"] = "`$ARRAY`",
             ["union"] = {
               ["branches"] = 5,
@@ -283,6 +299,7 @@ local function make_config()
           },
           {
             ["name"] = "time",
+            ["short"] = "The time which the state vectors in this response are associated with.",
             ["type"] = "`$INTEGER`",
           },
         },
@@ -415,18 +432,22 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "callsign",
+            ["short"] = "Callsign of the vehicle",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "endTime",
+            ["short"] = "Unix timestamp (seconds) of the end of the track",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "icao24",
+            ["short"] = "Unique ICAO 24-bit address of the transponder",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "path",
+            ["short"] = "Array of waypoints representing the aircraft trajectory",
             ["type"] = "`$ARRAY`",
             ["union"] = {
               ["branches"] = 3,
@@ -436,6 +457,7 @@ local function make_config()
           },
           {
             ["name"] = "startTime",
+            ["short"] = "Unix timestamp (seconds) of the start of the track",
             ["type"] = "`$INTEGER`",
           },
         },
