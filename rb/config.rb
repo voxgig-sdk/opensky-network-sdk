@@ -28,6 +28,7 @@ module OpenskyNetworkConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
