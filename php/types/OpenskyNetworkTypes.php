@@ -32,18 +32,10 @@ class Flight
 /** Request payload for Flight#list. */
 class FlightListMatch
 {
-    public ?int $arrivalAirportCandidatesCount = null;
-    public ?string $callsign = null;
-    public ?int $departureAirportCandidatesCount = null;
-    public ?string $estArrivalAirport = null;
-    public ?int $estArrivalAirportHorizDistance = null;
-    public ?int $estArrivalAirportVertDistance = null;
-    public ?string $estDepartureAirport = null;
-    public ?int $estDepartureAirportHorizDistance = null;
-    public ?int $estDepartureAirportVertDistance = null;
-    public ?int $firstSeen = null;
+    public int $begin;
+    public int $end;
     public ?string $icao24 = null;
-    public ?int $lastSeen = null;
+    public ?string $airport = null;
 }
 
 /** StateVector entity data model. */
@@ -56,7 +48,12 @@ class StateVector
 /** Request payload for StateVector#list. */
 class StateVectorListMatch
 {
-    public ?array $states = null;
+    public ?int $extended = null;
+    public ?array $icao24 = null;
+    public ?float $lamax = null;
+    public ?float $lamin = null;
+    public ?float $lomax = null;
+    public ?float $lomin = null;
     public ?int $time = null;
 }
 
@@ -73,10 +70,7 @@ class Track
 /** Request payload for Track#list. */
 class TrackListMatch
 {
-    public ?string $callsign = null;
-    public ?int $endTime = null;
-    public ?string $icao24 = null;
-    public ?array $path = null;
-    public ?int $startTime = null;
+    public string $icao24;
+    public int $time;
 }
 

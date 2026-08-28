@@ -63,54 +63,22 @@ Flight = Struct.new(
 
 # Request payload for Flight#list.
 #
-# @!attribute [rw] arrivalAirportCandidatesCount
-#   @return [Integer, nil]
+# @!attribute [rw] begin
+#   @return [Integer]
 #
-# @!attribute [rw] callsign
-#   @return [String, nil]
-#
-# @!attribute [rw] departureAirportCandidatesCount
-#   @return [Integer, nil]
-#
-# @!attribute [rw] estArrivalAirport
-#   @return [String, nil]
-#
-# @!attribute [rw] estArrivalAirportHorizDistance
-#   @return [Integer, nil]
-#
-# @!attribute [rw] estArrivalAirportVertDistance
-#   @return [Integer, nil]
-#
-# @!attribute [rw] estDepartureAirport
-#   @return [String, nil]
-#
-# @!attribute [rw] estDepartureAirportHorizDistance
-#   @return [Integer, nil]
-#
-# @!attribute [rw] estDepartureAirportVertDistance
-#   @return [Integer, nil]
-#
-# @!attribute [rw] firstSeen
-#   @return [Integer, nil]
+# @!attribute [rw] end
+#   @return [Integer]
 #
 # @!attribute [rw] icao24
 #   @return [String, nil]
 #
-# @!attribute [rw] lastSeen
-#   @return [Integer, nil]
+# @!attribute [rw] airport
+#   @return [String, nil]
 FlightListMatch = Struct.new(
-  :arrivalAirportCandidatesCount,
-  :callsign,
-  :departureAirportCandidatesCount,
-  :estArrivalAirport,
-  :estArrivalAirportHorizDistance,
-  :estArrivalAirportVertDistance,
-  :estDepartureAirport,
-  :estDepartureAirportHorizDistance,
-  :estDepartureAirportVertDistance,
-  :firstSeen,
+  :begin,
+  :end,
   :icao24,
-  :lastSeen,
+  :airport,
   keyword_init: true
 )
 
@@ -129,13 +97,33 @@ StateVector = Struct.new(
 
 # Request payload for StateVector#list.
 #
-# @!attribute [rw] states
+# @!attribute [rw] extended
+#   @return [Integer, nil]
+#
+# @!attribute [rw] icao24
 #   @return [Array, nil]
+#
+# @!attribute [rw] lamax
+#   @return [Float, nil]
+#
+# @!attribute [rw] lamin
+#   @return [Float, nil]
+#
+# @!attribute [rw] lomax
+#   @return [Float, nil]
+#
+# @!attribute [rw] lomin
+#   @return [Float, nil]
 #
 # @!attribute [rw] time
 #   @return [Integer, nil]
 StateVectorListMatch = Struct.new(
-  :states,
+  :extended,
+  :icao24,
+  :lamax,
+  :lamin,
+  :lomax,
+  :lomin,
   :time,
   keyword_init: true
 )
@@ -167,26 +155,14 @@ Track = Struct.new(
 
 # Request payload for Track#list.
 #
-# @!attribute [rw] callsign
-#   @return [String, nil]
-#
-# @!attribute [rw] endTime
-#   @return [Integer, nil]
-#
 # @!attribute [rw] icao24
-#   @return [String, nil]
+#   @return [String]
 #
-# @!attribute [rw] path
-#   @return [Array, nil]
-#
-# @!attribute [rw] startTime
-#   @return [Integer, nil]
+# @!attribute [rw] time
+#   @return [Integer]
 TrackListMatch = Struct.new(
-  :callsign,
-  :endTime,
   :icao24,
-  :path,
-  :startTime,
+  :time,
   keyword_init: true
 )
 

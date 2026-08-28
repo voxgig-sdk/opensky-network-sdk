@@ -114,6 +114,7 @@ function basicSetup(extra?: any) {
     'OPENSKY_NETWORK_TEST_LIVE': 'FALSE',
     'OPENSKY_NETWORK_TEST_EXPLAIN': 'FALSE',
     'OPENSKY_NETWORK_APIKEY': 'NONE',
+    'OPENSKY_NETWORK_SECRET': 'NONE',
   })
 
   idmap = env['OPENSKY_NETWORK_TEST_TRACK_ENTID']
@@ -124,6 +125,7 @@ function basicSetup(extra?: any) {
     client = new OpenskyNetworkSDK(merge([
       {
         apikey: env.OPENSKY_NETWORK_APIKEY,
+        secret: env.OPENSKY_NETWORK_SECRET,
       },
       extra
     ]))

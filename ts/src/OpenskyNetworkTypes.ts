@@ -21,18 +21,10 @@ export interface Flight {
 }
 
 export interface FlightListMatch {
-  arrivalAirportCandidatesCount?: number
-  callsign?: string
-  departureAirportCandidatesCount?: number
-  estArrivalAirport?: string
-  estArrivalAirportHorizDistance?: number
-  estArrivalAirportVertDistance?: number
-  estDepartureAirport?: string
-  estDepartureAirportHorizDistance?: number
-  estDepartureAirportVertDistance?: number
-  firstSeen?: number
+  begin: number
+  end: number
   icao24?: string
-  lastSeen?: number
+  airport?: string
 
   // Selects a custom action instead of the plain list:
   //   'aircraft' | 'all' | 'arrival' | 'departure'
@@ -47,7 +39,12 @@ export interface StateVector {
 }
 
 export interface StateVectorListMatch {
-  states?: any[]
+  extended?: number
+  icao24?: any[]
+  lamax?: number
+  lamin?: number
+  lomax?: number
+  lomin?: number
   time?: number
 }
 
@@ -60,10 +57,7 @@ export interface Track {
 }
 
 export interface TrackListMatch {
-  callsign?: string
-  endTime?: number
-  icao24?: string
-  path?: any[]
-  startTime?: number
+  icao24: string
+  time: number
 }
 

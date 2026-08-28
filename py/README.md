@@ -46,7 +46,7 @@ error — iterate it directly.
 
 ```python
 try:
-    flights = client.Flight().list()
+    flights = client.Flight().list({"begin": 1, "end": 1})
     for flight in flights:
         print(flight)
 except Exception as err:
@@ -327,7 +327,7 @@ Create an instance: `flight = client.Flight()`
 #### Example: List
 
 ```python
-flights = client.Flight().list()
+flights = client.Flight().list({"begin": 1, "end": 1})
 ```
 
 
@@ -378,8 +378,31 @@ Create an instance: `track = client.Track()`
 #### Example: List
 
 ```python
-tracks = client.Track().list()
+tracks = client.Track().list({"icao24": "example", "time": 1})
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

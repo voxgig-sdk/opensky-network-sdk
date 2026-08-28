@@ -84,6 +84,7 @@ function directSetup(mockres?: any) {
     'OPENSKY_NETWORK_TEST_STATE_VECTOR_ENTID': {},
     'OPENSKY_NETWORK_TEST_LIVE': 'FALSE',
     'OPENSKY_NETWORK_APIKEY': 'NONE',
+    'OPENSKY_NETWORK_SECRET': 'NONE',
   })
 
   const live = 'TRUE' === env.OPENSKY_NETWORK_TEST_LIVE
@@ -91,6 +92,7 @@ function directSetup(mockres?: any) {
   if (live) {
     const client = new OpenskyNetworkSDK({
       apikey: env.OPENSKY_NETWORK_APIKEY,
+      secret: env.OPENSKY_NETWORK_SECRET,
     })
 
     let idmap: any = env['OPENSKY_NETWORK_TEST_STATE_VECTOR_ENTID']

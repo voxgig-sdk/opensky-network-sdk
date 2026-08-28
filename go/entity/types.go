@@ -30,18 +30,10 @@ type Flight struct {
 
 // FlightListMatch is the typed request payload for Flight.ListTyped.
 type FlightListMatch struct {
-	ArrivalAirportCandidatesCount *int `json:"arrivalAirportCandidatesCount,omitempty"`
-	Callsign *string `json:"callsign,omitempty"`
-	DepartureAirportCandidatesCount *int `json:"departureAirportCandidatesCount,omitempty"`
-	EstArrivalAirport *string `json:"estArrivalAirport,omitempty"`
-	EstArrivalAirportHorizDistance *int `json:"estArrivalAirportHorizDistance,omitempty"`
-	EstArrivalAirportVertDistance *int `json:"estArrivalAirportVertDistance,omitempty"`
-	EstDepartureAirport *string `json:"estDepartureAirport,omitempty"`
-	EstDepartureAirportHorizDistance *int `json:"estDepartureAirportHorizDistance,omitempty"`
-	EstDepartureAirportVertDistance *int `json:"estDepartureAirportVertDistance,omitempty"`
-	FirstSeen *int `json:"firstSeen,omitempty"`
+	Begin int `json:"begin"`
+	End int `json:"end"`
 	Icao24 *string `json:"icao24,omitempty"`
-	LastSeen *int `json:"lastSeen,omitempty"`
+	Airport *string `json:"airport,omitempty"`
 }
 
 // StateVector is the typed data model for the state_vector entity.
@@ -52,7 +44,12 @@ type StateVector struct {
 
 // StateVectorListMatch is the typed request payload for StateVector.ListTyped.
 type StateVectorListMatch struct {
-	States *[]any `json:"states,omitempty"`
+	Extended *int `json:"extended,omitempty"`
+	Icao24 *[]any `json:"icao24,omitempty"`
+	Lamax *float64 `json:"lamax,omitempty"`
+	Lamin *float64 `json:"lamin,omitempty"`
+	Lomax *float64 `json:"lomax,omitempty"`
+	Lomin *float64 `json:"lomin,omitempty"`
 	Time *int `json:"time,omitempty"`
 }
 
@@ -67,11 +64,8 @@ type Track struct {
 
 // TrackListMatch is the typed request payload for Track.ListTyped.
 type TrackListMatch struct {
-	Callsign *string `json:"callsign,omitempty"`
-	EndTime *int `json:"endTime,omitempty"`
-	Icao24 *string `json:"icao24,omitempty"`
-	Path *[]any `json:"path,omitempty"`
-	StartTime *int `json:"startTime,omitempty"`
+	Icao24 string `json:"icao24"`
+	Time int `json:"time"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

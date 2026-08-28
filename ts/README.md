@@ -32,6 +32,7 @@ import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network'
 
 const client = new OpenskyNetworkSDK({
   apikey: process.env.OPENSKY_NETWORK_APIKEY,
+  secret: process.env.OPENSKY_NETWORK_SECRET,
 })
 ```
 
@@ -42,7 +43,7 @@ resolves to entities, not raw records. Iterate them directly, and call
 `.data()` on one for the record it holds:
 
 ```ts
-const flights = await client.Flight().list()
+const flights = await client.Flight().list({ begin: 1, end: 1 })
 
 for (const flight of flights) {
   console.log(flight)
@@ -132,7 +133,7 @@ console.log(track)
 You can also use the instance method:
 
 ```ts
-const client = new OpenskyNetworkSDK({ apikey: '...' })
+const client = new OpenskyNetworkSDK({ apikey: '...', secret: '...' })
 const testClient = client.tester()
 ```
 
@@ -169,6 +170,7 @@ const logger = {
 
 const client = new OpenskyNetworkSDK({
   apikey: '...',
+  secret: '...',
   extend: [logger],
 })
 ```
@@ -180,6 +182,7 @@ Create a `.env.local` file at the project root:
 ```
 OPENSKY_NETWORK_TEST_LIVE=TRUE
 OPENSKY_NETWORK_APIKEY=<your-key>
+OPENSKY_NETWORK_SECRET=<your-secret>
 ```
 
 Then run:
@@ -198,6 +201,7 @@ cd ts && npm test
 ```ts
 new OpenskyNetworkSDK(options?: {
   apikey?: string
+  secret?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -209,6 +213,7 @@ new OpenskyNetworkSDK(options?: {
 | Option | Type | Description |
 | --- | --- | --- |
 | `apikey` | `string` | API key for authentication. |
+| `secret` | `string` | API secret for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -372,7 +377,7 @@ Create an instance: `const flight = client.Flight()`
 #### Example: List
 
 ```ts
-const flights = await client.Flight().list()
+const flights = await client.Flight().list({ begin: 1, end: 1 })
 ```
 
 
@@ -423,8 +428,31 @@ Create an instance: `const track = client.Track()`
 #### Example: List
 
 ```ts
-const tracks = await client.Track().list()
+const tracks = await client.Track().list({ icao24: "example", time: 1 })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

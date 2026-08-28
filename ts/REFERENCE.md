@@ -19,6 +19,7 @@ Create a new SDK client instance.
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
 | `options.apikey` | `string` | API key for authentication. |
+| `options.secret` | `string` | API secret for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -184,7 +185,7 @@ const result = await client.Flight().list({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Flight().list()
+const results = await client.Flight().list({ begin: 1, end: 1 })
 ```
 
 ### Common Methods
@@ -289,7 +290,7 @@ const track = client.Track()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Track().list()
+const results = await client.Track().list({ icao24: "example", time: 1 })
 ```
 
 ### Common Methods
@@ -336,4 +337,42 @@ const client = new OpenskyNetworkSDK({
   }
 })
 ```
+
+
+### Configuring features
+
+Each feature is inactive until switched on, and an SDK with no feature
+configured does no feature work at all. Every option below keeps its default
+unless you name it.
+
+The array form of \`feature\` is significant: several features wrap the
+transport, and the order you list them in is the order they nest.
+
+#### `test`
+
+In-memory mock transport for testing without a live server.
+
+**Configuration**
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Options above are those the model carries a default for. A feature may
+also accept callback options — a `sink` to receive each record, for
+instance — which have no default and are covered in the full feature
+reference.
+
+**Usage**
+
+Set `feature.test.active` to true in the client options, and override any option above in the same entry. Every option keeps
+its default unless you name it.
+
+**Considerations**
+
+- Attaches to pipeline hooks, not the transport, so activation order does
+  not change what it observes.
+- Installs the BASE transport that the wrapping features wrap, so it must be
+  activated before them.
+- Inactive by default: leaving it out costs nothing at runtime.
 

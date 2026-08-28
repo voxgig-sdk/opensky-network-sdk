@@ -21,25 +21,22 @@
 ---@field lastSeen? number
 
 ---@class FlightListMatch
----@field arrivalAirportCandidatesCount? number
----@field callsign? string
----@field departureAirportCandidatesCount? number
----@field estArrivalAirport? string
----@field estArrivalAirportHorizDistance? number
----@field estArrivalAirportVertDistance? number
----@field estDepartureAirport? string
----@field estDepartureAirportHorizDistance? number
----@field estDepartureAirportVertDistance? number
----@field firstSeen? number
+---@field begin number
+---@field end number
 ---@field icao24? string
----@field lastSeen? number
+---@field airport? string
 
 ---@class StateVector
 ---@field states? table
 ---@field time? number
 
 ---@class StateVectorListMatch
----@field states? table
+---@field extended? number
+---@field icao24? table
+---@field lamax? number
+---@field lamin? number
+---@field lomax? number
+---@field lomin? number
 ---@field time? number
 
 ---@class Track
@@ -50,11 +47,8 @@
 ---@field startTime? number
 
 ---@class TrackListMatch
----@field callsign? string
----@field endTime? number
----@field icao24? string
----@field path? table
----@field startTime? number
+---@field icao24 string
+---@field time number
 
 local M = {}
 

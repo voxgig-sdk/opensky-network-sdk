@@ -31,19 +31,14 @@ class Flight(TypedDict, total=False):
     lastSeen: int
 
 
-class FlightListMatch(TypedDict, total=False):
-    arrivalAirportCandidatesCount: int
-    callsign: str
-    departureAirportCandidatesCount: int
-    estArrivalAirport: str
-    estArrivalAirportHorizDistance: int
-    estArrivalAirportVertDistance: int
-    estDepartureAirport: str
-    estDepartureAirportHorizDistance: int
-    estDepartureAirportVertDistance: int
-    firstSeen: int
+class FlightListMatchRequired(TypedDict):
+    begin: int
+    end: int
+
+
+class FlightListMatch(FlightListMatchRequired, total=False):
     icao24: str
-    lastSeen: int
+    airport: str
 
 
 class StateVector(TypedDict, total=False):
@@ -52,7 +47,12 @@ class StateVector(TypedDict, total=False):
 
 
 class StateVectorListMatch(TypedDict, total=False):
-    states: list
+    extended: int
+    icao24: list
+    lamax: float
+    lamin: float
+    lomax: float
+    lomin: float
     time: int
 
 
@@ -64,9 +64,6 @@ class Track(TypedDict, total=False):
     startTime: int
 
 
-class TrackListMatch(TypedDict, total=False):
-    callsign: str
-    endTime: int
+class TrackListMatch(TypedDict):
     icao24: str
-    path: list
-    startTime: int
+    time: int
