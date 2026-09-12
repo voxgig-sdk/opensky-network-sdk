@@ -85,9 +85,13 @@ main: kit: entity: state_vector: {
           }
           method: "GET"
           orig: "/states/all"
-          parts: [
-            "states"
-            "all"
+          segments: [
+            {
+              lit: "states"
+            }
+            {
+              lit: "all"
+            }
           ]
           select: {
             exist: [
@@ -133,9 +137,13 @@ main: kit: entity: state_vector: {
           }
           method: "GET"
           orig: "/states/own"
-          parts: [
-            "states"
-            "own"
+          segments: [
+            {
+              lit: "states"
+            }
+            {
+              lit: "own"
+            }
           ]
           select: {
             exist: [

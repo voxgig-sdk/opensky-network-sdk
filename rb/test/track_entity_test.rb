@@ -118,7 +118,7 @@ def track_basic_setup(extra)
     "OPENSKY_NETWORK_TEST_TRACK_ENTID" => idmap,
     "OPENSKY_NETWORK_TEST_LIVE" => "FALSE",
     "OPENSKY_NETWORK_TEST_EXPLAIN" => "FALSE",
-    "OPENSKY_NETWORK_APIKEY" => "NONE",
+    "OPENSKY_NETWORK_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -129,6 +129,9 @@ def track_basic_setup(extra)
 
   if env["OPENSKY_NETWORK_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["OPENSKY_NETWORK_APIKEY"],
       },

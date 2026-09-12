@@ -1,6 +1,14 @@
 # OpenskyNetwork SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -153,9 +161,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/flights/aircraft",
-                "parts": [
-                  "flights",
-                  "aircraft",
+                "segments": [
+                  {
+                    "lit": "flights",
+                  },
+                  {
+                    "lit": "aircraft",
+                  },
                 ],
                 "select": {
                   "$action": "aircraft",
@@ -169,6 +181,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "flights",
+                  "aircraft",
+                ],
               },
               {
                 "args": {
@@ -199,9 +215,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/flights/arrival",
-                "parts": [
-                  "flights",
-                  "arrival",
+                "segments": [
+                  {
+                    "lit": "flights",
+                  },
+                  {
+                    "lit": "arrival",
+                  },
                 ],
                 "select": {
                   "$action": "arrival",
@@ -215,6 +235,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "flights",
+                  "arrival",
+                ],
               },
               {
                 "args": {
@@ -245,9 +269,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/flights/departure",
-                "parts": [
-                  "flights",
-                  "departure",
+                "segments": [
+                  {
+                    "lit": "flights",
+                  },
+                  {
+                    "lit": "departure",
+                  },
                 ],
                 "select": {
                   "$action": "departure",
@@ -261,6 +289,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "flights",
+                  "departure",
+                ],
               },
               {
                 "args": {
@@ -284,9 +316,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/flights/all",
-                "parts": [
-                  "flights",
-                  "all",
+                "segments": [
+                  {
+                    "lit": "flights",
+                  },
+                  {
+                    "lit": "all",
+                  },
                 ],
                 "select": {
                   "$action": "all",
@@ -299,6 +335,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "flights",
+                  "all",
+                ],
               },
             ],
           },
@@ -381,9 +421,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/states/all",
-                "parts": [
-                  "states",
-                  "all",
+                "segments": [
+                  {
+                    "lit": "states",
+                  },
+                  {
+                    "lit": "all",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -400,6 +444,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.states`",
                 },
+                "parts": [
+                  "states",
+                  "all",
+                ],
               },
               {
                 "args": {
@@ -427,9 +475,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/states/own",
-                "parts": [
-                  "states",
-                  "own",
+                "segments": [
+                  {
+                    "lit": "states",
+                  },
+                  {
+                    "lit": "own",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -442,6 +494,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.states`",
                 },
+                "parts": [
+                  "states",
+                  "own",
+                ],
               },
             ],
           },
@@ -511,8 +567,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/tracks",
-                "parts": [
-                  "tracks",
+                "segments": [
+                  {
+                    "lit": "tracks",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -524,6 +582,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.path`",
                 },
+                "parts": [
+                  "tracks",
+                ],
               },
             ],
           },

@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -173,9 +184,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/flights/aircraft",
-              "parts": [
-                "flights",
-                "aircraft"
+              "segments": [
+                {
+                  "lit": "flights"
+                },
+                {
+                  "lit": "aircraft"
+                }
               ],
               "select": {
                 "$action": "aircraft",
@@ -188,7 +203,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "flights",
+                "aircraft"
+              ]
             },
             {
               "args": {
@@ -219,9 +238,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/flights/arrival",
-              "parts": [
-                "flights",
-                "arrival"
+              "segments": [
+                {
+                  "lit": "flights"
+                },
+                {
+                  "lit": "arrival"
+                }
               ],
               "select": {
                 "$action": "arrival",
@@ -234,7 +257,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "flights",
+                "arrival"
+              ]
             },
             {
               "args": {
@@ -265,9 +292,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/flights/departure",
-              "parts": [
-                "flights",
-                "departure"
+              "segments": [
+                {
+                  "lit": "flights"
+                },
+                {
+                  "lit": "departure"
+                }
               ],
               "select": {
                 "$action": "departure",
@@ -280,7 +311,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "flights",
+                "departure"
+              ]
             },
             {
               "args": {
@@ -304,9 +339,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/flights/all",
-              "parts": [
-                "flights",
-                "all"
+              "segments": [
+                {
+                  "lit": "flights"
+                },
+                {
+                  "lit": "all"
+                }
               ],
               "select": {
                 "$action": "all",
@@ -318,7 +357,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "flights",
+                "all"
+              ]
             }
           ]
         }
@@ -401,9 +444,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/states/all",
-              "parts": [
-                "states",
-                "all"
+              "segments": [
+                {
+                  "lit": "states"
+                },
+                {
+                  "lit": "all"
+                }
               ],
               "select": {
                 "exist": [
@@ -419,7 +466,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.states`"
-              }
+              },
+              "parts": [
+                "states",
+                "all"
+              ]
             },
             {
               "args": {
@@ -447,9 +498,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/states/own",
-              "parts": [
-                "states",
-                "own"
+              "segments": [
+                {
+                  "lit": "states"
+                },
+                {
+                  "lit": "own"
+                }
               ],
               "select": {
                 "exist": [
@@ -461,7 +516,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.states`"
-              }
+              },
+              "parts": [
+                "states",
+                "own"
+              ]
             }
           ]
         }
@@ -531,8 +590,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/tracks",
-              "parts": [
-                "tracks"
+              "segments": [
+                {
+                  "lit": "tracks"
+                }
               ],
               "select": {
                 "exist": [
@@ -543,7 +604,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.path`"
-              }
+              },
+              "parts": [
+                "tracks"
+              ]
             }
           ]
         }
@@ -559,6 +623,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

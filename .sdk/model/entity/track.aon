@@ -68,8 +68,10 @@ main: kit: entity: track: {
           }
           method: "GET"
           orig: "/tracks"
-          parts: [
-            "tracks"
+          segments: [
+            {
+              lit: "tracks"
+            }
           ]
           select: {
             exist: [

@@ -144,9 +144,13 @@ module OpenskyNetworkConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/aircraft",
-                  "parts" => [
-                    "flights",
-                    "aircraft",
+                  "segments" => [
+                    {
+                      "lit" => "flights",
+                    },
+                    {
+                      "lit" => "aircraft",
+                    },
                   ],
                   "select" => {
                     "$action" => "aircraft",
@@ -160,6 +164,10 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "flights",
+                    "aircraft",
+                  ],
                 },
                 {
                   "args" => {
@@ -190,9 +198,13 @@ module OpenskyNetworkConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/arrival",
-                  "parts" => [
-                    "flights",
-                    "arrival",
+                  "segments" => [
+                    {
+                      "lit" => "flights",
+                    },
+                    {
+                      "lit" => "arrival",
+                    },
                   ],
                   "select" => {
                     "$action" => "arrival",
@@ -206,6 +218,10 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "flights",
+                    "arrival",
+                  ],
                 },
                 {
                   "args" => {
@@ -236,9 +252,13 @@ module OpenskyNetworkConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/departure",
-                  "parts" => [
-                    "flights",
-                    "departure",
+                  "segments" => [
+                    {
+                      "lit" => "flights",
+                    },
+                    {
+                      "lit" => "departure",
+                    },
                   ],
                   "select" => {
                     "$action" => "departure",
@@ -252,6 +272,10 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "flights",
+                    "departure",
+                  ],
                 },
                 {
                   "args" => {
@@ -275,9 +299,13 @@ module OpenskyNetworkConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/flights/all",
-                  "parts" => [
-                    "flights",
-                    "all",
+                  "segments" => [
+                    {
+                      "lit" => "flights",
+                    },
+                    {
+                      "lit" => "all",
+                    },
                   ],
                   "select" => {
                     "$action" => "all",
@@ -290,6 +318,10 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "flights",
+                    "all",
+                  ],
                 },
               ],
             },
@@ -372,9 +404,13 @@ module OpenskyNetworkConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/states/all",
-                  "parts" => [
-                    "states",
-                    "all",
+                  "segments" => [
+                    {
+                      "lit" => "states",
+                    },
+                    {
+                      "lit" => "all",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -391,6 +427,10 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body.states`",
                   },
+                  "parts" => [
+                    "states",
+                    "all",
+                  ],
                 },
                 {
                   "args" => {
@@ -418,9 +458,13 @@ module OpenskyNetworkConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/states/own",
-                  "parts" => [
-                    "states",
-                    "own",
+                  "segments" => [
+                    {
+                      "lit" => "states",
+                    },
+                    {
+                      "lit" => "own",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -433,6 +477,10 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body.states`",
                   },
+                  "parts" => [
+                    "states",
+                    "own",
+                  ],
                 },
               ],
             },
@@ -502,8 +550,10 @@ module OpenskyNetworkConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/tracks",
-                  "parts" => [
-                    "tracks",
+                  "segments" => [
+                    {
+                      "lit" => "tracks",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -515,6 +565,9 @@ module OpenskyNetworkConfig
                     "req" => "`reqdata`",
                     "res" => "`body.path`",
                   },
+                  "parts" => [
+                    "tracks",
+                  ],
                 },
               ],
             },

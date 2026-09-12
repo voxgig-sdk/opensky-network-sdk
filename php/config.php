@@ -158,9 +158,13 @@ class OpenskyNetworkConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/aircraft',
-                  'parts' => [
-                    'flights',
-                    'aircraft',
+                  'segments' => [
+                    [
+                      'lit' => 'flights',
+                    ],
+                    [
+                      'lit' => 'aircraft',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'aircraft',
@@ -173,6 +177,10 @@ class OpenskyNetworkConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'flights',
+                    'aircraft',
                   ],
                 ],
                 [
@@ -204,9 +212,13 @@ class OpenskyNetworkConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/arrival',
-                  'parts' => [
-                    'flights',
-                    'arrival',
+                  'segments' => [
+                    [
+                      'lit' => 'flights',
+                    ],
+                    [
+                      'lit' => 'arrival',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'arrival',
@@ -219,6 +231,10 @@ class OpenskyNetworkConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'flights',
+                    'arrival',
                   ],
                 ],
                 [
@@ -250,9 +266,13 @@ class OpenskyNetworkConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/departure',
-                  'parts' => [
-                    'flights',
-                    'departure',
+                  'segments' => [
+                    [
+                      'lit' => 'flights',
+                    ],
+                    [
+                      'lit' => 'departure',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'departure',
@@ -265,6 +285,10 @@ class OpenskyNetworkConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'flights',
+                    'departure',
                   ],
                 ],
                 [
@@ -289,9 +313,13 @@ class OpenskyNetworkConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/all',
-                  'parts' => [
-                    'flights',
-                    'all',
+                  'segments' => [
+                    [
+                      'lit' => 'flights',
+                    ],
+                    [
+                      'lit' => 'all',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'all',
@@ -303,6 +331,10 @@ class OpenskyNetworkConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'flights',
+                    'all',
                   ],
                 ],
               ],
@@ -386,9 +418,13 @@ class OpenskyNetworkConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/states/all',
-                  'parts' => [
-                    'states',
-                    'all',
+                  'segments' => [
+                    [
+                      'lit' => 'states',
+                    ],
+                    [
+                      'lit' => 'all',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -404,6 +440,10 @@ class OpenskyNetworkConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.states`',
+                  ],
+                  'parts' => [
+                    'states',
+                    'all',
                   ],
                 ],
                 [
@@ -432,9 +472,13 @@ class OpenskyNetworkConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/states/own',
-                  'parts' => [
-                    'states',
-                    'own',
+                  'segments' => [
+                    [
+                      'lit' => 'states',
+                    ],
+                    [
+                      'lit' => 'own',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -446,6 +490,10 @@ class OpenskyNetworkConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.states`',
+                  ],
+                  'parts' => [
+                    'states',
+                    'own',
                   ],
                 ],
               ],
@@ -516,8 +564,10 @@ class OpenskyNetworkConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/tracks',
-                  'parts' => [
-                    'tracks',
+                  'segments' => [
+                    [
+                      'lit' => 'tracks',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -528,6 +578,9 @@ class OpenskyNetworkConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.path`',
+                  ],
+                  'parts' => [
+                    'tracks',
                   ],
                 ],
               ],

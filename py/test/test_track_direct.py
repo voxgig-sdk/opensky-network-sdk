@@ -60,15 +60,18 @@ def _track_direct_setup(mockres):
     env = runner.env_override({
         "OPENSKY_NETWORK_TEST_TRACK_ENTID": {},
         "OPENSKY_NETWORK_TEST_LIVE": "FALSE",
-        "OPENSKY_NETWORK_APIKEY": "NONE",
+        "OPENSKY_NETWORK_APIKEY": "",
     })
 
     live = env.get("OPENSKY_NETWORK_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("OPENSKY_NETWORK_APIKEY"),
-        }
+        })
         client = OpenskyNetworkSDK(merged_opts)
         return {
             "client": client,

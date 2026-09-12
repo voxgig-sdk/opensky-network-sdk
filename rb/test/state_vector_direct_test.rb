@@ -62,15 +62,17 @@ def state_vector_direct_setup(mockres)
   env = Runner.env_override({
     "OPENSKY_NETWORK_TEST_STATE_VECTOR_ENTID" => {},
     "OPENSKY_NETWORK_TEST_LIVE" => "FALSE",
-    "OPENSKY_NETWORK_APIKEY" => "NONE",
+    "OPENSKY_NETWORK_APIKEY" => "",
   })
 
   live = env["OPENSKY_NETWORK_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["OPENSKY_NETWORK_APIKEY"],
-    }
+    })
     client = OpenskyNetworkSDK.new(merged_opts)
     return {
       client: client,

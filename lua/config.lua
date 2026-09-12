@@ -132,9 +132,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/aircraft",
-                ["parts"] = {
-                  "flights",
-                  "aircraft",
+                ["segments"] = {
+                  {
+                    ["lit"] = "flights",
+                  },
+                  {
+                    ["lit"] = "aircraft",
+                  },
                 },
                 ["select"] = {
                   ["$action"] = "aircraft",
@@ -147,6 +151,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "flights",
+                  "aircraft",
                 },
               },
               {
@@ -178,9 +186,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/arrival",
-                ["parts"] = {
-                  "flights",
-                  "arrival",
+                ["segments"] = {
+                  {
+                    ["lit"] = "flights",
+                  },
+                  {
+                    ["lit"] = "arrival",
+                  },
                 },
                 ["select"] = {
                   ["$action"] = "arrival",
@@ -193,6 +205,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "flights",
+                  "arrival",
                 },
               },
               {
@@ -224,9 +240,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/departure",
-                ["parts"] = {
-                  "flights",
-                  "departure",
+                ["segments"] = {
+                  {
+                    ["lit"] = "flights",
+                  },
+                  {
+                    ["lit"] = "departure",
+                  },
                 },
                 ["select"] = {
                   ["$action"] = "departure",
@@ -239,6 +259,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "flights",
+                  "departure",
                 },
               },
               {
@@ -263,9 +287,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/flights/all",
-                ["parts"] = {
-                  "flights",
-                  "all",
+                ["segments"] = {
+                  {
+                    ["lit"] = "flights",
+                  },
+                  {
+                    ["lit"] = "all",
+                  },
                 },
                 ["select"] = {
                   ["$action"] = "all",
@@ -277,6 +305,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "flights",
+                  "all",
                 },
               },
             },
@@ -360,9 +392,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/states/all",
-                ["parts"] = {
-                  "states",
-                  "all",
+                ["segments"] = {
+                  {
+                    ["lit"] = "states",
+                  },
+                  {
+                    ["lit"] = "all",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -378,6 +414,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.states`",
+                },
+                ["parts"] = {
+                  "states",
+                  "all",
                 },
               },
               {
@@ -406,9 +446,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/states/own",
-                ["parts"] = {
-                  "states",
-                  "own",
+                ["segments"] = {
+                  {
+                    ["lit"] = "states",
+                  },
+                  {
+                    ["lit"] = "own",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -420,6 +464,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.states`",
+                },
+                ["parts"] = {
+                  "states",
+                  "own",
                 },
               },
             },
@@ -490,8 +538,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/tracks",
-                ["parts"] = {
-                  "tracks",
+                ["segments"] = {
+                  {
+                    ["lit"] = "tracks",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -502,6 +552,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.path`",
+                },
+                ["parts"] = {
+                  "tracks",
                 },
               },
             },

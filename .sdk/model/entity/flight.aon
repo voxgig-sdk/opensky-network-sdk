@@ -112,9 +112,13 @@ main: kit: entity: flight: {
           }
           method: "GET"
           orig: "/flights/aircraft"
-          parts: [
-            "flights"
-            "aircraft"
+          segments: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "aircraft"
+            }
           ]
           select: {
             "$action": "aircraft"
@@ -157,9 +161,13 @@ main: kit: entity: flight: {
           }
           method: "GET"
           orig: "/flights/arrival"
-          parts: [
-            "flights"
-            "arrival"
+          segments: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "arrival"
+            }
           ]
           select: {
             "$action": "arrival"
@@ -202,9 +210,13 @@ main: kit: entity: flight: {
           }
           method: "GET"
           orig: "/flights/departure"
-          parts: [
-            "flights"
-            "departure"
+          segments: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "departure"
+            }
           ]
           select: {
             "$action": "departure"
@@ -240,9 +252,13 @@ main: kit: entity: flight: {
           }
           method: "GET"
           orig: "/flights/all"
-          parts: [
-            "flights"
-            "all"
+          segments: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "all"
+            }
           ]
           select: {
             "$action": "all"

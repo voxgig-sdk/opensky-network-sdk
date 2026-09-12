@@ -124,7 +124,7 @@ function state_vector_basic_setup($extra)
         "OPENSKY_NETWORK_TEST_STATE_VECTOR_ENTID" => $idmap,
         "OPENSKY_NETWORK_TEST_LIVE" => "FALSE",
         "OPENSKY_NETWORK_TEST_EXPLAIN" => "FALSE",
-        "OPENSKY_NETWORK_APIKEY" => "NONE",
+        "OPENSKY_NETWORK_APIKEY" => "",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -135,10 +135,17 @@ function state_vector_basic_setup($extra)
 
     if ($env["OPENSKY_NETWORK_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
+            // FIRST, so the generated fields below win: sdk-test-control.json's
+            // test.client.options adds to the live client, it does not redirect it.
+            Runner::live_client_options(),
             [
                 "apikey" => $env["OPENSKY_NETWORK_APIKEY"],
             ],
-            $extra ?? [],
+            // ismap, not a plain "?? []" default: an empty PHP array is a
+            // LIST, and a non-map later entry REPLACES the accumulated map in
+            // merge - so the no-extras call discarded live_client_options()
+            // and the apikey/server map above it.
+            Vs::ismap($extra) ? $extra : new \stdClass(),
         ]);
         $client = new OpenskyNetworkSDK(Helpers::to_map($merged_opts));
     }
