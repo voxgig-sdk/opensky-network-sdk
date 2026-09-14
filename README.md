@@ -105,7 +105,7 @@ local results, err = client:Track():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
+| TypeScript | `@voxgig-sdk/opensky-network-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
 | Python | `voxgig-sdk-opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
 | PHP | `voxgig-sdk/opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/opensky-network-sdk/go` | `go get github.com/voxgig-sdk/opensky-network-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Track():list()
 ### TypeScript
 
 ```ts
-import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network'
+import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network-sdk'
 
 const client = new OpenskyNetworkSDK({
   apikey: process.env.OPENSKY_NETWORK_APIKEY,

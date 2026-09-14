@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network'
+import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network-sdk'
 
 const client = new OpenskyNetworkSDK({
   apikey: process.env.OPENSKY_NETWORK_APIKEY,
@@ -533,7 +533,7 @@ opensky-network/
 Import the SDK from the package root:
 
 ```ts
-import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network'
+import { OpenskyNetworkSDK } from '@voxgig-sdk/opensky-network-sdk'
 ```
 
 ### Entity state
