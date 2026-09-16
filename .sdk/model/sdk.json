@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "flight": {
           "active": true,
@@ -153,6 +217,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /flights/aircraft",
+                    "json": "{\"operationId\":\"getFlightsByAircraft\",\"parameters\":[{\"description\":\"ICAO24 transponder address represented by a hex string\",\"in\":\"query\",\"name\":\"icao24\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with flights data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/flights/aircraft",
@@ -206,6 +276,12 @@
                         "type": "`$INTEGER`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /flights/arrival",
+                    "json": "{\"operationId\":\"getArrivalsByAirport\",\"parameters\":[{\"description\":\"ICAO airport code\",\"in\":\"query\",\"name\":\"airport\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with arrivals data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -261,6 +337,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /flights/departure",
+                    "json": "{\"operationId\":\"getDeparturesByAirport\",\"parameters\":[{\"description\":\"ICAO airport code\",\"in\":\"query\",\"name\":\"airport\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with departures data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/flights/departure",
@@ -306,6 +388,12 @@
                         "type": "`$INTEGER`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /flights/all",
+                    "json": "{\"operationId\":\"getFlightsInInterval\",\"parameters\":[{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with flights data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -431,6 +519,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /states/all",
+                    "json": "{\"operationId\":\"getAllStates\",\"parameters\":[{\"description\":\"The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.\",\"in\":\"query\",\"name\":\"time\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.\",\"explode\":true,\"in\":\"query\",\"name\":\"icao24\",\"required\":false,\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}},{\"description\":\"Lower bound for the latitude in decimal degrees\",\"in\":\"query\",\"name\":\"lamin\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Lower bound for the longitude in decimal degrees\",\"in\":\"query\",\"name\":\"lomin\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Upper bound for the latitude in decimal degrees\",\"in\":\"query\",\"name\":\"lamax\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Upper bound for the longitude in decimal degrees\",\"in\":\"query\",\"name\":\"lomax\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Set to 1 to include aircraft category information\",\"in\":\"query\",\"name\":\"extended\",\"required\":false,\"schema\":{\"enum\":[0,1],\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"states\":{\"description\":\"Array of state vectors\",\"items\":{\"description\":\"State vector representing an aircraft's state\",\"example\":[\"abc9f3\",\"CALLSIGN\",\"United States\",1458564121,1458564121,-100.5,40.5,1500,false,150,90,5,[1,2,3],1520,\"1234\",false,0,3],\"items\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"number\"},{\"type\":\"integer\"},{\"type\":\"boolean\"},{\"type\":\"array\"},{\"type\":\"null\"}]},\"maxItems\":18,\"minItems\":17,\"type\":\"array\"},\"type\":\"array\"},\"time\":{\"description\":\"The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [time - 1, time].\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with state vectors\",\"headers\":{\"X-Rate-Limit-Remaining\":{\"description\":\"Number of remaining API credits\",\"schema\":{\"type\":\"integer\"}}}},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\",\"headers\":{\"X-Rate-Limit-Retry-After-Seconds\":{\"description\":\"Number of seconds until credits become available again\",\"schema\":{\"type\":\"integer\"}}}}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/states/all",
@@ -487,6 +581,12 @@
                         "type": "`$INTEGER`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /states/own",
+                    "json": "{\"operationId\":\"getOwnStates\",\"parameters\":[{\"description\":\"The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.\",\"in\":\"query\",\"name\":\"time\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.\",\"explode\":true,\"in\":\"query\",\"name\":\"icao24\",\"required\":false,\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}},{\"description\":\"Retrieve only states of a subset of your receivers. You can pass this argument several times to filter state of more than one of your receivers.\",\"explode\":true,\"in\":\"query\",\"name\":\"serials\",\"required\":false,\"schema\":{\"items\":{\"type\":\"integer\"},\"type\":\"array\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"states\":{\"description\":\"Array of state vectors\",\"items\":{\"description\":\"State vector representing an aircraft's state\",\"example\":[\"abc9f3\",\"CALLSIGN\",\"United States\",1458564121,1458564121,-100.5,40.5,1500,false,150,90,5,[1,2,3],1520,\"1234\",false,0,3],\"items\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"number\"},{\"type\":\"integer\"},{\"type\":\"boolean\"},{\"type\":\"array\"},{\"type\":\"null\"}]},\"maxItems\":18,\"minItems\":17,\"type\":\"array\"},\"type\":\"array\"},\"time\":{\"description\":\"The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [time - 1, time].\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with state vectors\"},\"401\":{\"description\":\"Unauthorized - Invalid or missing authentication\"},\"403\":{\"description\":\"Forbidden - Authentication required\"}},\"security\":[{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -593,6 +693,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /tracks",
+                    "json": "{\"operationId\":\"getTrackByAircraft\",\"parameters\":[{\"description\":\"ICAO24 transponder address represented by a hex string\",\"in\":\"query\",\"name\":\"icao24\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Unix timestamp (seconds) for which the track should be retrieved\",\"in\":\"query\",\"name\":\"time\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"callsign\":{\"description\":\"Callsign of the vehicle\",\"nullable\":true,\"type\":\"string\"},\"endTime\":{\"description\":\"Unix timestamp (seconds) of the end of the track\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder\",\"type\":\"string\"},\"path\":{\"description\":\"Array of waypoints representing the aircraft trajectory\",\"items\":{\"description\":\"Waypoint [time, latitude, longitude, altitude, on_ground]\",\"items\":{\"oneOf\":[{\"type\":\"number\"},{\"type\":\"integer\"},{\"type\":\"boolean\"},{\"type\":\"null\"}]},\"maxItems\":5,\"minItems\":5,\"type\":\"array\"},\"type\":\"array\"},\"startTime\":{\"description\":\"Unix timestamp (seconds) of the start of the track\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with track data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"404\":{\"description\":\"Not Found - No track found for the given aircraft and time\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/tracks",
@@ -621,13 +727,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -717,6 +1033,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -825,6 +1237,48 @@
         "website": "https://opensky-network.org"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -1379,6 +1833,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -1420,7 +1875,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

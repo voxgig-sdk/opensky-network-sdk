@@ -4,7 +4,10 @@ declare(strict_types=1);
 // OpenskyNetwork SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class OpenskyNetworkFeatures
@@ -14,8 +17,14 @@ class OpenskyNetworkFeatures
         switch ($name) {
             case "base":
                 return new OpenskyNetworkBaseFeature();
+            case "ratelimit":
+                return new OpenskyNetworkRatelimitFeature();
+            case "retry":
+                return new OpenskyNetworkRetryFeature();
             case "test":
                 return new OpenskyNetworkTestFeature();
+            case "timeout":
+                return new OpenskyNetworkTimeoutFeature();
             default:
                 return new OpenskyNetworkBaseFeature();
         }
@@ -31,7 +40,10 @@ class OpenskyNetworkFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

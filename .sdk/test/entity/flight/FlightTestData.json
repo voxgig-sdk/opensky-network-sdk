@@ -2,64 +2,605 @@
   "existing": {
     "flight": {
       "FLIGHT00": {
-        "arrivalAirportCandidatesCount": "s78",
+        "arrivalAirportCandidatesCount": 120,
         "callsign": "s79",
-        "departureAirportCandidatesCount": "s7a",
+        "departureAirportCandidatesCount": 122,
         "estArrivalAirport": "s7b",
-        "estArrivalAirportHorizDistance": "s7c",
-        "estArrivalAirportVertDistance": "s7d",
+        "estArrivalAirportHorizDistance": 124,
+        "estArrivalAirportVertDistance": 125,
         "estDepartureAirport": "s7e",
-        "estDepartureAirportHorizDistance": "s7f",
-        "estDepartureAirportVertDistance": "s80",
-        "firstSeen": "s81",
+        "estDepartureAirportHorizDistance": 127,
+        "estDepartureAirportVertDistance": 128,
+        "firstSeen": 129,
         "icao24": "s82",
-        "lastSeen": "s83"
+        "lastSeen": 131
       },
       "FLIGHT01": {
-        "arrivalAirportCandidatesCount": "sf0",
+        "arrivalAirportCandidatesCount": 240,
         "callsign": "sf1",
-        "departureAirportCandidatesCount": "sf2",
+        "departureAirportCandidatesCount": 242,
         "estArrivalAirport": "sf3",
-        "estArrivalAirportHorizDistance": "sf4",
-        "estArrivalAirportVertDistance": "sf5",
+        "estArrivalAirportHorizDistance": 244,
+        "estArrivalAirportVertDistance": 245,
         "estDepartureAirport": "sf6",
-        "estDepartureAirportHorizDistance": "sf7",
-        "estDepartureAirportVertDistance": "sf8",
-        "firstSeen": "sf9",
+        "estDepartureAirportHorizDistance": 247,
+        "estDepartureAirportVertDistance": 248,
+        "firstSeen": 249,
         "icao24": "sfa",
-        "lastSeen": "sfb"
+        "lastSeen": 251
       },
       "FLIGHT02": {
-        "arrivalAirportCandidatesCount": "s168",
+        "arrivalAirportCandidatesCount": 360,
         "callsign": "s169",
-        "departureAirportCandidatesCount": "s16a",
+        "departureAirportCandidatesCount": 362,
         "estArrivalAirport": "s16b",
-        "estArrivalAirportHorizDistance": "s16c",
-        "estArrivalAirportVertDistance": "s16d",
+        "estArrivalAirportHorizDistance": 364,
+        "estArrivalAirportVertDistance": 365,
         "estDepartureAirport": "s16e",
-        "estDepartureAirportHorizDistance": "s16f",
-        "estDepartureAirportVertDistance": "s170",
-        "firstSeen": "s171",
+        "estDepartureAirportHorizDistance": 367,
+        "estDepartureAirportVertDistance": 368,
+        "firstSeen": 369,
         "icao24": "s172",
-        "lastSeen": "s173"
+        "lastSeen": 371
       }
     }
   },
   "new": {
     "flight": {
       "flight_ref01": {
-        "arrivalAirportCandidatesCount": "s1e0",
+        "arrivalAirportCandidatesCount": 480,
         "callsign": "s1e1",
-        "departureAirportCandidatesCount": "s1e2",
+        "departureAirportCandidatesCount": 482,
         "estArrivalAirport": "s1e3",
-        "estArrivalAirportHorizDistance": "s1e4",
-        "estArrivalAirportVertDistance": "s1e5",
+        "estArrivalAirportHorizDistance": 484,
+        "estArrivalAirportVertDistance": 485,
         "estDepartureAirport": "s1e6",
-        "estDepartureAirportHorizDistance": "s1e7",
-        "estDepartureAirportVertDistance": "s1e8",
-        "firstSeen": "s1e9",
+        "estDepartureAirportHorizDistance": 487,
+        "estDepartureAirportVertDistance": 488,
+        "firstSeen": 489,
         "icao24": "s1ea",
-        "lastSeen": "s1eb"
+        "lastSeen": 491
+      }
+    }
+  },
+  "requests": {
+    "GET /flights/aircraft": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getFlightsByAircraft",
+        "parameters": [
+          {
+            "description": "ICAO24 transponder address represented by a hex string",
+            "in": "query",
+            "name": "icao24",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "begin",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "end",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "arrivalAirportCandidatesCount": {
+                        "description": "Number of candidates for arrival airport",
+                        "type": "integer"
+                      },
+                      "callsign": {
+                        "description": "Callsign of the vehicle (8 chars)",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "departureAirportCandidatesCount": {
+                        "description": "Number of candidates for departure airport",
+                        "type": "integer"
+                      },
+                      "estArrivalAirport": {
+                        "description": "Estimated arrival airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estArrivalAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estArrivalAirportVertDistance": {
+                        "description": "Vertical distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirport": {
+                        "description": "Estimated departure airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estDepartureAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirportVertDistance": {
+                        "description": "Vertical distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "firstSeen": {
+                        "description": "Unix timestamp (seconds) of the first position report",
+                        "type": "integer"
+                      },
+                      "icao24": {
+                        "description": "Unique ICAO 24-bit address of the transponder in hex string representation",
+                        "type": "string"
+                      },
+                      "lastSeen": {
+                        "description": "Unix timestamp (seconds) of the last position report",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response with flights data"
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "description": "Basic authentication using OpenSky username and password (deprecated for new accounts)",
+            "scheme": "basic",
+            "type": "http"
+          },
+          "oauth2": {
+            "bearerFormat": "JWT",
+            "description": "OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /flights/arrival": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getArrivalsByAirport",
+        "parameters": [
+          {
+            "description": "ICAO airport code",
+            "in": "query",
+            "name": "airport",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "begin",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "end",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "arrivalAirportCandidatesCount": {
+                        "description": "Number of candidates for arrival airport",
+                        "type": "integer"
+                      },
+                      "callsign": {
+                        "description": "Callsign of the vehicle (8 chars)",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "departureAirportCandidatesCount": {
+                        "description": "Number of candidates for departure airport",
+                        "type": "integer"
+                      },
+                      "estArrivalAirport": {
+                        "description": "Estimated arrival airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estArrivalAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estArrivalAirportVertDistance": {
+                        "description": "Vertical distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirport": {
+                        "description": "Estimated departure airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estDepartureAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirportVertDistance": {
+                        "description": "Vertical distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "firstSeen": {
+                        "description": "Unix timestamp (seconds) of the first position report",
+                        "type": "integer"
+                      },
+                      "icao24": {
+                        "description": "Unique ICAO 24-bit address of the transponder in hex string representation",
+                        "type": "string"
+                      },
+                      "lastSeen": {
+                        "description": "Unix timestamp (seconds) of the last position report",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response with arrivals data"
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "description": "Basic authentication using OpenSky username and password (deprecated for new accounts)",
+            "scheme": "basic",
+            "type": "http"
+          },
+          "oauth2": {
+            "bearerFormat": "JWT",
+            "description": "OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /flights/departure": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDeparturesByAirport",
+        "parameters": [
+          {
+            "description": "ICAO airport code",
+            "in": "query",
+            "name": "airport",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "begin",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "end",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "arrivalAirportCandidatesCount": {
+                        "description": "Number of candidates for arrival airport",
+                        "type": "integer"
+                      },
+                      "callsign": {
+                        "description": "Callsign of the vehicle (8 chars)",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "departureAirportCandidatesCount": {
+                        "description": "Number of candidates for departure airport",
+                        "type": "integer"
+                      },
+                      "estArrivalAirport": {
+                        "description": "Estimated arrival airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estArrivalAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estArrivalAirportVertDistance": {
+                        "description": "Vertical distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirport": {
+                        "description": "Estimated departure airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estDepartureAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirportVertDistance": {
+                        "description": "Vertical distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "firstSeen": {
+                        "description": "Unix timestamp (seconds) of the first position report",
+                        "type": "integer"
+                      },
+                      "icao24": {
+                        "description": "Unique ICAO 24-bit address of the transponder in hex string representation",
+                        "type": "string"
+                      },
+                      "lastSeen": {
+                        "description": "Unix timestamp (seconds) of the last position report",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response with departures data"
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "description": "Basic authentication using OpenSky username and password (deprecated for new accounts)",
+            "scheme": "basic",
+            "type": "http"
+          },
+          "oauth2": {
+            "bearerFormat": "JWT",
+            "description": "OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /flights/all": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getFlightsInInterval",
+        "parameters": [
+          {
+            "description": "Start of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "begin",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of time interval in seconds since epoch (Unix timestamp)",
+            "in": "query",
+            "name": "end",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "arrivalAirportCandidatesCount": {
+                        "description": "Number of candidates for arrival airport",
+                        "type": "integer"
+                      },
+                      "callsign": {
+                        "description": "Callsign of the vehicle (8 chars)",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "departureAirportCandidatesCount": {
+                        "description": "Number of candidates for departure airport",
+                        "type": "integer"
+                      },
+                      "estArrivalAirport": {
+                        "description": "Estimated arrival airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estArrivalAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estArrivalAirportVertDistance": {
+                        "description": "Vertical distance to estimated arrival airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirport": {
+                        "description": "Estimated departure airport ICAO code",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "estDepartureAirportHorizDistance": {
+                        "description": "Horizontal distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "estDepartureAirportVertDistance": {
+                        "description": "Vertical distance to estimated departure airport in meters",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "firstSeen": {
+                        "description": "Unix timestamp (seconds) of the first position report",
+                        "type": "integer"
+                      },
+                      "icao24": {
+                        "description": "Unique ICAO 24-bit address of the transponder in hex string representation",
+                        "type": "string"
+                      },
+                      "lastSeen": {
+                        "description": "Unix timestamp (seconds) of the last position report",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response with flights data"
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "description": "Basic authentication using OpenSky username and password (deprecated for new accounts)",
+            "scheme": "basic",
+            "type": "http"
+          },
+          "oauth2": {
+            "bearerFormat": "JWT",
+            "description": "OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

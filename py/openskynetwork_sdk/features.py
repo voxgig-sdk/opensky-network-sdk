@@ -1,12 +1,18 @@
 # OpenskyNetwork SDK feature factory
 
 from openskynetwork_sdk.feature.base_feature import OpenskyNetworkBaseFeature
+from openskynetwork_sdk.feature.ratelimit_feature import OpenskyNetworkRatelimitFeature
+from openskynetwork_sdk.feature.retry_feature import OpenskyNetworkRetryFeature
 from openskynetwork_sdk.feature.test_feature import OpenskyNetworkTestFeature
+from openskynetwork_sdk.feature.timeout_feature import OpenskyNetworkTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: OpenskyNetworkBaseFeature(),
+    "ratelimit": lambda: OpenskyNetworkRatelimitFeature(),
+    "retry": lambda: OpenskyNetworkRetryFeature(),
     "test": lambda: OpenskyNetworkTestFeature(),
+    "timeout": lambda: OpenskyNetworkTimeoutFeature(),
 }
 
 

@@ -3,24 +3,24 @@
     "track": {
       "TRACK00": {
         "callsign": "s32",
-        "endTime": "s33",
+        "endTime": 51,
         "icao24": "s34",
         "path": [],
-        "startTime": "s36"
+        "startTime": 54
       },
       "TRACK01": {
         "callsign": "s64",
-        "endTime": "s65",
+        "endTime": 101,
         "icao24": "s66",
         "path": [],
-        "startTime": "s68"
+        "startTime": 104
       },
       "TRACK02": {
         "callsign": "s96",
-        "endTime": "s97",
+        "endTime": 151,
         "icao24": "s98",
         "path": [],
-        "startTime": "s9a"
+        "startTime": 154
       }
     }
   },
@@ -28,10 +28,128 @@
     "track": {
       "track_ref01": {
         "callsign": "sc8",
-        "endTime": "sc9",
+        "endTime": 201,
         "icao24": "sca",
         "path": [],
-        "startTime": "scc"
+        "startTime": 204
+      }
+    }
+  },
+  "requests": {
+    "GET /tracks": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getTrackByAircraft",
+        "parameters": [
+          {
+            "description": "ICAO24 transponder address represented by a hex string",
+            "in": "query",
+            "name": "icao24",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unix timestamp (seconds) for which the track should be retrieved",
+            "in": "query",
+            "name": "time",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "callsign": {
+                      "description": "Callsign of the vehicle",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "endTime": {
+                      "description": "Unix timestamp (seconds) of the end of the track",
+                      "type": "integer"
+                    },
+                    "icao24": {
+                      "description": "Unique ICAO 24-bit address of the transponder",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "Array of waypoints representing the aircraft trajectory",
+                      "items": {
+                        "description": "Waypoint [time, latitude, longitude, altitude, on_ground]",
+                        "items": {
+                          "oneOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "maxItems": 5,
+                        "minItems": 5,
+                        "type": "array"
+                      },
+                      "type": "array"
+                    },
+                    "startTime": {
+                      "description": "Unix timestamp (seconds) of the start of the track",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with track data"
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "404": {
+            "description": "Not Found - No track found for the given aircraft and time"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "security": [
+          {},
+          {
+            "basicAuth": []
+          },
+          {
+            "oauth2": []
+          }
+        ],
+        "securitySchemes": {
+          "basicAuth": {
+            "description": "Basic authentication using OpenSky username and password (deprecated for new accounts)",
+            "scheme": "basic",
+            "type": "http"
+          },
+          "oauth2": {
+            "bearerFormat": "JWT",
+            "description": "OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

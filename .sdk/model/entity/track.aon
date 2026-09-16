@@ -66,6 +66,12 @@ main: kit: entity: track: {
               }
             ]
           }
+          contract: {
+            id: "GET /tracks"
+            json: "{\"operationId\":\"getTrackByAircraft\",\"parameters\":[{\"description\":\"ICAO24 transponder address represented by a hex string\",\"in\":\"query\",\"name\":\"icao24\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Unix timestamp (seconds) for which the track should be retrieved\",\"in\":\"query\",\"name\":\"time\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"callsign\":{\"description\":\"Callsign of the vehicle\",\"nullable\":true,\"type\":\"string\"},\"endTime\":{\"description\":\"Unix timestamp (seconds) of the end of the track\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder\",\"type\":\"string\"},\"path\":{\"description\":\"Array of waypoints representing the aircraft trajectory\",\"items\":{\"description\":\"Waypoint [time, latitude, longitude, altitude, on_ground]\",\"items\":{\"oneOf\":[{\"type\":\"number\"},{\"type\":\"integer\"},{\"type\":\"boolean\"},{\"type\":\"null\"}]},\"maxItems\":5,\"minItems\":5,\"type\":\"array\"},\"type\":\"array\"},\"startTime\":{\"description\":\"Unix timestamp (seconds) of the start of the track\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with track data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"404\":{\"description\":\"Not Found - No track found for the given aircraft and time\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/tracks"
           segments: [
