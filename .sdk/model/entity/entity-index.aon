@@ -1,5 +1,5 @@
 # Entity Models
 
-@"flight.aon"
-@"state_vector.aon"
-@"track.aon"
+@"./flight.aon"
+@"./state_vector.aon"
+@"./track.aon"

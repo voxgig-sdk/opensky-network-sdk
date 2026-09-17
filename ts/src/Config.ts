@@ -132,15 +132,15 @@ class Config {
 
     entity: {
       
-      flight: {
-      },
-
-      state_vector: {
-      },
-
-      track: {
-      },
-
+        flight: {
+        },
+  
+        state_vector: {
+        },
+  
+        track: {
+        },
+  
     }
   }
 

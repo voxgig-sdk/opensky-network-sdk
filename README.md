@@ -105,12 +105,12 @@ local results, err = client:Track():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/opensky-network-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
-| Python | `voxgig-sdk-opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
-| PHP | `voxgig-sdk/opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
+| TypeScript | `@voxgig-sdk/opensky-network-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/tags) |
+| Python | `voxgig-sdk-opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/tags) |
+| PHP | `voxgig-sdk/opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/opensky-network-sdk/go` | `go get github.com/voxgig-sdk/opensky-network-sdk/go@latest` |
-| Ruby | `voxgig-sdk-opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
-| Lua | `voxgig-sdk-opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/releases) |
+| Ruby | `voxgig-sdk-opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/tags) |
+| Lua | `voxgig-sdk-opensky-network` | publish pending — [install from git tag](https://github.com/voxgig-sdk/opensky-network-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/opensky-network-sdk/go-cli` | `go install github.com/voxgig-sdk/opensky-network-sdk/go-cli/cmd/opensky-network@latest` |
 | Go MCP server | `github.com/voxgig-sdk/opensky-network-sdk/go-mcp` | `go get github.com/voxgig-sdk/opensky-network-sdk/go-mcp@latest` |
 

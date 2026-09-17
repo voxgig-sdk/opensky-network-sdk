@@ -89,6 +89,7 @@ module OpenskyNetworkConfig
         "base" => "https://opensky-network.org/api",
         "auth" => {
           "prefix" => "Basic",
+          "basic" => true,
         },
         "headers" => {
           "content-type" => "application/json",

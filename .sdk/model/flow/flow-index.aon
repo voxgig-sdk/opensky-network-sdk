@@ -1,5 +1,5 @@
 # Flows
 
-@"BasicFlightFlow.aon"
-@"BasicStateVectorFlow.aon"
-@"BasicTrackFlow.aon"
+@"./BasicFlightFlow.aon"
+@"./BasicStateVectorFlow.aon"
+@"./BasicTrackFlow.aon"
