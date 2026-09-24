@@ -46,6 +46,10 @@ client = OpenskyNetworkSDK.test
 
 Create a new `Flight` entity instance. Pass `nil` for no initial data.
 
+#### `Own(data = nil)`
+
+Create a new `Own` entity instance. Pass `nil` for no initial data.
+
 #### `StateVector(data = nil)`
 
 Create a new `StateVector` entity instance. Pass `nil` for no initial data.
@@ -146,6 +150,59 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `FlightEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
+## OwnEntity
+
+```ruby
+own = client.Own
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `states` | `Array` | No | Array of state vectors |
+| `time` | `Integer` | No | The time which the state vectors in this response are associated with. |
+
+### Operations
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.Own.list
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `OwnEntity` instance with the same client and
 options.
 
 #### `get_name -> String`

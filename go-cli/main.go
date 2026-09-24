@@ -20,7 +20,7 @@ import (
 const prompt = "opensky-network"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "flight state_vector track"
+const entitiesHelp = "flight own state_vector track"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

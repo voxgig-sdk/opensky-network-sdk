@@ -45,7 +45,7 @@ local flights, err = client:Flight():list()
 if err then error(err) end
 
 for _, item in ipairs(flights) do
-  print(item["callsign"])
+  print(item)
 end
 ```
 
@@ -196,6 +196,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
 | `Flight` | `(data) -> FlightEntity` | Create a Flight entity instance. |
+| `Own` | `(data) -> OwnEntity` | Create an Own entity instance. |
 | `StateVector` | `(data) -> StateVectorEntity` | Create a StateVector entity instance. |
 | `Track` | `(data) -> TrackEntity` | Create a Track entity instance. |
 
@@ -253,6 +254,17 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 Operations: List.
 
 API path: `/flights/aircraft`
+
+#### Own
+
+| Field | Description |
+| --- | --- |
+| `states` | Array of state vectors |
+| `time` | The time which the state vectors in this response are associated with. |
+
+Operations: List.
+
+API path: `/states/own`
 
 #### StateVector
 
@@ -315,6 +327,30 @@ Create an instance: `local flight = client:Flight(nil)`
 
 ```lua
 local flights, err = client:Flight():list()
+```
+
+
+### Own
+
+Create an instance: `local own = client:Own(nil)`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `states` | `table` | Array of state vectors |
+| `time` | `number` | The time which the state vectors in this response are associated with. |
+
+#### Example: List
+
+```lua
+local owns, err = client:Own():list()
 ```
 
 
@@ -452,7 +488,7 @@ activated earlier.
 
 ## Open types
 
-2 fields are carried as open values rather than typed structures.
+3 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -462,6 +498,7 @@ guarantee.
 
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
+| `own` | `states` | 5 | 2 levels |
 | `state_vector` | `states` | 5 | 2 levels |
 | `track` | `path` | 3 | 2 levels |
 

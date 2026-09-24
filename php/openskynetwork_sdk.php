@@ -359,6 +359,24 @@ class OpenskyNetworkSDK
     }
 
 
+    private $_own = null;
+
+    // Canonical facade: $client->Own()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->own()
+    // resolves here too.
+    public function Own($data = null)
+    {
+        require_once __DIR__ . '/entity/own_entity.php';
+        if ($data === null) {
+            if ($this->_own === null) {
+                $this->_own = new OwnEntity($this, null);
+            }
+            return $this->_own;
+        }
+        return new OwnEntity($this, $data);
+    }
+
+
     private $_state_vector = null;
 
     // Canonical facade: $client->StateVector()->list() / ->load(["id" => ...]).

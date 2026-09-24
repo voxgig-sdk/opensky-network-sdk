@@ -296,6 +296,13 @@ class OpenskyNetworkSDK
   end
 
 
+  # Canonical facade: client.Own.list / client.Own.load({ "id" => ... })
+  def Own(data = nil)
+    require_relative 'entity/own_entity'
+    OwnEntity.new(self, data)
+  end
+
+
   # Canonical facade: client.StateVector.list / client.StateVector.load({ "id" => ... })
   def StateVector(data = nil)
     require_relative 'entity/state_vector_entity'

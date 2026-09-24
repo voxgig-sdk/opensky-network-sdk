@@ -234,6 +234,7 @@ new OpenskyNetworkSDK(options?: {
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
 | `Flight(data?)` | `FlightEntity` | Create a Flight entity instance. |
+| `Own(data?)` | `OwnEntity` | Create an Own entity instance. |
 | `StateVector(data?)` | `StateVectorEntity` | Create a StateVector entity instance. |
 | `Track(data?)` | `TrackEntity` | Create a Track entity instance. |
 | `tester(testopts?, sdkopts?)` | `OpenskyNetworkSDK` | Create a test-mode client instance. |
@@ -322,6 +323,17 @@ Operations: list.
 
 API path: `/flights/aircraft`
 
+#### Own
+
+| Field | Description |
+| --- | --- |
+| `states` | Array of state vectors |
+| `time` | The time which the state vectors in this response are associated with. |
+
+Operations: list.
+
+API path: `/states/own`
+
 #### StateVector
 
 | Field | Description |
@@ -383,6 +395,30 @@ Create an instance: `const flight = client.Flight()`
 
 ```ts
 const flights = await client.Flight().list({ begin: 1, end: 1 })
+```
+
+
+### Own
+
+Create an instance: `const own = client.Own()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `states` | `any[]` | Array of state vectors |
+| `time` | `number` | The time which the state vectors in this response are associated with. |
+
+#### Example: List
+
+```ts
+const owns = await client.Own().list()
 ```
 
 
@@ -520,7 +556,7 @@ activated earlier.
 
 ## Open types
 
-2 fields are carried as open values rather than typed structures.
+3 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -530,6 +566,7 @@ guarantee.
 
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
+| `own` | `states` | 5 | 2 levels |
 | `state_vector` | `states` | 5 | 2 levels |
 | `track` | `path` | 3 | 2 levels |
 

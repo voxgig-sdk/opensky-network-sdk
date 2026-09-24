@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -135,6 +128,9 @@ class Config {
         flight: {
         },
   
+        own: {
+        },
+  
         state_vector: {
         },
   
@@ -150,63 +146,75 @@ class Config {
       "fields": [
         {
           "name": "arrivalAirportCandidatesCount",
-          "short": "Number of candidates for arrival airport",
-          "type": "`$INTEGER`"
+          "title": "Arrival Airport Candidates Count",
+          "type": "`$INTEGER`",
+          "short": "Number of candidates for arrival airport"
         },
         {
           "name": "callsign",
-          "short": "Callsign of the vehicle (8 chars)",
-          "type": "`$STRING`"
+          "title": "Callsign",
+          "type": "`$STRING`",
+          "short": "Callsign of the vehicle (8 chars)"
         },
         {
           "name": "departureAirportCandidatesCount",
-          "short": "Number of candidates for departure airport",
-          "type": "`$INTEGER`"
+          "title": "Departure Airport Candidates Count",
+          "type": "`$INTEGER`",
+          "short": "Number of candidates for departure airport"
         },
         {
           "name": "estArrivalAirport",
-          "short": "Estimated arrival airport ICAO code",
-          "type": "`$STRING`"
+          "title": "Est Arrival Airport",
+          "type": "`$STRING`",
+          "short": "Estimated arrival airport ICAO code"
         },
         {
           "name": "estArrivalAirportHorizDistance",
-          "short": "Horizontal distance to estimated arrival airport in meters",
-          "type": "`$INTEGER`"
+          "title": "Est Arrival Airport Horiz Distance",
+          "type": "`$INTEGER`",
+          "short": "Horizontal distance to estimated arrival airport in meters"
         },
         {
           "name": "estArrivalAirportVertDistance",
-          "short": "Vertical distance to estimated arrival airport in meters",
-          "type": "`$INTEGER`"
+          "title": "Est Arrival Airport Vert Distance",
+          "type": "`$INTEGER`",
+          "short": "Vertical distance to estimated arrival airport in meters"
         },
         {
           "name": "estDepartureAirport",
-          "short": "Estimated departure airport ICAO code",
-          "type": "`$STRING`"
+          "title": "Est Departure Airport",
+          "type": "`$STRING`",
+          "short": "Estimated departure airport ICAO code"
         },
         {
           "name": "estDepartureAirportHorizDistance",
-          "short": "Horizontal distance to estimated departure airport in meters",
-          "type": "`$INTEGER`"
+          "title": "Est Departure Airport Horiz Distance",
+          "type": "`$INTEGER`",
+          "short": "Horizontal distance to estimated departure airport in meters"
         },
         {
           "name": "estDepartureAirportVertDistance",
-          "short": "Vertical distance to estimated departure airport in meters",
-          "type": "`$INTEGER`"
+          "title": "Est Departure Airport Vert Distance",
+          "type": "`$INTEGER`",
+          "short": "Vertical distance to estimated departure airport in meters"
         },
         {
           "name": "firstSeen",
-          "short": "Unix timestamp (seconds) of the first position report",
-          "type": "`$INTEGER`"
+          "title": "First Seen",
+          "type": "`$INTEGER`",
+          "short": "Unix timestamp (seconds) of the first position report"
         },
         {
           "name": "icao24",
-          "short": "Unique ICAO 24-bit address of the transponder in hex string representation",
-          "type": "`$STRING`"
+          "title": "Icao24",
+          "type": "`$STRING`",
+          "short": "Unique ICAO 24-bit address of the transponder in hex string representation"
         },
         {
           "name": "lastSeen",
-          "short": "Unix timestamp (seconds) of the last position report",
-          "type": "`$INTEGER`"
+          "title": "Last Seen",
+          "type": "`$INTEGER`",
+          "short": "Unix timestamp (seconds) of the last position report"
         }
       ],
       "name": "flight",
@@ -216,31 +224,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "begin",
-                    "orig": "begin",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "end",
-                    "orig": "end",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "icao24",
-                    "orig": "icao24",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/flights/aircraft",
@@ -252,6 +235,40 @@ class Config {
                   "lit": "aircraft"
                 }
               ],
+              "parts": [
+                "flights",
+                "aircraft"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "begin",
+                    "orig": "begin",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "end",
+                    "orig": "end",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "icao24",
+                    "orig": "icao24",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "$action": "aircraft",
                 "exist": [
@@ -259,42 +276,9 @@ class Config {
                   "end",
                   "icao24"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "flights",
-                "aircraft"
-              ]
+              }
             },
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "airport",
-                    "orig": "airport",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "begin",
-                    "orig": "begin",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "end",
-                    "orig": "end",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/flights/arrival",
@@ -306,6 +290,40 @@ class Config {
                   "lit": "arrival"
                 }
               ],
+              "parts": [
+                "flights",
+                "arrival"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "airport",
+                    "orig": "airport",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "begin",
+                    "orig": "begin",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "end",
+                    "orig": "end",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "$action": "arrival",
                 "exist": [
@@ -313,42 +331,9 @@ class Config {
                   "begin",
                   "end"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "flights",
-                "arrival"
-              ]
+              }
             },
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "airport",
-                    "orig": "airport",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "begin",
-                    "orig": "begin",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "end",
-                    "orig": "end",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/flights/departure",
@@ -360,6 +345,40 @@ class Config {
                   "lit": "departure"
                 }
               ],
+              "parts": [
+                "flights",
+                "departure"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "airport",
+                    "orig": "airport",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "begin",
+                    "orig": "begin",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "end",
+                    "orig": "end",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "$action": "departure",
                 "exist": [
@@ -367,35 +386,9 @@ class Config {
                   "begin",
                   "end"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "flights",
-                "departure"
-              ]
+              }
             },
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "begin",
-                    "orig": "begin",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "end",
-                    "orig": "end",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/flights/all",
@@ -407,21 +400,119 @@ class Config {
                   "lit": "all"
                 }
               ],
+              "parts": [
+                "flights",
+                "all"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "begin",
+                    "orig": "begin",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "end",
+                    "orig": "end",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "$action": "all",
                 "exist": [
                   "begin",
                   "end"
                 ]
-              },
+              }
+            }
+          ]
+        }
+      },
+      "relations": {
+        "ancestors": []
+      }
+    },
+    "own": {
+      "fields": [
+        {
+          "name": "states",
+          "title": "States",
+          "type": "`$ARRAY`",
+          "short": "Array of state vectors"
+        },
+        {
+          "name": "time",
+          "title": "Time",
+          "type": "`$INTEGER`",
+          "short": "The time which the state vectors in this response are associated with."
+        }
+      ],
+      "name": "own",
+      "op": {
+        "list": {
+          "input": "data",
+          "name": "list",
+          "points": [
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/states/own",
+              "segments": [
+                {
+                  "lit": "states"
+                },
+                {
+                  "lit": "own"
+                }
+              ],
+              "parts": [
+                "states",
+                "own"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.states`"
               },
-              "parts": [
-                "flights",
-                "all"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "icao24",
+                    "orig": "icao24",
+                    "type": "`$ARRAY`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "serial",
+                    "orig": "serial",
+                    "type": "`$ARRAY`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "time",
+                    "orig": "time",
+                    "type": "`$INTEGER`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "icao24",
+                  "serial",
+                  "time"
+                ]
+              }
             }
           ]
         }
@@ -434,18 +525,15 @@ class Config {
       "fields": [
         {
           "name": "states",
-          "short": "Array of state vectors",
+          "title": "States",
           "type": "`$ARRAY`",
-          "union": {
-            "branches": 5,
-            "count": 1,
-            "depth": 2
-          }
+          "short": "Array of state vectors"
         },
         {
           "name": "time",
-          "short": "The time which the state vectors in this response are associated with.",
-          "type": "`$INTEGER`"
+          "title": "Time",
+          "type": "`$INTEGER`",
+          "short": "The time which the state vectors in this response are associated with."
         }
       ],
       "name": "state_vector",
@@ -455,52 +543,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "extended",
-                    "orig": "extended",
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "icao24",
-                    "orig": "icao24",
-                    "type": "`$ARRAY`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "lamax",
-                    "orig": "lamax",
-                    "type": "`$NUMBER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "lamin",
-                    "orig": "lamin",
-                    "type": "`$NUMBER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "lomax",
-                    "orig": "lomax",
-                    "type": "`$NUMBER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "lomin",
-                    "orig": "lomin",
-                    "type": "`$NUMBER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "time",
-                    "orig": "time",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/states/all",
@@ -512,6 +554,61 @@ class Config {
                   "lit": "all"
                 }
               ],
+              "parts": [
+                "states",
+                "all"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.states`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "extended",
+                    "orig": "extended",
+                    "type": "`$INTEGER`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "icao24",
+                    "orig": "icao24",
+                    "type": "`$ARRAY`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "lamax",
+                    "orig": "lamax",
+                    "type": "`$NUMBER`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "lamin",
+                    "orig": "lamin",
+                    "type": "`$NUMBER`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "lomax",
+                    "orig": "lomax",
+                    "type": "`$NUMBER`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "lomin",
+                    "orig": "lomin",
+                    "type": "`$NUMBER`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "time",
+                    "orig": "time",
+                    "type": "`$INTEGER`",
+                    "kind": "query"
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "extended",
@@ -522,65 +619,7 @@ class Config {
                   "lomin",
                   "time"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.states`"
-              },
-              "parts": [
-                "states",
-                "all"
-              ]
-            },
-            {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "icao24",
-                    "orig": "icao24",
-                    "type": "`$ARRAY`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "serial",
-                    "orig": "serial",
-                    "type": "`$ARRAY`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "time",
-                    "orig": "time",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
-              "kind": "http",
-              "method": "GET",
-              "orig": "/states/own",
-              "segments": [
-                {
-                  "lit": "states"
-                },
-                {
-                  "lit": "own"
-                }
-              ],
-              "select": {
-                "exist": [
-                  "icao24",
-                  "serial",
-                  "time"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.states`"
-              },
-              "parts": [
-                "states",
-                "own"
-              ]
+              }
             }
           ]
         }
@@ -593,33 +632,33 @@ class Config {
       "fields": [
         {
           "name": "callsign",
-          "short": "Callsign of the vehicle",
-          "type": "`$STRING`"
+          "title": "Callsign",
+          "type": "`$STRING`",
+          "short": "Callsign of the vehicle"
         },
         {
           "name": "endTime",
-          "short": "Unix timestamp (seconds) of the end of the track",
-          "type": "`$INTEGER`"
+          "title": "End Time",
+          "type": "`$INTEGER`",
+          "short": "Unix timestamp (seconds) of the end of the track"
         },
         {
           "name": "icao24",
-          "short": "Unique ICAO 24-bit address of the transponder",
-          "type": "`$STRING`"
+          "title": "Icao24",
+          "type": "`$STRING`",
+          "short": "Unique ICAO 24-bit address of the transponder"
         },
         {
           "name": "path",
-          "short": "Array of waypoints representing the aircraft trajectory",
+          "title": "Path",
           "type": "`$ARRAY`",
-          "union": {
-            "branches": 3,
-            "count": 1,
-            "depth": 2
-          }
+          "short": "Array of waypoints representing the aircraft trajectory"
         },
         {
           "name": "startTime",
-          "short": "Unix timestamp (seconds) of the start of the track",
-          "type": "`$INTEGER`"
+          "title": "Start Time",
+          "type": "`$INTEGER`",
+          "short": "Unix timestamp (seconds) of the start of the track"
         }
       ],
       "name": "track",
@@ -629,24 +668,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "icao24",
-                    "orig": "icao24",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "time",
-                    "orig": "time",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/tracks",
@@ -655,19 +676,38 @@ class Config {
                   "lit": "tracks"
                 }
               ],
+              "parts": [
+                "tracks"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.path`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "icao24",
+                    "orig": "icao24",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "reqd": true
+                  },
+                  {
+                    "name": "time",
+                    "orig": "time",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "icao24",
                   "time"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.path`"
-              },
-              "parts": [
-                "tracks"
-              ]
+              }
             }
           ]
         }

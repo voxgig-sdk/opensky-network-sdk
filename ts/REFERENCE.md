@@ -62,6 +62,18 @@ Create a new `Flight` entity instance.
 
 **Returns:** `FlightEntity` instance.
 
+#### `Own(data?: object)`
+
+Create a new `Own` entity instance.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `data` | `object` | Initial entity data. |
+
+**Returns:** `OwnEntity` instance.
+
 #### `StateVector(data?: object)`
 
 Create a new `StateVector` entity instance.
@@ -203,6 +215,57 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `FlightEntity` instance with the same client and
+options.
+
+#### `client()`
+
+Return the parent `OpenskyNetworkSDK` instance.
+
+#### `entopts()`
+
+Return a copy of the entity options.
+
+
+---
+
+## OwnEntity
+
+```ts
+const own = client.Own()
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `states` | `any[]` | No | Array of state vectors |
+| `time` | `number` | No | The time which the state vectors in this response are associated with. |
+
+### Operations
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.Own().list()
+```
+
+### Common Methods
+
+#### `data(data?: object)`
+
+Get or set the entity data. When called with data, sets the entity's
+internal data and returns the current data. When called without
+arguments, returns a copy of the current data.
+
+#### `match(match?: object)`
+
+Get or set the entity match criteria. Works the same as `data()`.
+
+#### `make()`
+
+Create a new `OwnEntity` instance with the same client and
 options.
 
 #### `client()`

@@ -226,6 +226,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
 | `Flight` | `(data map[string]any) OpenskyNetworkEntity` | Create a Flight entity instance. |
+| `Own` | `(data map[string]any) OpenskyNetworkEntity` | Create an Own entity instance. |
 | `StateVector` | `(data map[string]any) OpenskyNetworkEntity` | Create a StateVector entity instance. |
 | `Track` | `(data map[string]any) OpenskyNetworkEntity` | Create a Track entity instance. |
 
@@ -283,6 +284,17 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 Operations: List.
 
 API path: `/flights/aircraft`
+
+#### Own
+
+| Field | Description |
+| --- | --- |
+| `"states"` | Array of state vectors |
+| `"time"` | The time which the state vectors in this response are associated with. |
+
+Operations: List.
+
+API path: `/states/own`
 
 #### StateVector
 
@@ -349,6 +361,34 @@ if err != nil {
     panic(err)
 }
 fmt.Println(flights) // the array of records
+```
+
+
+### Own
+
+Create an instance: `own := client.Own(nil)`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `List(match, ctrl)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `states` | `[]any` | Array of state vectors |
+| `time` | `int` | The time which the state vectors in this response are associated with. |
+
+#### Example: List
+
+```go
+owns, err := client.Own(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(owns) // the array of records
 ```
 
 
@@ -494,7 +534,7 @@ activated earlier.
 
 ## Open types
 
-2 fields are carried as open values rather than typed structures.
+3 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -504,6 +544,7 @@ guarantee.
 
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
+| `own` | `states` | 5 | 2 levels |
 | `state_vector` | `states` | 5 | 2 levels |
 | `track` | `path` | 3 | 2 levels |
 

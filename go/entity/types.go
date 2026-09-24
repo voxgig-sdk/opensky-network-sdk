@@ -1,7 +1,7 @@
 // Typed models for the OpenskyNetwork SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,18 +14,6 @@ import (
 
 // Flight is the typed data model for the flight entity.
 type Flight struct {
-	ArrivalAirportCandidatesCount *int `json:"arrivalAirportCandidatesCount,omitempty"`
-	Callsign *string `json:"callsign,omitempty"`
-	DepartureAirportCandidatesCount *int `json:"departureAirportCandidatesCount,omitempty"`
-	EstArrivalAirport *string `json:"estArrivalAirport,omitempty"`
-	EstArrivalAirportHorizDistance *int `json:"estArrivalAirportHorizDistance,omitempty"`
-	EstArrivalAirportVertDistance *int `json:"estArrivalAirportVertDistance,omitempty"`
-	EstDepartureAirport *string `json:"estDepartureAirport,omitempty"`
-	EstDepartureAirportHorizDistance *int `json:"estDepartureAirportHorizDistance,omitempty"`
-	EstDepartureAirportVertDistance *int `json:"estDepartureAirportVertDistance,omitempty"`
-	FirstSeen *int `json:"firstSeen,omitempty"`
-	Icao24 *string `json:"icao24,omitempty"`
-	LastSeen *int `json:"lastSeen,omitempty"`
 }
 
 // FlightListMatch is the typed request payload for Flight.ListTyped.
@@ -36,10 +24,19 @@ type FlightListMatch struct {
 	Airport *string `json:"airport,omitempty"`
 }
 
+// Own is the typed data model for the own entity.
+type Own struct {
+}
+
+// OwnListMatch is the typed request payload for Own.ListTyped.
+type OwnListMatch struct {
+	Icao24 *[]any `json:"icao24,omitempty"`
+	Serial *[]any `json:"serial,omitempty"`
+	Time *int `json:"time,omitempty"`
+}
+
 // StateVector is the typed data model for the state_vector entity.
 type StateVector struct {
-	States *[]any `json:"states,omitempty"`
-	Time *int `json:"time,omitempty"`
 }
 
 // StateVectorListMatch is the typed request payload for StateVector.ListTyped.
@@ -55,11 +52,6 @@ type StateVectorListMatch struct {
 
 // Track is the typed data model for the track entity.
 type Track struct {
-	Callsign *string `json:"callsign,omitempty"`
-	EndTime *int `json:"endTime,omitempty"`
-	Icao24 *string `json:"icao24,omitempty"`
-	Path *[]any `json:"path,omitempty"`
-	StartTime *int `json:"startTime,omitempty"`
 }
 
 // TrackListMatch is the typed request payload for Track.ListTyped.

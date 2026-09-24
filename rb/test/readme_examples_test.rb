@@ -44,6 +44,7 @@ class ReadmeExamplesTest < Minitest::Test
   # Entity accessor (client.<Name>) => fixture storage key (lowercase name).
   ENTITIES = {
     "Flight" => "flight",
+    "Own" => "own",
     "StateVector" => "state_vector",
     "Track" => "track",
   }

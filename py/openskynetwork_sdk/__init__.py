@@ -313,6 +313,12 @@ class OpenskyNetworkSDK:
         return FlightEntity(self, data)
 
 
+    def Own(self, data=None) -> "OwnEntity":
+        """Entity factory: client.Own().list() / client.Own().load({"id": ...})."""
+        from openskynetwork_sdk.entity.own_entity import OwnEntity
+        return OwnEntity(self, data)
+
+
     def StateVector(self, data=None) -> "StateVectorEntity":
         """Entity factory: client.StateVector().list() / client.StateVector().load({"id": ...})."""
         from openskynetwork_sdk.entity.state_vector_entity import StateVectorEntity
@@ -353,5 +359,6 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from openskynetwork_sdk.entity.flight_entity import FlightEntity
+    from openskynetwork_sdk.entity.own_entity import OwnEntity
     from openskynetwork_sdk.entity.state_vector_entity import StateVectorEntity
     from openskynetwork_sdk.entity.track_entity import TrackEntity

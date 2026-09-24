@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "own": {
+      "OWN00": {
+        "states": [],
+        "time": 21
+      },
+      "OWN01": {
+        "states": [],
+        "time": 41
+      },
+      "OWN02": {
+        "states": [],
+        "time": 61
+      }
+    }
+  },
+  "new": {
+    "own": {
+      "own_ref01": {
+        "states": [],
+        "time": 81
+      }
+    }
+  },
+  "requests": {
+    "GET /states/own": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

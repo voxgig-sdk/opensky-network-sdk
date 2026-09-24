@@ -1,0 +1,22 @@
+# BasicOwnFlow
+
+main: kit: flow: BasicOwnFlow:
+{
+  entity: "own",
+  kind: "basic",
+  name: "BasicOwnFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "own_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOwnFlow"
+}

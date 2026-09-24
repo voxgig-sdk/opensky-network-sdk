@@ -1,0 +1,51 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 7
+  metrics: count: method: 7
+
+  entity: flight: {
+    path: "/flights/aircraft": {
+      action: "aircraft": {}
+      op: list: method: *GET
+    }
+    path: "/flights/all": {
+      action: "all": {}
+      op: list: method: *GET
+    }
+    path: "/flights/arrival": {
+      action: "arrival": {}
+      op: list: method: *GET
+    }
+    path: "/flights/departure": {
+      action: "departure": {}
+      op: list: method: *GET
+    }
+  }
+
+  entity: own: {
+    path: "/states/own": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.states`")|top
+    }
+  }
+
+  entity: state_vector: {
+    path: "/states/all": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.states`")|top
+    }
+  }
+
+  entity: track: {
+    path: "/tracks": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.path`")|top
+    }
+  }
+
+}

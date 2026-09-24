@@ -46,6 +46,10 @@ $client = OpenskyNetworkSDK::test();
 
 Create a new `FlightEntity` instance. Pass `null` for no initial data.
 
+#### `Own($data = null)`
+
+Create a new `OwnEntity` instance. Pass `null` for no initial data.
+
 #### `StateVector($data = null)`
 
 Create a new `StateVectorEntity` instance. Pass `null` for no initial data.
@@ -145,6 +149,59 @@ Set the entity match criteria.
 #### `make(): FlightEntity`
 
 Create a new `FlightEntity` instance with the same client and
+options.
+
+#### `get_name(): string`
+
+Return the entity name.
+
+
+---
+
+## OwnEntity
+
+```php
+$own = $client->Own();
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `states` | `array` | No | Array of state vectors |
+| `time` | `int` | No | The time which the state vectors in this response are associated with. |
+
+### Operations
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->Own()->list();
+```
+
+### Common Methods
+
+#### `data_get(): array`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set($data): void`
+
+Set the entity data.
+
+#### `match_get(): array`
+
+Get the entity match criteria.
+
+#### `match_set($match): void`
+
+Set the entity match criteria.
+
+#### `make(): OwnEntity`
+
+Create a new `OwnEntity` instance with the same client and
 options.
 
 #### `get_name(): string`

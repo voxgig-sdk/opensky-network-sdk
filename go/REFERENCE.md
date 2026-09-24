@@ -52,6 +52,10 @@ client := sdk.TestSDK(testopts, sdkopts)
 
 Create a new `Flight` entity instance. Pass `nil` for no initial data.
 
+#### `Own(data map[string]any) OpenskyNetworkEntity`
+
+Create a new `Own` entity instance. Pass `nil` for no initial data.
+
 #### `StateVector(data map[string]any) OpenskyNetworkEntity`
 
 Create a new `StateVector` entity instance. Pass `nil` for no initial data.
@@ -149,6 +153,58 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `FlightEntity` instance with the same client and
+options.
+
+#### `GetName() string`
+
+Return the entity name.
+
+
+---
+
+## OwnEntity
+
+```go
+own := client.Own(nil)
+fmt.Println(own.GetName()) // "own"
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `states` | `[]any` | No | Array of state vectors |
+| `time` | `int` | No | The time which the state vectors in this response are associated with. |
+
+### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.Own(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
+
+### Common Methods
+
+#### `Data(args ...any) any`
+
+Get or set the entity data. When called with data, sets the entity's
+internal data and returns the current data. When called without
+arguments, returns a copy of the current data.
+
+#### `Match(args ...any) any`
+
+Get or set the entity match criteria. Works the same as `Data()`.
+
+#### `Make() Entity`
+
+Create a new `OwnEntity` instance with the same client and
 options.
 
 #### `GetName() string`

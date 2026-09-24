@@ -1,0 +1,103 @@
+# Entity: track
+
+main: kit: entity: track: {
+
+  alias: field: {}
+
+  fields: {
+    callsign: {
+      h: "Callsign"
+      n: "callsign"
+      r: false
+      sh: "Callsign of the vehicle"
+      t: "`$STRING`"
+    }
+    endTime: {
+      h: "End Time"
+      n: "endTime"
+      r: false
+      sh: "Unix timestamp (seconds) of the end of the track"
+      t: "`$INTEGER`"
+    }
+    icao24: {
+      h: "Icao24"
+      n: "icao24"
+      r: false
+      sh: "Unique ICAO 24-bit address of the transponder"
+      t: "`$STRING`"
+    }
+    path: {
+      h: "Path"
+      n: "path"
+      r: false
+      sh: "Array of waypoints representing the aircraft trajectory"
+      t: "`$ARRAY`"
+      union: {
+        branches: 3
+        count: 1
+        depth: 2
+      }
+    }
+    startTime: {
+      h: "Start Time"
+      n: "startTime"
+      r: false
+      sh: "Unix timestamp (seconds) of the start of the track"
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "track"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /tracks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "icao24"
+                or: "icao24"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "time"
+                or: "time"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/tracks"
+          q: {
+            exist: [
+              "icao24"
+              "time"
+            ]
+          }
+          s: [
+            {
+              lit: "tracks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.path`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

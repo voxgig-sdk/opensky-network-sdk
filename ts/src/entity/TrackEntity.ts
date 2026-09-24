@@ -19,7 +19,6 @@ import type {
   TrackListMatch,
 } from '../OpenskyNetworkTypes'
 
-// TODO: needs Entity superclass
 class TrackEntity extends OpenskyNetworkEntityBase<Track> {
 
   constructor(client: OpenskyNetworkSDK, entopts: any) {

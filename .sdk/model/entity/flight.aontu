@@ -1,0 +1,313 @@
+# Entity: flight
+
+main: kit: entity: flight: {
+
+  alias: field: {}
+
+  fields: {
+    arrivalAirportCandidatesCount: {
+      h: "Arrival Airport Candidates Count"
+      n: "arrivalAirportCandidatesCount"
+      r: false
+      sh: "Number of candidates for arrival airport"
+      t: "`$INTEGER`"
+    }
+    callsign: {
+      h: "Callsign"
+      n: "callsign"
+      r: false
+      sh: "Callsign of the vehicle (8 chars)"
+      t: "`$STRING`"
+    }
+    departureAirportCandidatesCount: {
+      h: "Departure Airport Candidates Count"
+      n: "departureAirportCandidatesCount"
+      r: false
+      sh: "Number of candidates for departure airport"
+      t: "`$INTEGER`"
+    }
+    estArrivalAirport: {
+      h: "Est Arrival Airport"
+      n: "estArrivalAirport"
+      r: false
+      sh: "Estimated arrival airport ICAO code"
+      t: "`$STRING`"
+    }
+    estArrivalAirportHorizDistance: {
+      h: "Est Arrival Airport Horiz Distance"
+      n: "estArrivalAirportHorizDistance"
+      r: false
+      sh: "Horizontal distance to estimated arrival airport in meters"
+      t: "`$INTEGER`"
+    }
+    estArrivalAirportVertDistance: {
+      h: "Est Arrival Airport Vert Distance"
+      n: "estArrivalAirportVertDistance"
+      r: false
+      sh: "Vertical distance to estimated arrival airport in meters"
+      t: "`$INTEGER`"
+    }
+    estDepartureAirport: {
+      h: "Est Departure Airport"
+      n: "estDepartureAirport"
+      r: false
+      sh: "Estimated departure airport ICAO code"
+      t: "`$STRING`"
+    }
+    estDepartureAirportHorizDistance: {
+      h: "Est Departure Airport Horiz Distance"
+      n: "estDepartureAirportHorizDistance"
+      r: false
+      sh: "Horizontal distance to estimated departure airport in meters"
+      t: "`$INTEGER`"
+    }
+    estDepartureAirportVertDistance: {
+      h: "Est Departure Airport Vert Distance"
+      n: "estDepartureAirportVertDistance"
+      r: false
+      sh: "Vertical distance to estimated departure airport in meters"
+      t: "`$INTEGER`"
+    }
+    firstSeen: {
+      h: "First Seen"
+      n: "firstSeen"
+      r: false
+      sh: "Unix timestamp (seconds) of the first position report"
+      t: "`$INTEGER`"
+    }
+    icao24: {
+      h: "Icao24"
+      n: "icao24"
+      r: false
+      sh: "Unique ICAO 24-bit address of the transponder in hex string representation"
+      t: "`$STRING`"
+    }
+    lastSeen: {
+      h: "Last Seen"
+      n: "lastSeen"
+      r: false
+      sh: "Unix timestamp (seconds) of the last position report"
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "flight"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /flights/aircraft"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "begin"
+                or: "begin"
+                r: true
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "end"
+                or: "end"
+                r: true
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "icao24"
+                or: "icao24"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/flights/aircraft"
+          q: {
+            "$action": "aircraft"
+            exist: [
+              "begin"
+              "end"
+              "icao24"
+            ]
+          }
+          s: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "aircraft"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /flights/arrival"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "airport"
+                or: "airport"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "begin"
+                or: "begin"
+                r: true
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "end"
+                or: "end"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/flights/arrival"
+          q: {
+            "$action": "arrival"
+            exist: [
+              "airport"
+              "begin"
+              "end"
+            ]
+          }
+          s: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "arrival"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /flights/departure"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "airport"
+                or: "airport"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "begin"
+                or: "begin"
+                r: true
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "end"
+                or: "end"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/flights/departure"
+          q: {
+            "$action": "departure"
+            exist: [
+              "airport"
+              "begin"
+              "end"
+            ]
+          }
+          s: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "departure"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /flights/all"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "begin"
+                or: "begin"
+                r: true
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "end"
+                or: "end"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/flights/all"
+          q: {
+            "$action": "all"
+            exist: [
+              "begin"
+              "end"
+            ]
+          }
+          s: [
+            {
+              lit: "flights"
+            }
+            {
+              lit: "all"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

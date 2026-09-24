@@ -77,6 +77,7 @@ _CLIENT_VARS = ("client", "sdk")
 # The API's capitalised semantic entities -> lowercase fixture key.
 _ENTITIES = {
     "Flight": "flight",
+    "Own": "own",
     "StateVector": "state_vector",
     "Track": "track",
 }

@@ -1,4 +1,5 @@
 import { FlightEntity } from './entity/FlightEntity';
+import { OwnEntity } from './entity/OwnEntity';
 import { StateVectorEntity } from './entity/StateVectorEntity';
 import { TrackEntity } from './entity/TrackEntity';
 export type * from './OpenskyNetworkTypes';
@@ -47,6 +48,7 @@ declare class OpenskyNetworkSDK {
     }>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Flight(entopts?: Record<string, any>): FlightEntity;
+    Own(entopts?: Record<string, any>): OwnEntity;
     StateVector(entopts?: Record<string, any>): StateVectorEntity;
     Track(entopts?: Record<string, any>): TrackEntity;
     static test(testoptsarg?: any, sdkoptsarg?: any): OpenskyNetworkSDK;

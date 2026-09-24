@@ -19,7 +19,6 @@ import type {
   StateVectorListMatch,
 } from '../OpenskyNetworkTypes'
 
-// TODO: needs Entity superclass
 class StateVectorEntity extends OpenskyNetworkEntityBase<StateVector> {
 
   constructor(client: OpenskyNetworkSDK, entopts: any) {

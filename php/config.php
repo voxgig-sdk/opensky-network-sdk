@@ -109,6 +109,7 @@ class OpenskyNetworkConfig
         ],
                 "entity" => [
                     "flight" => [],
+                    "own" => [],
                     "state_vector" => [],
                     "track" => [],
                 ],
@@ -118,63 +119,75 @@ class OpenskyNetworkConfig
           'fields' => [
             [
               'name' => 'arrivalAirportCandidatesCount',
-              'short' => 'Number of candidates for arrival airport',
+              'title' => 'Arrival Airport Candidates Count',
               'type' => '`$INTEGER`',
+              'short' => 'Number of candidates for arrival airport',
             ],
             [
               'name' => 'callsign',
-              'short' => 'Callsign of the vehicle (8 chars)',
+              'title' => 'Callsign',
               'type' => '`$STRING`',
+              'short' => 'Callsign of the vehicle (8 chars)',
             ],
             [
               'name' => 'departureAirportCandidatesCount',
-              'short' => 'Number of candidates for departure airport',
+              'title' => 'Departure Airport Candidates Count',
               'type' => '`$INTEGER`',
+              'short' => 'Number of candidates for departure airport',
             ],
             [
               'name' => 'estArrivalAirport',
-              'short' => 'Estimated arrival airport ICAO code',
+              'title' => 'Est Arrival Airport',
               'type' => '`$STRING`',
+              'short' => 'Estimated arrival airport ICAO code',
             ],
             [
               'name' => 'estArrivalAirportHorizDistance',
-              'short' => 'Horizontal distance to estimated arrival airport in meters',
+              'title' => 'Est Arrival Airport Horiz Distance',
               'type' => '`$INTEGER`',
+              'short' => 'Horizontal distance to estimated arrival airport in meters',
             ],
             [
               'name' => 'estArrivalAirportVertDistance',
-              'short' => 'Vertical distance to estimated arrival airport in meters',
+              'title' => 'Est Arrival Airport Vert Distance',
               'type' => '`$INTEGER`',
+              'short' => 'Vertical distance to estimated arrival airport in meters',
             ],
             [
               'name' => 'estDepartureAirport',
-              'short' => 'Estimated departure airport ICAO code',
+              'title' => 'Est Departure Airport',
               'type' => '`$STRING`',
+              'short' => 'Estimated departure airport ICAO code',
             ],
             [
               'name' => 'estDepartureAirportHorizDistance',
-              'short' => 'Horizontal distance to estimated departure airport in meters',
+              'title' => 'Est Departure Airport Horiz Distance',
               'type' => '`$INTEGER`',
+              'short' => 'Horizontal distance to estimated departure airport in meters',
             ],
             [
               'name' => 'estDepartureAirportVertDistance',
-              'short' => 'Vertical distance to estimated departure airport in meters',
+              'title' => 'Est Departure Airport Vert Distance',
               'type' => '`$INTEGER`',
+              'short' => 'Vertical distance to estimated departure airport in meters',
             ],
             [
               'name' => 'firstSeen',
-              'short' => 'Unix timestamp (seconds) of the first position report',
+              'title' => 'First Seen',
               'type' => '`$INTEGER`',
+              'short' => 'Unix timestamp (seconds) of the first position report',
             ],
             [
               'name' => 'icao24',
-              'short' => 'Unique ICAO 24-bit address of the transponder in hex string representation',
+              'title' => 'Icao24',
               'type' => '`$STRING`',
+              'short' => 'Unique ICAO 24-bit address of the transponder in hex string representation',
             ],
             [
               'name' => 'lastSeen',
-              'short' => 'Unix timestamp (seconds) of the last position report',
+              'title' => 'Last Seen',
               'type' => '`$INTEGER`',
+              'short' => 'Unix timestamp (seconds) of the last position report',
             ],
           ],
           'name' => 'flight',
@@ -184,31 +197,6 @@ class OpenskyNetworkConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'begin',
-                        'orig' => 'begin',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'end',
-                        'orig' => 'end',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'icao24',
-                        'orig' => 'icao24',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/aircraft',
@@ -220,6 +208,40 @@ class OpenskyNetworkConfig
                       'lit' => 'aircraft',
                     ],
                   ],
+                  'parts' => [
+                    'flights',
+                    'aircraft',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'begin',
+                        'orig' => 'begin',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'end',
+                        'orig' => 'end',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'icao24',
+                        'orig' => 'icao24',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
                   'select' => [
                     '$action' => 'aircraft',
                     'exist' => [
@@ -228,41 +250,8 @@ class OpenskyNetworkConfig
                       'icao24',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'parts' => [
-                    'flights',
-                    'aircraft',
-                  ],
                 ],
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'airport',
-                        'orig' => 'airport',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'begin',
-                        'orig' => 'begin',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'end',
-                        'orig' => 'end',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/arrival',
@@ -274,6 +263,40 @@ class OpenskyNetworkConfig
                       'lit' => 'arrival',
                     ],
                   ],
+                  'parts' => [
+                    'flights',
+                    'arrival',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'airport',
+                        'orig' => 'airport',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'begin',
+                        'orig' => 'begin',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'end',
+                        'orig' => 'end',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
                   'select' => [
                     '$action' => 'arrival',
                     'exist' => [
@@ -282,41 +305,8 @@ class OpenskyNetworkConfig
                       'end',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'parts' => [
-                    'flights',
-                    'arrival',
-                  ],
                 ],
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'airport',
-                        'orig' => 'airport',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'begin',
-                        'orig' => 'begin',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'end',
-                        'orig' => 'end',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/departure',
@@ -328,6 +318,40 @@ class OpenskyNetworkConfig
                       'lit' => 'departure',
                     ],
                   ],
+                  'parts' => [
+                    'flights',
+                    'departure',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'airport',
+                        'orig' => 'airport',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'begin',
+                        'orig' => 'begin',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'end',
+                        'orig' => 'end',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
                   'select' => [
                     '$action' => 'departure',
                     'exist' => [
@@ -336,34 +360,8 @@ class OpenskyNetworkConfig
                       'end',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'parts' => [
-                    'flights',
-                    'departure',
-                  ],
                 ],
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'begin',
-                        'orig' => 'begin',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'end',
-                        'orig' => 'end',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/flights/all',
@@ -375,6 +373,33 @@ class OpenskyNetworkConfig
                       'lit' => 'all',
                     ],
                   ],
+                  'parts' => [
+                    'flights',
+                    'all',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'begin',
+                        'orig' => 'begin',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'end',
+                        'orig' => 'end',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
                   'select' => [
                     '$action' => 'all',
                     'exist' => [
@@ -382,13 +407,84 @@ class OpenskyNetworkConfig
                       'end',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
+                ],
+              ],
+            ],
+          ],
+          'relations' => [
+            'ancestors' => [],
+          ],
+        ],
+        'own' => [
+          'fields' => [
+            [
+              'name' => 'states',
+              'title' => 'States',
+              'type' => '`$ARRAY`',
+              'short' => 'Array of state vectors',
+            ],
+            [
+              'name' => 'time',
+              'title' => 'Time',
+              'type' => '`$INTEGER`',
+              'short' => 'The time which the state vectors in this response are associated with.',
+            ],
+          ],
+          'name' => 'own',
+          'op' => [
+            'list' => [
+              'input' => 'data',
+              'name' => 'list',
+              'points' => [
+                [
+                  'kind' => 'http',
+                  'method' => 'GET',
+                  'orig' => '/states/own',
+                  'segments' => [
+                    [
+                      'lit' => 'states',
+                    ],
+                    [
+                      'lit' => 'own',
+                    ],
                   ],
                   'parts' => [
-                    'flights',
-                    'all',
+                    'states',
+                    'own',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.states`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'icao24',
+                        'orig' => 'icao24',
+                        'type' => '`$ARRAY`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'serial',
+                        'orig' => 'serial',
+                        'type' => '`$ARRAY`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'time',
+                        'orig' => 'time',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'icao24',
+                      'serial',
+                      'time',
+                    ],
                   ],
                 ],
               ],
@@ -402,18 +498,15 @@ class OpenskyNetworkConfig
           'fields' => [
             [
               'name' => 'states',
-              'short' => 'Array of state vectors',
+              'title' => 'States',
               'type' => '`$ARRAY`',
-              'union' => [
-                'branches' => 5,
-                'count' => 1,
-                'depth' => 2,
-              ],
+              'short' => 'Array of state vectors',
             ],
             [
               'name' => 'time',
-              'short' => 'The time which the state vectors in this response are associated with.',
+              'title' => 'Time',
               'type' => '`$INTEGER`',
+              'short' => 'The time which the state vectors in this response are associated with.',
             ],
           ],
           'name' => 'state_vector',
@@ -423,52 +516,6 @@ class OpenskyNetworkConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'extended',
-                        'orig' => 'extended',
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'icao24',
-                        'orig' => 'icao24',
-                        'type' => '`$ARRAY`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'lamax',
-                        'orig' => 'lamax',
-                        'type' => '`$NUMBER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'lamin',
-                        'orig' => 'lamin',
-                        'type' => '`$NUMBER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'lomax',
-                        'orig' => 'lomax',
-                        'type' => '`$NUMBER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'lomin',
-                        'orig' => 'lomin',
-                        'type' => '`$NUMBER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'time',
-                        'orig' => 'time',
-                        'type' => '`$INTEGER`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/states/all',
@@ -478,6 +525,61 @@ class OpenskyNetworkConfig
                     ],
                     [
                       'lit' => 'all',
+                    ],
+                  ],
+                  'parts' => [
+                    'states',
+                    'all',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.states`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'extended',
+                        'orig' => 'extended',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'icao24',
+                        'orig' => 'icao24',
+                        'type' => '`$ARRAY`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'lamax',
+                        'orig' => 'lamax',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'lamin',
+                        'orig' => 'lamin',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'lomax',
+                        'orig' => 'lomax',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'lomin',
+                        'orig' => 'lomin',
+                        'type' => '`$NUMBER`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'time',
+                        'orig' => 'time',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                      ],
                     ],
                   ],
                   'select' => [
@@ -491,64 +593,6 @@ class OpenskyNetworkConfig
                       'time',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.states`',
-                  ],
-                  'parts' => [
-                    'states',
-                    'all',
-                  ],
-                ],
-                [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'icao24',
-                        'orig' => 'icao24',
-                        'type' => '`$ARRAY`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'serial',
-                        'orig' => 'serial',
-                        'type' => '`$ARRAY`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'time',
-                        'orig' => 'time',
-                        'type' => '`$INTEGER`',
-                      ],
-                    ],
-                  ],
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/states/own',
-                  'segments' => [
-                    [
-                      'lit' => 'states',
-                    ],
-                    [
-                      'lit' => 'own',
-                    ],
-                  ],
-                  'select' => [
-                    'exist' => [
-                      'icao24',
-                      'serial',
-                      'time',
-                    ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.states`',
-                  ],
-                  'parts' => [
-                    'states',
-                    'own',
-                  ],
                 ],
               ],
             ],
@@ -561,33 +605,33 @@ class OpenskyNetworkConfig
           'fields' => [
             [
               'name' => 'callsign',
-              'short' => 'Callsign of the vehicle',
+              'title' => 'Callsign',
               'type' => '`$STRING`',
+              'short' => 'Callsign of the vehicle',
             ],
             [
               'name' => 'endTime',
-              'short' => 'Unix timestamp (seconds) of the end of the track',
+              'title' => 'End Time',
               'type' => '`$INTEGER`',
+              'short' => 'Unix timestamp (seconds) of the end of the track',
             ],
             [
               'name' => 'icao24',
-              'short' => 'Unique ICAO 24-bit address of the transponder',
+              'title' => 'Icao24',
               'type' => '`$STRING`',
+              'short' => 'Unique ICAO 24-bit address of the transponder',
             ],
             [
               'name' => 'path',
-              'short' => 'Array of waypoints representing the aircraft trajectory',
+              'title' => 'Path',
               'type' => '`$ARRAY`',
-              'union' => [
-                'branches' => 3,
-                'count' => 1,
-                'depth' => 2,
-              ],
+              'short' => 'Array of waypoints representing the aircraft trajectory',
             ],
             [
               'name' => 'startTime',
-              'short' => 'Unix timestamp (seconds) of the start of the track',
+              'title' => 'Start Time',
               'type' => '`$INTEGER`',
+              'short' => 'Unix timestamp (seconds) of the start of the track',
             ],
           ],
           'name' => 'track',
@@ -597,24 +641,6 @@ class OpenskyNetworkConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'icao24',
-                        'orig' => 'icao24',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'time',
-                        'orig' => 'time',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/tracks',
@@ -623,18 +649,37 @@ class OpenskyNetworkConfig
                       'lit' => 'tracks',
                     ],
                   ],
+                  'parts' => [
+                    'tracks',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.path`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'icao24',
+                        'orig' => 'icao24',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'time',
+                        'orig' => 'time',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
                   'select' => [
                     'exist' => [
                       'icao24',
                       'time',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.path`',
-                  ],
-                  'parts' => [
-                    'tracks',
                   ],
                 ],
               ],

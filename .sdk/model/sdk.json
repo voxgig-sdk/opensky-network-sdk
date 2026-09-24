@@ -24,98 +24,176 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "flight": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "arrivalAirportCandidatesCount",
-              "req": false,
-              "short": "Number of candidates for arrival airport",
-              "type": "`$INTEGER`"
+          "fields": {
+            "arrivalAirportCandidatesCount": {
+              "a": true,
+              "h": "Arrival Airport Candidates Count",
+              "n": "arrivalAirportCandidatesCount",
+              "r": false,
+              "sh": "Number of candidates for arrival airport",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "callsign",
-              "req": false,
-              "short": "Callsign of the vehicle (8 chars)",
-              "type": "`$STRING`"
+            "callsign": {
+              "a": true,
+              "h": "Callsign",
+              "n": "callsign",
+              "r": false,
+              "sh": "Callsign of the vehicle (8 chars)",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "departureAirportCandidatesCount",
-              "req": false,
-              "short": "Number of candidates for departure airport",
-              "type": "`$INTEGER`"
+            "departureAirportCandidatesCount": {
+              "a": true,
+              "h": "Departure Airport Candidates Count",
+              "n": "departureAirportCandidatesCount",
+              "r": false,
+              "sh": "Number of candidates for departure airport",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "estArrivalAirport",
-              "req": false,
-              "short": "Estimated arrival airport ICAO code",
-              "type": "`$STRING`"
+            "estArrivalAirport": {
+              "a": true,
+              "h": "Est Arrival Airport",
+              "n": "estArrivalAirport",
+              "r": false,
+              "sh": "Estimated arrival airport ICAO code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "estArrivalAirportHorizDistance",
-              "req": false,
-              "short": "Horizontal distance to estimated arrival airport in meters",
-              "type": "`$INTEGER`"
+            "estArrivalAirportHorizDistance": {
+              "a": true,
+              "h": "Est Arrival Airport Horiz Distance",
+              "n": "estArrivalAirportHorizDistance",
+              "r": false,
+              "sh": "Horizontal distance to estimated arrival airport in meters",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "estArrivalAirportVertDistance",
-              "req": false,
-              "short": "Vertical distance to estimated arrival airport in meters",
-              "type": "`$INTEGER`"
+            "estArrivalAirportVertDistance": {
+              "a": true,
+              "h": "Est Arrival Airport Vert Distance",
+              "n": "estArrivalAirportVertDistance",
+              "r": false,
+              "sh": "Vertical distance to estimated arrival airport in meters",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "estDepartureAirport",
-              "req": false,
-              "short": "Estimated departure airport ICAO code",
-              "type": "`$STRING`"
+            "estDepartureAirport": {
+              "a": true,
+              "h": "Est Departure Airport",
+              "n": "estDepartureAirport",
+              "r": false,
+              "sh": "Estimated departure airport ICAO code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "estDepartureAirportHorizDistance",
-              "req": false,
-              "short": "Horizontal distance to estimated departure airport in meters",
-              "type": "`$INTEGER`"
+            "estDepartureAirportHorizDistance": {
+              "a": true,
+              "h": "Est Departure Airport Horiz Distance",
+              "n": "estDepartureAirportHorizDistance",
+              "r": false,
+              "sh": "Horizontal distance to estimated departure airport in meters",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "estDepartureAirportVertDistance",
-              "req": false,
-              "short": "Vertical distance to estimated departure airport in meters",
-              "type": "`$INTEGER`"
+            "estDepartureAirportVertDistance": {
+              "a": true,
+              "h": "Est Departure Airport Vert Distance",
+              "n": "estDepartureAirportVertDistance",
+              "r": false,
+              "sh": "Vertical distance to estimated departure airport in meters",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "firstSeen",
-              "req": false,
-              "short": "Unix timestamp (seconds) of the first position report",
-              "type": "`$INTEGER`"
+            "firstSeen": {
+              "a": true,
+              "h": "First Seen",
+              "n": "firstSeen",
+              "r": false,
+              "sh": "Unix timestamp (seconds) of the first position report",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "icao24",
-              "req": false,
-              "short": "Unique ICAO 24-bit address of the transponder in hex string representation",
-              "type": "`$STRING`"
+            "icao24": {
+              "a": true,
+              "h": "Icao24",
+              "n": "icao24",
+              "r": false,
+              "sh": "Unique ICAO 24-bit address of the transponder in hex string representation",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "lastSeen",
-              "req": false,
-              "short": "Unix timestamp (seconds) of the last position report",
-              "type": "`$INTEGER`"
+            "lastSeen": {
+              "a": true,
+              "h": "Last Seen",
+              "n": "lastSeen",
+              "r": false,
+              "sh": "Unix timestamp (seconds) of the last position report",
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "name": "flight",
           "op": {
             "list": {
@@ -123,53 +201,44 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /flights/aircraft",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "begin",
-                        "orig": "begin",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "begin",
+                        "or": "begin",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "end",
-                        "orig": "end",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "end",
+                        "or": "end",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "icao24",
-                        "orig": "icao24",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "icao24",
+                        "or": "icao24",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /flights/aircraft",
-                    "json": "{\"operationId\":\"getFlightsByAircraft\",\"parameters\":[{\"description\":\"ICAO24 transponder address represented by a hex string\",\"in\":\"query\",\"name\":\"icao24\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with flights data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/flights/aircraft",
-                  "segments": [
-                    {
-                      "lit": "flights"
-                    },
-                    {
-                      "lit": "aircraft"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/flights/aircraft",
+                  "q": {
                     "$action": "aircraft",
                     "exist": [
                       "begin",
@@ -177,59 +246,59 @@
                       "icao24"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "flights"
+                    },
+                    {
+                      "lit": "aircraft"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /flights/arrival",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "airport",
-                        "orig": "airport",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "airport",
+                        "or": "airport",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "begin",
-                        "orig": "begin",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "begin",
+                        "or": "begin",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "end",
-                        "orig": "end",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "end",
+                        "or": "end",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /flights/arrival",
-                    "json": "{\"operationId\":\"getArrivalsByAirport\",\"parameters\":[{\"description\":\"ICAO airport code\",\"in\":\"query\",\"name\":\"airport\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with arrivals data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/flights/arrival",
-                  "segments": [
-                    {
-                      "lit": "flights"
-                    },
-                    {
-                      "lit": "arrival"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/flights/arrival",
+                  "q": {
                     "$action": "arrival",
                     "exist": [
                       "airport",
@@ -237,59 +306,59 @@
                       "end"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "flights"
+                    },
+                    {
+                      "lit": "arrival"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /flights/departure",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "airport",
-                        "orig": "airport",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "airport",
+                        "or": "airport",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "begin",
-                        "orig": "begin",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "begin",
+                        "or": "begin",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "end",
-                        "orig": "end",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "end",
+                        "or": "end",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /flights/departure",
-                    "json": "{\"operationId\":\"getDeparturesByAirport\",\"parameters\":[{\"description\":\"ICAO airport code\",\"in\":\"query\",\"name\":\"airport\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with departures data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/flights/departure",
-                  "segments": [
-                    {
-                      "lit": "flights"
-                    },
-                    {
-                      "lit": "departure"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/flights/departure",
+                  "q": {
                     "$action": "departure",
                     "exist": [
                       "airport",
@@ -297,43 +366,59 @@
                       "end"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "flights"
+                    },
+                    {
+                      "lit": "departure"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /flights/all",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "begin",
-                        "orig": "begin",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "begin",
+                        "or": "begin",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "end",
-                        "orig": "end",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "end",
+                        "or": "end",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /flights/all",
-                    "json": "{\"operationId\":\"getFlightsInInterval\",\"parameters\":[{\"description\":\"Start of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"begin\",\"required\":true,\"schema\":{\"type\":\"integer\"}},{\"description\":\"End of time interval in seconds since epoch (Unix timestamp)\",\"in\":\"query\",\"name\":\"end\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrivalAirportCandidatesCount\":{\"description\":\"Number of candidates for arrival airport\",\"type\":\"integer\"},\"callsign\":{\"description\":\"Callsign of the vehicle (8 chars)\",\"nullable\":true,\"type\":\"string\"},\"departureAirportCandidatesCount\":{\"description\":\"Number of candidates for departure airport\",\"type\":\"integer\"},\"estArrivalAirport\":{\"description\":\"Estimated arrival airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estArrivalAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estArrivalAirportVertDistance\":{\"description\":\"Vertical distance to estimated arrival airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirport\":{\"description\":\"Estimated departure airport ICAO code\",\"nullable\":true,\"type\":\"string\"},\"estDepartureAirportHorizDistance\":{\"description\":\"Horizontal distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"estDepartureAirportVertDistance\":{\"description\":\"Vertical distance to estimated departure airport in meters\",\"nullable\":true,\"type\":\"integer\"},\"firstSeen\":{\"description\":\"Unix timestamp (seconds) of the first position report\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder in hex string representation\",\"type\":\"string\"},\"lastSeen\":{\"description\":\"Unix timestamp (seconds) of the last position report\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with flights data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/flights/all",
+                  "q": {
+                    "$action": "all",
+                    "exist": [
+                      "begin",
+                      "end"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/flights/all",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "flights"
                     },
@@ -341,16 +426,109 @@
                       "lit": "all"
                     }
                   ],
-                  "select": {
-                    "$action": "all",
-                    "exist": [
-                      "begin",
-                      "end"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "own": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "states": {
+              "a": true,
+              "h": "States",
+              "n": "states",
+              "r": false,
+              "sh": "Array of state vectors",
+              "t": "`$ARRAY`",
+              "union": {
+                "branches": 5,
+                "count": 1,
+                "depth": 2
+              }
+            },
+            "time": {
+              "a": true,
+              "h": "Time",
+              "n": "time",
+              "r": false,
+              "sh": "The time which the state vectors in this response are associated with.",
+              "t": "`$INTEGER`"
+            }
+          },
+          "name": "own",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /states/own",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "icao24",
+                        "or": "icao24",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "serial",
+                        "or": "serial",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "time",
+                        "or": "time",
+                        "r": false,
+                        "t": "`$INTEGER`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/states/own",
+                  "q": {
+                    "exist": [
+                      "icao24",
+                      "serial",
+                      "time"
+                    ]
+                  },
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "states"
+                    },
+                    {
+                      "lit": "own"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body.states`"
                   }
                 }
               ]
@@ -365,27 +543,29 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "states",
-              "req": false,
-              "short": "Array of state vectors",
-              "type": "`$ARRAY`",
+          "fields": {
+            "states": {
+              "a": true,
+              "h": "States",
+              "n": "states",
+              "r": false,
+              "sh": "Array of state vectors",
+              "t": "`$ARRAY`",
               "union": {
                 "branches": 5,
                 "count": 1,
                 "depth": 2
               }
             },
-            {
-              "active": true,
-              "name": "time",
-              "req": false,
-              "short": "The time which the state vectors in this response are associated with.",
-              "type": "`$INTEGER`"
+            "time": {
+              "a": true,
+              "h": "Time",
+              "n": "time",
+              "r": false,
+              "sh": "The time which the state vectors in this response are associated with.",
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "name": "state_vector",
           "op": {
             "list": {
@@ -393,85 +573,76 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /states/all",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "extended",
-                        "orig": "extended",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "extended",
+                        "or": "extended",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "icao24",
-                        "orig": "icao24",
-                        "reqd": false,
-                        "type": "`$ARRAY`"
+                        "a": true,
+                        "k": "query",
+                        "n": "icao24",
+                        "or": "icao24",
+                        "r": false,
+                        "t": "`$ARRAY`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "lamax",
-                        "orig": "lamax",
-                        "reqd": false,
-                        "type": "`$NUMBER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "lamax",
+                        "or": "lamax",
+                        "r": false,
+                        "t": "`$NUMBER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "lamin",
-                        "orig": "lamin",
-                        "reqd": false,
-                        "type": "`$NUMBER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "lamin",
+                        "or": "lamin",
+                        "r": false,
+                        "t": "`$NUMBER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "lomax",
-                        "orig": "lomax",
-                        "reqd": false,
-                        "type": "`$NUMBER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "lomax",
+                        "or": "lomax",
+                        "r": false,
+                        "t": "`$NUMBER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "lomin",
-                        "orig": "lomin",
-                        "reqd": false,
-                        "type": "`$NUMBER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "lomin",
+                        "or": "lomin",
+                        "r": false,
+                        "t": "`$NUMBER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "time",
-                        "orig": "time",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "time",
+                        "or": "time",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /states/all",
-                    "json": "{\"operationId\":\"getAllStates\",\"parameters\":[{\"description\":\"The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.\",\"in\":\"query\",\"name\":\"time\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.\",\"explode\":true,\"in\":\"query\",\"name\":\"icao24\",\"required\":false,\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}},{\"description\":\"Lower bound for the latitude in decimal degrees\",\"in\":\"query\",\"name\":\"lamin\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Lower bound for the longitude in decimal degrees\",\"in\":\"query\",\"name\":\"lomin\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Upper bound for the latitude in decimal degrees\",\"in\":\"query\",\"name\":\"lamax\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Upper bound for the longitude in decimal degrees\",\"in\":\"query\",\"name\":\"lomax\",\"required\":false,\"schema\":{\"format\":\"float\",\"type\":\"number\"}},{\"description\":\"Set to 1 to include aircraft category information\",\"in\":\"query\",\"name\":\"extended\",\"required\":false,\"schema\":{\"enum\":[0,1],\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"states\":{\"description\":\"Array of state vectors\",\"items\":{\"description\":\"State vector representing an aircraft's state\",\"example\":[\"abc9f3\",\"CALLSIGN\",\"United States\",1458564121,1458564121,-100.5,40.5,1500,false,150,90,5,[1,2,3],1520,\"1234\",false,0,3],\"items\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"number\"},{\"type\":\"integer\"},{\"type\":\"boolean\"},{\"type\":\"array\"},{\"type\":\"null\"}]},\"maxItems\":18,\"minItems\":17,\"type\":\"array\"},\"type\":\"array\"},\"time\":{\"description\":\"The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [time - 1, time].\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with state vectors\",\"headers\":{\"X-Rate-Limit-Remaining\":{\"description\":\"Number of remaining API credits\",\"schema\":{\"type\":\"integer\"}}}},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\",\"headers\":{\"X-Rate-Limit-Retry-After-Seconds\":{\"description\":\"Number of seconds until credits become available again\",\"schema\":{\"type\":\"integer\"}}}}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/states/all",
-                  "segments": [
-                    {
-                      "lit": "states"
-                    },
-                    {
-                      "lit": "all"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/states/all",
+                  "q": {
                     "exist": [
                       "extended",
                       "icao24",
@@ -482,66 +653,16 @@
                       "time"
                     ]
                   },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body.states`"
-                  }
-                },
-                {
-                  "active": true,
-                  "args": {
-                    "query": [
-                      {
-                        "active": true,
-                        "kind": "query",
-                        "name": "icao24",
-                        "orig": "icao24",
-                        "reqd": false,
-                        "type": "`$ARRAY`"
-                      },
-                      {
-                        "active": true,
-                        "kind": "query",
-                        "name": "serial",
-                        "orig": "serial",
-                        "reqd": false,
-                        "type": "`$ARRAY`"
-                      },
-                      {
-                        "active": true,
-                        "kind": "query",
-                        "name": "time",
-                        "orig": "time",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
-                      }
-                    ]
-                  },
-                  "contract": {
-                    "id": "GET /states/own",
-                    "json": "{\"operationId\":\"getOwnStates\",\"parameters\":[{\"description\":\"The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.\",\"in\":\"query\",\"name\":\"time\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.\",\"explode\":true,\"in\":\"query\",\"name\":\"icao24\",\"required\":false,\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}},{\"description\":\"Retrieve only states of a subset of your receivers. You can pass this argument several times to filter state of more than one of your receivers.\",\"explode\":true,\"in\":\"query\",\"name\":\"serials\",\"required\":false,\"schema\":{\"items\":{\"type\":\"integer\"},\"type\":\"array\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"states\":{\"description\":\"Array of state vectors\",\"items\":{\"description\":\"State vector representing an aircraft's state\",\"example\":[\"abc9f3\",\"CALLSIGN\",\"United States\",1458564121,1458564121,-100.5,40.5,1500,false,150,90,5,[1,2,3],1520,\"1234\",false,0,3],\"items\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"number\"},{\"type\":\"integer\"},{\"type\":\"boolean\"},{\"type\":\"array\"},{\"type\":\"null\"}]},\"maxItems\":18,\"minItems\":17,\"type\":\"array\"},\"type\":\"array\"},\"time\":{\"description\":\"The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [time - 1, time].\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with state vectors\"},\"401\":{\"description\":\"Unauthorized - Invalid or missing authentication\"},\"403\":{\"description\":\"Forbidden - Authentication required\"}},\"security\":[{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/states/own",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "states"
                     },
                     {
-                      "lit": "own"
+                      "lit": "all"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "icao24",
-                      "serial",
-                      "time"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.states`"
                   }
@@ -558,48 +679,53 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "callsign",
-              "req": false,
-              "short": "Callsign of the vehicle",
-              "type": "`$STRING`"
+          "fields": {
+            "callsign": {
+              "a": true,
+              "h": "Callsign",
+              "n": "callsign",
+              "r": false,
+              "sh": "Callsign of the vehicle",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "endTime",
-              "req": false,
-              "short": "Unix timestamp (seconds) of the end of the track",
-              "type": "`$INTEGER`"
+            "endTime": {
+              "a": true,
+              "h": "End Time",
+              "n": "endTime",
+              "r": false,
+              "sh": "Unix timestamp (seconds) of the end of the track",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "icao24",
-              "req": false,
-              "short": "Unique ICAO 24-bit address of the transponder",
-              "type": "`$STRING`"
+            "icao24": {
+              "a": true,
+              "h": "Icao24",
+              "n": "icao24",
+              "r": false,
+              "sh": "Unique ICAO 24-bit address of the transponder",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "path",
-              "req": false,
-              "short": "Array of waypoints representing the aircraft trajectory",
-              "type": "`$ARRAY`",
+            "path": {
+              "a": true,
+              "h": "Path",
+              "n": "path",
+              "r": false,
+              "sh": "Array of waypoints representing the aircraft trajectory",
+              "t": "`$ARRAY`",
               "union": {
                 "branches": 3,
                 "count": 1,
                 "depth": 2
               }
             },
-            {
-              "active": true,
-              "name": "startTime",
-              "req": false,
-              "short": "Unix timestamp (seconds) of the start of the track",
-              "type": "`$INTEGER`"
+            "startTime": {
+              "a": true,
+              "h": "Start Time",
+              "n": "startTime",
+              "r": false,
+              "sh": "Unix timestamp (seconds) of the start of the track",
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "name": "track",
           "op": {
             "list": {
@@ -607,48 +733,48 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /tracks",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "icao24",
-                        "orig": "icao24",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "icao24",
+                        "or": "icao24",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "time",
-                        "orig": "time",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "query",
+                        "n": "time",
+                        "or": "time",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /tracks",
-                    "json": "{\"operationId\":\"getTrackByAircraft\",\"parameters\":[{\"description\":\"ICAO24 transponder address represented by a hex string\",\"in\":\"query\",\"name\":\"icao24\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Unix timestamp (seconds) for which the track should be retrieved\",\"in\":\"query\",\"name\":\"time\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"callsign\":{\"description\":\"Callsign of the vehicle\",\"nullable\":true,\"type\":\"string\"},\"endTime\":{\"description\":\"Unix timestamp (seconds) of the end of the track\",\"type\":\"integer\"},\"icao24\":{\"description\":\"Unique ICAO 24-bit address of the transponder\",\"type\":\"string\"},\"path\":{\"description\":\"Array of waypoints representing the aircraft trajectory\",\"items\":{\"description\":\"Waypoint [time, latitude, longitude, altitude, on_ground]\",\"items\":{\"oneOf\":[{\"type\":\"number\"},{\"type\":\"integer\"},{\"type\":\"boolean\"},{\"type\":\"null\"}]},\"maxItems\":5,\"minItems\":5,\"type\":\"array\"},\"type\":\"array\"},\"startTime\":{\"description\":\"Unix timestamp (seconds) of the start of the track\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful response with track data\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"404\":{\"description\":\"Not Found - No track found for the given aircraft and time\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"basicAuth\":[]},{\"oauth2\":[]}],\"securitySchemes\":{\"basicAuth\":{\"description\":\"Basic authentication using OpenSky username and password (deprecated for new accounts)\",\"scheme\":\"basic\",\"type\":\"http\"},\"oauth2\":{\"bearerFormat\":\"JWT\",\"description\":\"OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/tracks",
-                  "segments": [
-                    {
-                      "lit": "tracks"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/tracks",
+                  "q": {
                     "exist": [
                       "icao24",
                       "time"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "tracks"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.path`"
                   }
@@ -1077,17 +1203,43 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
                     "ref": "flight_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicOwnFlow": {
+          "active": true,
+          "entity": "own",
+          "key$": "BasicOwnFlow",
+          "kind": "basic",
+          "name": "BasicOwnFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "own_ref01"
                   }
                 }
               ]
@@ -1103,13 +1255,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1129,13 +1281,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {

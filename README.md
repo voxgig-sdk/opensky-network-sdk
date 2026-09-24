@@ -14,13 +14,13 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
+> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as a small set of **semantic entities** — Flight, StateVector and Track — that you
+This SDK exposes the API as a small set of **semantic entities** — Flight, Own, StateVector and Track — that you
 call directly, instead of assembling URL paths and query strings. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`):
@@ -167,11 +167,12 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 3 entities:
+The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
 | **Flight** | The Flight entity (list). | `/flights/aircraft` |
+| **Own** | The Own entity (list). | `/states/own` |
 | **StateVector** | The StateVector entity (list). | `/states/all` |
 | **Track** | The Track entity (list). | `/tracks` |
 

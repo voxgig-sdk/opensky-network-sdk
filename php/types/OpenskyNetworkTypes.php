@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 // Typed models for the OpenskyNetwork SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 //
@@ -36,6 +36,21 @@ class FlightListMatch
     public int $end;
     public ?string $icao24 = null;
     public ?string $airport = null;
+}
+
+/** Own entity data model. */
+class Own
+{
+    public ?array $states = null;
+    public ?int $time = null;
+}
+
+/** Request payload for Own#list. */
+class OwnListMatch
+{
+    public ?array $icao24 = null;
+    public ?array $serial = null;
+    public ?int $time = null;
 }
 
 /** StateVector entity data model. */

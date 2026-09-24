@@ -45,6 +45,10 @@ local client = sdk.test()
 
 Create a new `Flight` entity instance. Pass `nil` for no initial data.
 
+#### `Own(data)`
+
+Create a new `Own` entity instance. Pass `nil` for no initial data.
+
 #### `StateVector(data)`
 
 Create a new `StateVector` entity instance. Pass `nil` for no initial data.
@@ -143,6 +147,59 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `FlightEntity` instance with the same client and
+options.
+
+#### `get_name() -> string`
+
+Return the entity name.
+
+
+---
+
+## OwnEntity
+
+```lua
+local own = client:Own(nil)
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `states` | `table` | No | Array of state vectors |
+| `time` | `number` | No | The time which the state vectors in this response are associated with. |
+
+### Operations
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:Own():list()
+```
+
+### Common Methods
+
+#### `data_get() -> table`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> table`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `OwnEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`

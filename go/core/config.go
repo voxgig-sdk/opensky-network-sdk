@@ -87,6 +87,7 @@ func MakeConfig() map[string]any {
 			},
 			"entity": map[string]any{
 				"flight": map[string]any{},
+				"own": map[string]any{},
 				"state_vector": map[string]any{},
 				"track": map[string]any{},
 			},
@@ -96,63 +97,75 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "arrivalAirportCandidatesCount",
-						"short": "Number of candidates for arrival airport",
+						"title": "Arrival Airport Candidates Count",
 						"type": "`$INTEGER`",
+						"short": "Number of candidates for arrival airport",
 					},
 					map[string]any{
 						"name": "callsign",
-						"short": "Callsign of the vehicle (8 chars)",
+						"title": "Callsign",
 						"type": "`$STRING`",
+						"short": "Callsign of the vehicle (8 chars)",
 					},
 					map[string]any{
 						"name": "departureAirportCandidatesCount",
-						"short": "Number of candidates for departure airport",
+						"title": "Departure Airport Candidates Count",
 						"type": "`$INTEGER`",
+						"short": "Number of candidates for departure airport",
 					},
 					map[string]any{
 						"name": "estArrivalAirport",
-						"short": "Estimated arrival airport ICAO code",
+						"title": "Est Arrival Airport",
 						"type": "`$STRING`",
+						"short": "Estimated arrival airport ICAO code",
 					},
 					map[string]any{
 						"name": "estArrivalAirportHorizDistance",
-						"short": "Horizontal distance to estimated arrival airport in meters",
+						"title": "Est Arrival Airport Horiz Distance",
 						"type": "`$INTEGER`",
+						"short": "Horizontal distance to estimated arrival airport in meters",
 					},
 					map[string]any{
 						"name": "estArrivalAirportVertDistance",
-						"short": "Vertical distance to estimated arrival airport in meters",
+						"title": "Est Arrival Airport Vert Distance",
 						"type": "`$INTEGER`",
+						"short": "Vertical distance to estimated arrival airport in meters",
 					},
 					map[string]any{
 						"name": "estDepartureAirport",
-						"short": "Estimated departure airport ICAO code",
+						"title": "Est Departure Airport",
 						"type": "`$STRING`",
+						"short": "Estimated departure airport ICAO code",
 					},
 					map[string]any{
 						"name": "estDepartureAirportHorizDistance",
-						"short": "Horizontal distance to estimated departure airport in meters",
+						"title": "Est Departure Airport Horiz Distance",
 						"type": "`$INTEGER`",
+						"short": "Horizontal distance to estimated departure airport in meters",
 					},
 					map[string]any{
 						"name": "estDepartureAirportVertDistance",
-						"short": "Vertical distance to estimated departure airport in meters",
+						"title": "Est Departure Airport Vert Distance",
 						"type": "`$INTEGER`",
+						"short": "Vertical distance to estimated departure airport in meters",
 					},
 					map[string]any{
 						"name": "firstSeen",
-						"short": "Unix timestamp (seconds) of the first position report",
+						"title": "First Seen",
 						"type": "`$INTEGER`",
+						"short": "Unix timestamp (seconds) of the first position report",
 					},
 					map[string]any{
 						"name": "icao24",
-						"short": "Unique ICAO 24-bit address of the transponder in hex string representation",
+						"title": "Icao24",
 						"type": "`$STRING`",
+						"short": "Unique ICAO 24-bit address of the transponder in hex string representation",
 					},
 					map[string]any{
 						"name": "lastSeen",
-						"short": "Unix timestamp (seconds) of the last position report",
+						"title": "Last Seen",
 						"type": "`$INTEGER`",
+						"short": "Unix timestamp (seconds) of the last position report",
 					},
 				},
 				"name": "flight",
@@ -162,31 +175,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "begin",
-											"orig": "begin",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "end",
-											"orig": "end",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "icao24",
-											"orig": "icao24",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/aircraft",
@@ -198,6 +186,40 @@ func MakeConfig() map[string]any {
 										"lit": "aircraft",
 									},
 								},
+								"parts": []any{
+									"flights",
+									"aircraft",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "begin",
+											"orig": "begin",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "end",
+											"orig": "end",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "icao24",
+											"orig": "icao24",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"$action": "aircraft",
 									"exist": []any{
@@ -206,41 +228,8 @@ func MakeConfig() map[string]any {
 										"icao24",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"flights",
-									"aircraft",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "airport",
-											"orig": "airport",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "begin",
-											"orig": "begin",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "end",
-											"orig": "end",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/arrival",
@@ -252,6 +241,40 @@ func MakeConfig() map[string]any {
 										"lit": "arrival",
 									},
 								},
+								"parts": []any{
+									"flights",
+									"arrival",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "airport",
+											"orig": "airport",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "begin",
+											"orig": "begin",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "end",
+											"orig": "end",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"$action": "arrival",
 									"exist": []any{
@@ -260,41 +283,8 @@ func MakeConfig() map[string]any {
 										"end",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"flights",
-									"arrival",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "airport",
-											"orig": "airport",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "begin",
-											"orig": "begin",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "end",
-											"orig": "end",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/departure",
@@ -306,6 +296,40 @@ func MakeConfig() map[string]any {
 										"lit": "departure",
 									},
 								},
+								"parts": []any{
+									"flights",
+									"departure",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "airport",
+											"orig": "airport",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "begin",
+											"orig": "begin",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "end",
+											"orig": "end",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"$action": "departure",
 									"exist": []any{
@@ -314,34 +338,8 @@ func MakeConfig() map[string]any {
 										"end",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"flights",
-									"departure",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "begin",
-											"orig": "begin",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "end",
-											"orig": "end",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/flights/all",
@@ -353,6 +351,33 @@ func MakeConfig() map[string]any {
 										"lit": "all",
 									},
 								},
+								"parts": []any{
+									"flights",
+									"all",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "begin",
+											"orig": "begin",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "end",
+											"orig": "end",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"$action": "all",
 									"exist": []any{
@@ -360,13 +385,84 @@ func MakeConfig() map[string]any {
 										"end",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
+							},
+						},
+					},
+				},
+				"relations": map[string]any{
+					"ancestors": []any{},
+				},
+			},
+			"own": map[string]any{
+				"fields": []any{
+					map[string]any{
+						"name": "states",
+						"title": "States",
+						"type": "`$ARRAY`",
+						"short": "Array of state vectors",
+					},
+					map[string]any{
+						"name": "time",
+						"title": "Time",
+						"type": "`$INTEGER`",
+						"short": "The time which the state vectors in this response are associated with.",
+					},
+				},
+				"name": "own",
+				"op": map[string]any{
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/states/own",
+								"segments": []any{
+									map[string]any{
+										"lit": "states",
+									},
+									map[string]any{
+										"lit": "own",
+									},
 								},
 								"parts": []any{
-									"flights",
-									"all",
+									"states",
+									"own",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.states`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "icao24",
+											"orig": "icao24",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "serial",
+											"orig": "serial",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "time",
+											"orig": "time",
+											"type": "`$INTEGER`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"icao24",
+										"serial",
+										"time",
+									},
 								},
 							},
 						},
@@ -380,18 +476,15 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "states",
-						"short": "Array of state vectors",
+						"title": "States",
 						"type": "`$ARRAY`",
-						"union": map[string]any{
-							"branches": 5,
-							"count": 1,
-							"depth": 2,
-						},
+						"short": "Array of state vectors",
 					},
 					map[string]any{
 						"name": "time",
-						"short": "The time which the state vectors in this response are associated with.",
+						"title": "Time",
 						"type": "`$INTEGER`",
+						"short": "The time which the state vectors in this response are associated with.",
 					},
 				},
 				"name": "state_vector",
@@ -401,52 +494,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "extended",
-											"orig": "extended",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "icao24",
-											"orig": "icao24",
-											"type": "`$ARRAY`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "lamax",
-											"orig": "lamax",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "lamin",
-											"orig": "lamin",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "lomax",
-											"orig": "lomax",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "lomin",
-											"orig": "lomin",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "time",
-											"orig": "time",
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/states/all",
@@ -456,6 +503,61 @@ func MakeConfig() map[string]any {
 									},
 									map[string]any{
 										"lit": "all",
+									},
+								},
+								"parts": []any{
+									"states",
+									"all",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.states`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "extended",
+											"orig": "extended",
+											"type": "`$INTEGER`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "icao24",
+											"orig": "icao24",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "lamax",
+											"orig": "lamax",
+											"type": "`$NUMBER`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "lamin",
+											"orig": "lamin",
+											"type": "`$NUMBER`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "lomax",
+											"orig": "lomax",
+											"type": "`$NUMBER`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "lomin",
+											"orig": "lomin",
+											"type": "`$NUMBER`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "time",
+											"orig": "time",
+											"type": "`$INTEGER`",
+											"kind": "query",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -469,64 +571,6 @@ func MakeConfig() map[string]any {
 										"time",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.states`",
-								},
-								"parts": []any{
-									"states",
-									"all",
-								},
-							},
-							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "icao24",
-											"orig": "icao24",
-											"type": "`$ARRAY`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "serial",
-											"orig": "serial",
-											"type": "`$ARRAY`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "time",
-											"orig": "time",
-											"type": "`$INTEGER`",
-										},
-									},
-								},
-								"kind": "http",
-								"method": "GET",
-								"orig": "/states/own",
-								"segments": []any{
-									map[string]any{
-										"lit": "states",
-									},
-									map[string]any{
-										"lit": "own",
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"icao24",
-										"serial",
-										"time",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.states`",
-								},
-								"parts": []any{
-									"states",
-									"own",
-								},
 							},
 						},
 					},
@@ -539,33 +583,33 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "callsign",
-						"short": "Callsign of the vehicle",
+						"title": "Callsign",
 						"type": "`$STRING`",
+						"short": "Callsign of the vehicle",
 					},
 					map[string]any{
 						"name": "endTime",
-						"short": "Unix timestamp (seconds) of the end of the track",
+						"title": "End Time",
 						"type": "`$INTEGER`",
+						"short": "Unix timestamp (seconds) of the end of the track",
 					},
 					map[string]any{
 						"name": "icao24",
-						"short": "Unique ICAO 24-bit address of the transponder",
+						"title": "Icao24",
 						"type": "`$STRING`",
+						"short": "Unique ICAO 24-bit address of the transponder",
 					},
 					map[string]any{
 						"name": "path",
-						"short": "Array of waypoints representing the aircraft trajectory",
+						"title": "Path",
 						"type": "`$ARRAY`",
-						"union": map[string]any{
-							"branches": 3,
-							"count": 1,
-							"depth": 2,
-						},
+						"short": "Array of waypoints representing the aircraft trajectory",
 					},
 					map[string]any{
 						"name": "startTime",
-						"short": "Unix timestamp (seconds) of the start of the track",
+						"title": "Start Time",
 						"type": "`$INTEGER`",
+						"short": "Unix timestamp (seconds) of the start of the track",
 					},
 				},
 				"name": "track",
@@ -575,24 +619,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "icao24",
-											"orig": "icao24",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "time",
-											"orig": "time",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/tracks",
@@ -601,18 +627,37 @@ func MakeConfig() map[string]any {
 										"lit": "tracks",
 									},
 								},
+								"parts": []any{
+									"tracks",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.path`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "icao24",
+											"orig": "icao24",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "time",
+											"orig": "time",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"icao24",
 										"time",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.path`",
-								},
-								"parts": []any{
-									"tracks",
 								},
 							},
 						},

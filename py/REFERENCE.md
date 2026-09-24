@@ -46,6 +46,10 @@ client = OpenskyNetworkSDK.test()
 
 Create a new `FlightEntity` instance. Pass `None` for no initial data.
 
+#### `Own(data=None)`
+
+Create a new `OwnEntity` instance. Pass `None` for no initial data.
+
 #### `StateVector(data=None)`
 
 Create a new `StateVectorEntity` instance. Pass `None` for no initial data.
@@ -142,6 +146,60 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `FlightEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
+## OwnEntity
+
+```python
+own = client.Own()
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `states` | `list` | No | Array of state vectors |
+| `time` | `int` | No | The time which the state vectors in this response are associated with. |
+
+### Operations
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.Own().list()
+for own in results:
+    print(own)
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `OwnEntity` instance with the same options.
 
 #### `get_name() -> str`
 

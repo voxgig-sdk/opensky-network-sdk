@@ -363,6 +363,20 @@ function OpenskyNetworkSDK:Flight(data)
 end
 
 
+-- Idiomatic facade: client:Own():list() / client:Own():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function OpenskyNetworkSDK:Own(data)
+  local EntityMod = require("entity.own_entity")
+  if data == nil then
+    if self._own == nil then
+      self._own = EntityMod.new(self, nil)
+    end
+    return self._own
+  end
+  return EntityMod.new(self, data)
+end
+
+
 -- Idiomatic facade: client:StateVector():list() / client:StateVector():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function OpenskyNetworkSDK:StateVector(data)

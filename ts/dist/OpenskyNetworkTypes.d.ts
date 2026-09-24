@@ -20,6 +20,15 @@ export interface FlightListMatch {
     $action?: string;
     [action: string]: any;
 }
+export interface Own {
+    states?: any[];
+    time?: number;
+}
+export interface OwnListMatch {
+    icao24?: any[];
+    serial?: any[];
+    time?: number;
+}
 export interface StateVector {
     states?: any[];
     time?: number;

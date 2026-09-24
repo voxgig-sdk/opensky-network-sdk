@@ -213,6 +213,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
 | `Flight` | `($data): FlightEntity` | Create a Flight entity instance. |
+| `Own` | `($data): OwnEntity` | Create an Own entity instance. |
 | `StateVector` | `($data): StateVectorEntity` | Create a StateVector entity instance. |
 | `Track` | `($data): TrackEntity` | Create a Track entity instance. |
 
@@ -270,6 +271,17 @@ On error, `ok` is `false` and `$err` contains the error value.
 Operations: List.
 
 API path: `/flights/aircraft`
+
+#### Own
+
+| Field | Description |
+| --- | --- |
+| `states` | Array of state vectors |
+| `time` | The time which the state vectors in this response are associated with. |
+
+Operations: List.
+
+API path: `/states/own`
 
 #### StateVector
 
@@ -333,6 +345,31 @@ Create an instance: `$flight = $client->Flight();`
 ```php
 // list() returns an array of Flight records (throws on error).
 $flights = $client->Flight()->list();
+```
+
+
+### Own
+
+Create an instance: `$own = $client->Own();`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `states` | `array` | Array of state vectors |
+| `time` | `int` | The time which the state vectors in this response are associated with. |
+
+#### Example: List
+
+```php
+// list() returns an array of Own records (throws on error).
+$owns = $client->Own()->list();
 ```
 
 
@@ -472,7 +509,7 @@ activated earlier.
 
 ## Open types
 
-2 fields are carried as open values rather than typed structures.
+3 fields are carried as open values rather than typed structures.
 This follows from the API definition, not from a gap in this SDK: the
 definition describes them with untagged unions —
 `oneOf`/`anyOf` branches with no `discriminator` — so it never states which
@@ -482,6 +519,7 @@ guarantee.
 
 | Entity | Field | Variants | Nesting |
 | --- | --- | --- | --- |
+| `own` | `states` | 5 | 2 levels |
 | `state_vector` | `states` | 5 | 2 levels |
 | `track` | `path` | 3 | 2 levels |
 

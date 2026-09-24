@@ -1,0 +1,93 @@
+# Entity: own
+
+main: kit: entity: own: {
+
+  alias: field: {}
+
+  fields: {
+    states: {
+      h: "States"
+      n: "states"
+      r: false
+      sh: "Array of state vectors"
+      t: "`$ARRAY`"
+      union: {
+        branches: 5
+        count: 1
+        depth: 2
+      }
+    }
+    time: {
+      h: "Time"
+      n: "time"
+      r: false
+      sh: "The time which the state vectors in this response are associated with."
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "own"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /states/own"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "icao24"
+                or: "icao24"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "serial"
+                or: "serial"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "time"
+                or: "time"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/states/own"
+          q: {
+            exist: [
+              "icao24"
+              "serial"
+              "time"
+            ]
+          }
+          s: [
+            {
+              lit: "states"
+            }
+            {
+              lit: "own"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.states`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

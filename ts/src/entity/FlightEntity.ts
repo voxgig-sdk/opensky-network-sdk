@@ -19,7 +19,6 @@ import type {
   FlightListMatch,
 } from '../OpenskyNetworkTypes'
 
-// TODO: needs Entity superclass
 class FlightEntity extends OpenskyNetworkEntityBase<Flight> {
 
   constructor(client: OpenskyNetworkSDK, entopts: any) {

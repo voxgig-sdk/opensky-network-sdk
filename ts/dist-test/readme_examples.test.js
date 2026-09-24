@@ -70,7 +70,7 @@ const __1 = require("..");
 const SDK_NAME = 'OpenskyNetworkSDK';
 // A fixture for every entity, so list()/load() resolve offline with no
 // network. Snippet client construction is rewritten to seed this.
-const TEST_SEED = { "entity": { "flight": { "test01": { "id": "test01" } }, "state_vector": { "test01": { "id": "test01" } }, "track": { "test01": { "id": "test01" } } } };
+const TEST_SEED = { "entity": { "flight": { "test01": { "id": "test01" } }, "own": { "test01": { "id": "test01" } }, "state_vector": { "test01": { "id": "test01" } }, "track": { "test01": { "id": "test01" } } } };
 const SEED_ARG = JSON.stringify(TEST_SEED);
 const SEEDED_CTOR = SDK_NAME + '.test(' + SEED_ARG + ')';
 // The three docs this gate covers, resolved relative to dist-test/.

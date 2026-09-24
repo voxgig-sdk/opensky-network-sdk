@@ -2,8 +2,8 @@
 
 # Typed models for the OpenskyNetwork SDK.
 #
-# GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-# params (op.<name>.points[].args.params[]). Member types come from the
+# GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+# params (op.<name>.points[].g.params[]). Member types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Ruby types are unenforced; these YARD
 # annotations document the shapes. Do not edit by hand.
@@ -79,6 +79,36 @@ FlightListMatch = Struct.new(
   :end,
   :icao24,
   :airport,
+  keyword_init: true
+)
+
+# Own entity data model.
+#
+# @!attribute [rw] states
+#   @return [Array, nil]
+#
+# @!attribute [rw] time
+#   @return [Integer, nil]
+Own = Struct.new(
+  :states,
+  :time,
+  keyword_init: true
+)
+
+# Request payload for Own#list.
+#
+# @!attribute [rw] icao24
+#   @return [Array, nil]
+#
+# @!attribute [rw] serial
+#   @return [Array, nil]
+#
+# @!attribute [rw] time
+#   @return [Integer, nil]
+OwnListMatch = Struct.new(
+  :icao24,
+  :serial,
+  :time,
   keyword_init: true
 )
 

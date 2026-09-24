@@ -44,6 +44,9 @@ func init() {
 	core.NewFlightEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntity {
 		return entity.NewFlightEntity(client, entopts)
 	}
+	core.NewOwnEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntity {
+		return entity.NewOwnEntity(client, entopts)
+	}
 	core.NewStateVectorEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntity {
 		return entity.NewStateVectorEntity(client, entopts)
 	}

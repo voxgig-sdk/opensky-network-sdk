@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TrackEntity = void 0;
 const OpenskyNetworkEntityBase_1 = require("../OpenskyNetworkEntityBase");
-// TODO: needs Entity superclass
 class TrackEntity extends OpenskyNetworkEntityBase_1.OpenskyNetworkEntityBase {
     constructor(client, entopts) {
         super(client, entopts);
