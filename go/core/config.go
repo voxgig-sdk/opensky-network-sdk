@@ -445,7 +445,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "serial",
-											"orig": "serial",
+											"orig": "serials",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},

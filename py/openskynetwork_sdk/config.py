@@ -470,7 +470,7 @@ def make_config():
                     },
                     {
                       "name": "serial",
-                      "orig": "serial",
+                      "orig": "serials",
                       "type": "`$ARRAY`",
                       "kind": "query",
                     },

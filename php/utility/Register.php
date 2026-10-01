@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 OpenskyNetworkUtility::setRegistrar(function (OpenskyNetworkUtility $u): void {
     $u->clean = [OpenskyNetworkClean::class, 'call'];
+    $u->clean_add = [OpenskyNetworkClean::class, 'add'];
+    $u->clean_explain = [OpenskyNetworkDone::class, 'clean_explain'];
     $u->done = [OpenskyNetworkDone::class, 'call'];
     $u->make_error = [OpenskyNetworkMakeError::class, 'call'];
     $u->feature_add = [OpenskyNetworkFeatureAdd::class, 'call'];

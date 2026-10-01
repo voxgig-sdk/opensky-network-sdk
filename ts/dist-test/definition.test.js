@@ -1,0 +1,289 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_test_1 = require("node:test");
+const __1 = require("..");
+const definition_runner_1 = require("./definition-runner");
+const utility_1 = require("./utility");
+// Generated from the API definition, not from the model this SDK was built
+// from: the route, the declared query parameters, the credential the security
+// scheme names, and the definition's own response example.
+const PLAN = [
+    {
+        "entity": "flight",
+        "accessor": "Flight",
+        "op": "list",
+        "method": "GET",
+        "path": "/flights/aircraft",
+        "action": "aircraft",
+        "args": [],
+        "select": {
+            "begin": "v1",
+            "end": "v1",
+            "icao24": "v1"
+        },
+        "headers": [],
+        "query": [
+            "icao24",
+            "begin",
+            "end"
+        ],
+        "auth": [],
+        "status": 200,
+        "sample": [
+            {
+                "icao24": "x",
+                "firstSeen": 1,
+                "estDepartureAirport": "x",
+                "lastSeen": 1,
+                "estArrivalAirport": "x",
+                "callsign": "x",
+                "estDepartureAirportHorizDistance": 1,
+                "estDepartureAirportVertDistance": 1,
+                "estArrivalAirportHorizDistance": 1,
+                "estArrivalAirportVertDistance": 1,
+                "departureAirportCandidatesCount": 1,
+                "arrivalAirportCandidatesCount": 1
+            }
+        ],
+        "idField": "id"
+    },
+    {
+        "entity": "flight",
+        "accessor": "Flight",
+        "op": "list",
+        "method": "GET",
+        "path": "/flights/arrival",
+        "action": "arrival",
+        "args": [],
+        "select": {
+            "airport": "v1",
+            "begin": "v1",
+            "end": "v1"
+        },
+        "headers": [],
+        "query": [
+            "airport",
+            "begin",
+            "end"
+        ],
+        "auth": [],
+        "status": 200,
+        "sample": [
+            {
+                "icao24": "x",
+                "firstSeen": 1,
+                "estDepartureAirport": "x",
+                "lastSeen": 1,
+                "estArrivalAirport": "x",
+                "callsign": "x",
+                "estDepartureAirportHorizDistance": 1,
+                "estDepartureAirportVertDistance": 1,
+                "estArrivalAirportHorizDistance": 1,
+                "estArrivalAirportVertDistance": 1,
+                "departureAirportCandidatesCount": 1,
+                "arrivalAirportCandidatesCount": 1
+            }
+        ],
+        "idField": "id"
+    },
+    {
+        "entity": "flight",
+        "accessor": "Flight",
+        "op": "list",
+        "method": "GET",
+        "path": "/flights/departure",
+        "action": "departure",
+        "args": [],
+        "select": {
+            "airport": "v1",
+            "begin": "v1",
+            "end": "v1"
+        },
+        "headers": [],
+        "query": [
+            "airport",
+            "begin",
+            "end"
+        ],
+        "auth": [],
+        "status": 200,
+        "sample": [
+            {
+                "icao24": "x",
+                "firstSeen": 1,
+                "estDepartureAirport": "x",
+                "lastSeen": 1,
+                "estArrivalAirport": "x",
+                "callsign": "x",
+                "estDepartureAirportHorizDistance": 1,
+                "estDepartureAirportVertDistance": 1,
+                "estArrivalAirportHorizDistance": 1,
+                "estArrivalAirportVertDistance": 1,
+                "departureAirportCandidatesCount": 1,
+                "arrivalAirportCandidatesCount": 1
+            }
+        ],
+        "idField": "id"
+    },
+    {
+        "entity": "flight",
+        "accessor": "Flight",
+        "op": "list",
+        "method": "GET",
+        "path": "/flights/all",
+        "action": "all",
+        "args": [],
+        "select": {
+            "begin": "v1",
+            "end": "v1"
+        },
+        "headers": [],
+        "query": [
+            "begin",
+            "end"
+        ],
+        "auth": [],
+        "status": 200,
+        "sample": [
+            {
+                "icao24": "x",
+                "firstSeen": 1,
+                "estDepartureAirport": "x",
+                "lastSeen": 1,
+                "estArrivalAirport": "x",
+                "callsign": "x",
+                "estDepartureAirportHorizDistance": 1,
+                "estDepartureAirportVertDistance": 1,
+                "estArrivalAirportHorizDistance": 1,
+                "estArrivalAirportVertDistance": 1,
+                "departureAirportCandidatesCount": 1,
+                "arrivalAirportCandidatesCount": 1
+            }
+        ],
+        "idField": "id"
+    },
+    {
+        "entity": "own",
+        "accessor": "Own",
+        "op": "list",
+        "method": "GET",
+        "path": "/states/own",
+        "args": [],
+        "select": {
+            "icao24": "v1",
+            "serial": "v1",
+            "time": "v1"
+        },
+        "headers": [],
+        "query": [
+            "time",
+            "icao24",
+            "serials"
+        ],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "basic"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": {
+            "time": 1,
+            "states": [
+                [
+                    "abc9f3",
+                    "CALLSIGN",
+                    "United States"
+                ]
+            ]
+        },
+        "idField": "id"
+    },
+    {
+        "entity": "state_vector",
+        "accessor": "StateVector",
+        "op": "list",
+        "method": "GET",
+        "path": "/states/all",
+        "args": [],
+        "select": {
+            "extended": "v1",
+            "icao24": "v1",
+            "lamax": "v1",
+            "lamin": "v1",
+            "lomax": "v1",
+            "lomin": "v1",
+            "time": "v1"
+        },
+        "headers": [],
+        "query": [
+            "time",
+            "icao24",
+            "lamin",
+            "lomin",
+            "lamax",
+            "lomax",
+            "extended"
+        ],
+        "auth": [],
+        "status": 200,
+        "sample": {
+            "time": 1,
+            "states": [
+                [
+                    "abc9f3",
+                    "CALLSIGN",
+                    "United States"
+                ]
+            ]
+        },
+        "idField": "id"
+    },
+    {
+        "entity": "track",
+        "accessor": "Track",
+        "op": "list",
+        "method": "GET",
+        "path": "/tracks",
+        "args": [],
+        "select": {
+            "icao24": "v1",
+            "time": "v1"
+        },
+        "headers": [],
+        "query": [
+            "icao24",
+            "time"
+        ],
+        "auth": [],
+        "status": 200,
+        "sample": {
+            "icao24": "x",
+            "startTime": 1,
+            "endTime": 1,
+            "callsign": "x",
+            "path": [
+                [
+                    1
+                ]
+            ]
+        },
+        "idField": "id"
+    }
+];
+(0, node_test_1.describe)('definition', () => {
+    for (const point of PLAN) {
+        (0, node_test_1.test)(point.entity + '.' + point.op + ' ' + point.method + ' ' + point.path, async (t) => {
+            const control = (0, utility_1.isControlSkipped)('entityOp', point.entity + '.' + point.op, 'definition');
+            if (control.skip) {
+                t.skip(control.reason || 'skipped via sdk-test-control.json');
+                return;
+            }
+            await (0, definition_runner_1.runDefinitionPoint)(__1.SDK, point);
+        });
+    }
+});
+//# sourceMappingURL=definition.test.js.map

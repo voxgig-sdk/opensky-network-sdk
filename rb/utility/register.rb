@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 OpenskyNetworkUtility.registrar = ->(u) {
   u.clean = OpenskyNetworkUtilities::Clean
+  u.clean_add = OpenskyNetworkUtilities::CleanAdd
+  u.clean_explain = OpenskyNetworkUtilities::CleanExplain
   u.done = OpenskyNetworkUtilities::Done
   u.make_error = OpenskyNetworkUtilities::MakeError
   u.feature_add = OpenskyNetworkUtilities::FeatureAdd

@@ -49,7 +49,7 @@ main: kit: entity: own: {
               {
                 k: "query"
                 n: "serial"
-                or: "serial"
+                or: "serials"
                 r: false
                 t: "`$ARRAY`"
               }

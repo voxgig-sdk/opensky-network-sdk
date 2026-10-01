@@ -26,9 +26,11 @@ def prepare_auth_util(ctx):
 
     apikey = vs.getprop(options, OPTION_APIKEY, NOT_FOUND)
 
-    # True HTTP Basic Auth needs TWO credentials, base64-joined - a single
+    # True HTTP Basic Auth joins the two credentials, base64-encoded - a single
     # token in the header (the branch below) can never authenticate against
     # an API that actually checks `Authorization: Basic base64(user:pass)`.
+    # The password may be empty (RFC 7617): Lob, for one, documents the key as
+    # the user with a blank password (`curl -u key:`).
     if vs.getpath(options, "auth.basic") is True:
         secret = vs.getprop(options, OPTION_SECRET, NOT_FOUND)
         no_apikey = (
@@ -42,7 +44,7 @@ def prepare_auth_util(ctx):
             or secret == ""
         )
 
-        if no_apikey or no_secret:
+        if no_apikey:
             headers.pop(HEADER_AUTH, None)
         else:
             auth_prefix = ""
@@ -50,8 +52,11 @@ def prepare_auth_util(ctx):
             if isinstance(ap, str):
                 auth_prefix = ap
             b64 = base64.b64encode(
-                (str(apikey) + ":" + str(secret)).encode("utf-8")
+                (str(apikey) + ":" + ("" if no_secret else str(secret))).encode("utf-8")
             ).decode("ascii")
+            # The joined, encoded pair is a wire form neither credential's
+            # own registration covers.
+            ctx.utility.clean_add(ctx, b64)
             headers[HEADER_AUTH] = (
                 auth_prefix + " " + b64 if auth_prefix else b64
             )
