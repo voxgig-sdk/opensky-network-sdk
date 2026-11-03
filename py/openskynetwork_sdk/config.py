@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -106,6 +107,7 @@ def make_config():
             "base": "https://opensky-network.org/api",
             "auth": {
                 "prefix": "Basic",
+                "basic": True,
             },
             "headers": {
         "content-type": "application/json",
@@ -242,6 +244,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "reqd": True,
+                      "field": True,
                     },
                   ],
                 },
@@ -252,6 +255,10 @@ def make_config():
                     "end",
                     "icao24",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
               {
@@ -308,6 +315,10 @@ def make_config():
                     "end",
                   ],
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
               {
                 "kind": "http",
@@ -363,6 +374,10 @@ def make_config():
                     "end",
                   ],
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
               {
                 "kind": "http",
@@ -409,6 +424,10 @@ def make_config():
                     "begin",
                     "end",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -479,15 +498,14 @@ def make_config():
                       "orig": "time",
                       "type": "`$INTEGER`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "icao24",
-                    "serial",
-                    "time",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -582,19 +600,14 @@ def make_config():
                       "orig": "time",
                       "type": "`$INTEGER`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "extended",
-                    "icao24",
-                    "lamax",
-                    "lamin",
-                    "lomax",
-                    "lomin",
-                    "time",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -668,6 +681,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "reqd": True,
+                      "field": True,
                     },
                     {
                       "name": "time",
@@ -683,6 +697,10 @@ def make_config():
                     "icao24",
                     "time",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],

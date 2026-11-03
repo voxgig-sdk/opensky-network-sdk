@@ -10,6 +10,13 @@ OPTION_SECRET = "secret"
 NOT_FOUND = "__NOTFOUND__"
 
 
+def _auth_name(options):
+    name = vs.getpath(options, "auth.name")
+    if isinstance(name, str) and name != "":
+        return name.lower()
+    return HEADER_AUTH
+
+
 def prepare_auth_util(ctx):
     spec = ctx.spec
     if spec is None:
@@ -23,6 +30,12 @@ def prepare_auth_util(ctx):
     if options.get("auth") is None:
         headers.pop(HEADER_AUTH, None)
         return spec, None
+
+    name = _auth_name(options)
+
+    # A credential left under the declared name would travel beside the renamed one.
+    if name != HEADER_AUTH:
+        headers.pop(HEADER_AUTH, None)
 
     apikey = vs.getprop(options, OPTION_APIKEY, NOT_FOUND)
 
@@ -45,7 +58,7 @@ def prepare_auth_util(ctx):
         )
 
         if no_apikey:
-            headers.pop(HEADER_AUTH, None)
+            headers.pop(name, None)
         else:
             auth_prefix = ""
             ap = vs.getpath(options, "auth.prefix")
@@ -57,7 +70,7 @@ def prepare_auth_util(ctx):
             # The joined, encoded pair is a wire form neither credential's
             # own registration covers.
             ctx.utility.clean_add(ctx, b64)
-            headers[HEADER_AUTH] = (
+            headers[name] = (
                 auth_prefix + " " + b64 if auth_prefix else b64
             )
 
@@ -68,7 +81,7 @@ def prepare_auth_util(ctx):
         or apikey is None
         or apikey == ""
     ):
-        headers.pop(HEADER_AUTH, None)
+        headers.pop(name, None)
     else:
         auth_prefix = ""
         ap = vs.getpath(options, "auth.prefix")
@@ -78,7 +91,7 @@ def prepare_auth_util(ctx):
         if isinstance(apikey, str):
             apikey_val = apikey
         # Empty prefix (raw apiKey credential) must not add a leading space.
-        headers[HEADER_AUTH] = (
+        headers[name] = (
             auth_prefix + " " + apikey_val if auth_prefix else apikey_val
         )
 

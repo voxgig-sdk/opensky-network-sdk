@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -233,7 +234,8 @@ class Config {
                                         "orig": "icao24",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "reqd": true
+                                        "reqd": true,
+                                        "field": true
                                     }
                                 ]
                             },
@@ -244,6 +246,10 @@ class Config {
                                     "end",
                                     "icao24"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -299,6 +305,10 @@ class Config {
                                     "begin",
                                     "end"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -354,6 +364,10 @@ class Config {
                                     "begin",
                                     "end"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -401,6 +415,10 @@ class Config {
                                     "begin",
                                     "end"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -470,16 +488,15 @@ class Config {
                                         "name": "time",
                                         "orig": "time",
                                         "type": "`$INTEGER`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     }
                                 ]
                             },
-                            "select": {
-                                "exist": [
-                                    "icao24",
-                                    "serial",
-                                    "time"
-                                ]
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -573,20 +590,15 @@ class Config {
                                         "name": "time",
                                         "orig": "time",
                                         "type": "`$INTEGER`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     }
                                 ]
                             },
-                            "select": {
-                                "exist": [
-                                    "extended",
-                                    "icao24",
-                                    "lamax",
-                                    "lamin",
-                                    "lomax",
-                                    "lomin",
-                                    "time"
-                                ]
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -659,7 +671,8 @@ class Config {
                                         "orig": "icao24",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "reqd": true
+                                        "reqd": true,
+                                        "field": true
                                     },
                                     {
                                         "name": "time",
@@ -675,6 +688,10 @@ class Config {
                                     "icao24",
                                     "time"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

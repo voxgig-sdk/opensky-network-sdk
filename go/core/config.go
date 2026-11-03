@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -81,6 +82,7 @@ func MakeConfig() map[string]any {
 			"base": "https://opensky-network.org/api",
 			"auth": map[string]any{
 				"prefix": "Basic",
+				"basic": true,
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",
@@ -217,6 +219,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"field": true,
 										},
 									},
 								},
@@ -227,6 +230,10 @@ func MakeConfig() map[string]any {
 										"end",
 										"icao24",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -283,6 +290,10 @@ func MakeConfig() map[string]any {
 										"end",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -338,6 +349,10 @@ func MakeConfig() map[string]any {
 										"end",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -384,6 +399,10 @@ func MakeConfig() map[string]any {
 										"begin",
 										"end",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -454,15 +473,14 @@ func MakeConfig() map[string]any {
 											"orig": "time",
 											"type": "`$INTEGER`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"icao24",
-										"serial",
-										"time",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -557,19 +575,14 @@ func MakeConfig() map[string]any {
 											"orig": "time",
 											"type": "`$INTEGER`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"extended",
-										"icao24",
-										"lamax",
-										"lamin",
-										"lomax",
-										"lomin",
-										"time",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -643,6 +656,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"field": true,
 										},
 										map[string]any{
 											"name": "time",
@@ -658,6 +672,10 @@ func MakeConfig() map[string]any {
 										"icao24",
 										"time",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

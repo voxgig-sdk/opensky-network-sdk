@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to PyPI. Install it from the GitHub
-release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/opensky-network-sdk/releases)) or
+release tag (`py/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/opensky-network-sdk/tags)) or
 from a source checkout:
 
 ```bash
@@ -39,20 +39,6 @@ client = OpenskyNetworkSDK({
 })
 ```
 
-### 2. List flight records
-
-`list()` returns a `list` of records (each a `dict`) and raises on
-error — iterate it directly.
-
-```python
-try:
-    flights = client.Flight().list({"begin": 1, "end": 1})
-    for flight in flights:
-        print(flight)
-except Exception as err:
-    print(f"list failed: {err}")
-```
-
 
 ## Error handling
 
@@ -60,8 +46,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    tracks = client.Track().list()
-    print(tracks)
+    owns = client.Own().list()
+    print([item.data_get() for item in owns])
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -127,10 +113,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OpenskyNetworkSDK.test()
 
-# Entity ops return the ENTITY and raises on error;
-# call data_get() for the record.
-track = client.Track().list()
-# track contains the mock response record
+# Entity ops return the entity, and list one per record; they raise on error.
+own = client.Own().list()
+# data_get() on an entity reads its mock response record
 ```
 
 ### Use a custom fetch function
@@ -219,7 +204,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria, one per record. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -229,9 +214,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
-ops, a `list` for `list`) and raise on error. Wrap calls in
-`try`/`except` to handle failures.
+Entity operations return the entity, and `list` a `list` of entities, one
+per record; an entity's `data_get()` reads its record (a `dict`). They raise
+on error, so wrap calls in `try`/`except` to handle failures.
 
 The `direct()` escape hatch never raises — it returns a result `dict`
 you branch on via `result["ok"]`:
@@ -335,12 +320,6 @@ Create an instance: `flight = client.Flight()`
 | `firstSeen` | `int` | Unix timestamp (seconds) of the first position report |
 | `icao24` | `str` | Unique ICAO 24-bit address of the transponder in hex string representation |
 | `lastSeen` | `int` | Unix timestamp (seconds) of the last position report |
-
-#### Example: List
-
-```python
-flights = client.Flight().list({"begin": 1, "end": 1})
-```
 
 
 ### Own
@@ -598,11 +577,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-track = client.Track()
-track.list()
+own = client.Own()
+own.list()
 
-# track.data_get() now returns the track data from the last list
-# track.match_get() returns the last match criteria
+# own.data_get() now returns the own data from the last list
+# own.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

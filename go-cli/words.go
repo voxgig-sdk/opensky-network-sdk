@@ -75,7 +75,7 @@ func runOp(client *sdk.OpenskyNetworkSDK, op string, query *eng.Value, entityAto
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.OpenskyNetworkSDK, name string) (sdk.OpenskyNetworkEntity, error) {
+func entityFor(client *sdk.OpenskyNetworkSDK, name string) (sdk.OpenskyNetworkEntityBase, error) {
 	switch strings.ToLower(name) {
 	case "flight":
 		return client.Flight(nil), nil

@@ -64,12 +64,9 @@ main: kit: entity: own: {
           }
           m: "GET"
           o: "/states/own"
-          q: {
-            exist: [
-              "icao24"
-              "serial"
-              "time"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

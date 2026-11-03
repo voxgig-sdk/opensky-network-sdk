@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/opensky-network-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/opensky-network-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -41,20 +41,6 @@ client = OpenskyNetworkSDK.new({
 })
 ```
 
-### 2. List flight records
-
-```ruby
-begin
-  # list returns an Array of Flight records — iterate directly.
-  flights = client.Flight.list
-  flights.each do |item|
-    puts "#{item["arrivalAirportCandidatesCount"]}"
-  end
-rescue => err
-  warn "list failed: #{err}"
-end
-```
-
 
 ## Error handling
 
@@ -62,7 +48,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  tracks = client.Track.list()
+  owns = client.Own.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -130,10 +116,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = OpenskyNetworkSDK.test
 
-# Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-track = client.Track.list()
-puts track
+# list returns an Array of Own entities, one per mock record (raises on
+# error); data_get reads each record.
+owns = client.Own.list()
+owns.each { |item| puts item.data_get }
 ```
 
 ### Use a custom fetch function
@@ -222,7 +208,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -232,9 +218,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `OpenskyNetworkError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`OpenskyNetworkError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -338,13 +325,6 @@ Create an instance: `flight = client.Flight`
 | `icao24` | `String` | Unique ICAO 24-bit address of the transponder in hex string representation |
 | `lastSeen` | `Integer` | Unix timestamp (seconds) of the last position report |
 
-#### Example: List
-
-```ruby
-# list returns an Array of Flight records (raises on error).
-flights = client.Flight.list
-```
-
 
 ### Own
 
@@ -366,8 +346,9 @@ Create an instance: `own = client.Own`
 #### Example: List
 
 ```ruby
-# list returns an Array of Own records (raises on error).
+# list returns an Array of Own entities, one per record (raises on error).
 owns = client.Own.list
+owns.each { |item| puts item.data_get }
 ```
 
 
@@ -391,8 +372,9 @@ Create an instance: `state_vector = client.StateVector`
 #### Example: List
 
 ```ruby
-# list returns an Array of StateVector records (raises on error).
+# list returns an Array of StateVector entities, one per record (raises on error).
 state_vectors = client.StateVector.list
+state_vectors.each { |item| puts item.data_get }
 ```
 
 
@@ -419,8 +401,9 @@ Create an instance: `track = client.Track`
 #### Example: List
 
 ```ruby
-# list returns an Array of Track records (raises on error).
-tracks = client.Track.list
+# list returns an Array of Track entities, one per record (raises on error).
+tracks = client.Track.list({ "icao24" => "example", "time" => 1 })
+tracks.each { |item| puts item.data_get }
 ```
 
 ## Features
@@ -605,11 +588,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-track = client.Track
-track.list()
+own = client.Own
+own.list()
 
-# track.data_get now returns the track data from the last list
-# track.match_get returns the last match criteria
+# own.data_get now returns the own data from the last list
+# own.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

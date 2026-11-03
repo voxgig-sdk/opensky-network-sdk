@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Track();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('track hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.OpenskyNetworkSDK.test(offline).Track().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.OpenskyNetworkSDK.test(offline).Track()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.OpenskyNetworkSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Track().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.OpenskyNetworkSDK.test().Track().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.OpenskyNetworkSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Track().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Track().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.OpenskyNetworkSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Track().list({ "icao24": 1, "time": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.OPENSKY_NETWORK_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "callsign": { "a": true, "h": "Callsign", "n": "callsign", "r": false, "sh": "Callsign of the vehicle", "t": "`$STRING`", "key$": "callsign", "index$": 0 }, "endTime": { "a": true, "h": "End Time", "n": "endTime", "r": false, "sh": "Unix timestamp (seconds) of the end of the track", "t": "`$INTEGER`", "key$": "endTime", "index$": 1 }, "icao24": { "a": true, "h": "Icao24", "n": "icao24", "r": false, "sh": "Unique ICAO 24-bit address of the transponder", "t": "`$STRING`", "key$": "icao24", "index$": 2 }, "path": { "a": true, "h": "Path", "n": "path", "r": false, "sh": "Array of waypoints representing the aircraft trajectory", "t": "`$ARRAY`", "union": { "branches": 3, "count": 1, "depth": 2 }, "key$": "path", "index$": 3 }, "startTime": { "a": true, "h": "Start Time", "n": "startTime", "r": false, "sh": "Unix timestamp (seconds) of the start of the track", "t": "`$INTEGER`", "key$": "startTime", "index$": 4 } }, "name": "track", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /tracks", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "icao24", "or": "icao24", "r": true, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "time", "or": "time", "r": true, "t": "`$INTEGER`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/tracks", "q": { "exist": ["icao24", "time"] }, "r": {}, "s": [{ "lit": "tracks" }], "t": { "req": "`reqdata`", "res": "`body.path`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "track", "name__orig": "track", "Name": "Track", "name_": "track", "name-": "track", "NAME": "TRACK", "index$": 3 }, { "active": true, "entity": "track", "key$": "BasicTrackFlow", "kind": "basic", "name": "BasicTrackFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "track_ref01" } }], "index$": 0 }] }, 'Track', { "GET /tracks": { "protocol": "http", "parameters": [{ "name": "icao24", "in": "query", "description": "ICAO24 transponder address represented by a hex string", "required": true, "schema": { "type": "string" }, "index$": 0 }, { "name": "time", "in": "query", "description": "Unix timestamp (seconds) for which the track should be retrieved", "required": true, "schema": { "type": "integer" }, "index$": 1 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "callsign": { "a": true, "h": "Callsign", "n": "callsign", "r": false, "sh": "Callsign of the vehicle", "t": "`$STRING`", "key$": "callsign", "index$": 0 }, "endTime": { "a": true, "h": "End Time", "n": "endTime", "r": false, "sh": "Unix timestamp (seconds) of the end of the track", "t": "`$INTEGER`", "key$": "endTime", "index$": 1 }, "icao24": { "a": true, "h": "Icao24", "n": "icao24", "r": false, "sh": "Unique ICAO 24-bit address of the transponder", "t": "`$STRING`", "key$": "icao24", "index$": 2 }, "path": { "a": true, "h": "Path", "n": "path", "r": false, "sh": "Array of waypoints representing the aircraft trajectory", "t": "`$ARRAY`", "union": { "branches": 3, "count": 1, "depth": 2 }, "key$": "path", "index$": 3 }, "startTime": { "a": true, "h": "Start Time", "n": "startTime", "r": false, "sh": "Unix timestamp (seconds) of the start of the track", "t": "`$INTEGER`", "key$": "startTime", "index$": 4 } }, "name": "track", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /tracks", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "icao24", "or": "icao24", "r": true, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "time", "or": "time", "r": true, "t": "`$INTEGER`", "index$": 1 }] }, "k": "http", "m": "GET", "o": "/tracks", "q": { "exist": ["icao24", "time"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "tracks" }], "t": { "req": "`reqdata`", "res": "`body.path`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "track", "name__orig": "track", "Name": "Track", "name_": "track", "name-": "track", "NAME": "TRACK", "index$": 3 }, { "active": true, "entity": "track", "key$": "BasicTrackFlow", "kind": "basic", "name": "BasicTrackFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "track_ref01" } }], "index$": 0 }] }, 'Track', { "GET /tracks": { "protocol": "http", "parameters": [{ "name": "icao24", "in": "query", "description": "ICAO24 transponder address represented by a hex string", "required": true, "schema": { "type": "string" }, "index$": 0 }, { "name": "time", "in": "query", "description": "Unix timestamp (seconds) for which the track should be retrieved", "required": true, "schema": { "type": "integer" }, "index$": 1 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const track_ref01_list = (await track_ref01_ent.list(track_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

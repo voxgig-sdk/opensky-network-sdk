@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { OpenskyNetworkSDK, BaseFeature, stdutil } from '../../..'
+import { OpenskyNetworkSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('OwnEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('own hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of OpenskyNetworkSDK.test(offline).Own().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of OpenskyNetworkSDK.test(offline).Own()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = OpenskyNetworkSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Own().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of OpenskyNetworkSDK.test().Own().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new OpenskyNetworkSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Own().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Own().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = OpenskyNetworkSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Own().list({"time":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.OPENSKY_NETWORK_TEST_LIVE
@@ -51,7 +109,7 @@ describe('OwnEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"states":{"a":true,"h":"States","n":"states","r":false,"sh":"Array of state vectors","t":"`$ARRAY`","union":{"branches":5,"count":1,"depth":2},"key$":"states","index$":0},"time":{"a":true,"h":"Time","n":"time","r":false,"sh":"The time which the state vectors in this response are associated with.","t":"`$INTEGER`","key$":"time","index$":1}},"name":"own","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /states/own","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"icao24","or":"icao24","r":false,"t":"`$ARRAY`","index$":0},{"a":true,"k":"query","n":"serial","or":"serials","r":false,"t":"`$ARRAY`","index$":1},{"a":true,"k":"query","n":"time","or":"time","r":false,"t":"`$INTEGER`","index$":2}]},"k":"http","m":"GET","o":"/states/own","q":{"exist":["icao24","serial","time"]},"r":{},"s":[{"lit":"states"},{"lit":"own"}],"t":{"req":"`reqdata`","res":"`body.states`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"own","name__orig":"own","Name":"Own","name_":"own","name-":"own","NAME":"OWN","index$":1}, {"active":true,"entity":"own","key$":"BasicOwnFlow","kind":"basic","name":"BasicOwnFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"own_ref01"}}],"index$":0}]}, 'Own', {"GET /states/own":{"protocol":"http","parameters":[{"name":"time","in":"query","description":"The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.","required":false,"schema":{"type":"integer"},"index$":0},{"name":"icao24","in":"query","description":"One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.","required":false,"schema":{"type":"array","items":{"type":"string"}},"explode":true,"index$":1},{"name":"serials","in":"query","description":"Retrieve only states of a subset of your receivers. You can pass this argument several times to filter state of more than one of your receivers.","required":false,"schema":{"type":"array","items":{"type":"integer"}},"explode":true,"index$":2}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"states":{"a":true,"h":"States","n":"states","r":false,"sh":"Array of state vectors","t":"`$ARRAY`","union":{"branches":5,"count":1,"depth":2},"key$":"states","index$":0},"time":{"a":true,"h":"Time","n":"time","r":false,"sh":"The time which the state vectors in this response are associated with.","t":"`$INTEGER`","key$":"time","index$":1}},"name":"own","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /states/own","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"icao24","or":"icao24","r":false,"t":"`$ARRAY`","index$":0},{"a":true,"k":"query","n":"serial","or":"serials","r":false,"t":"`$ARRAY`","index$":1},{"a":true,"k":"query","n":"time","or":"time","r":false,"t":"`$INTEGER`","index$":2}]},"k":"http","m":"GET","o":"/states/own","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"states"},{"lit":"own"}],"t":{"req":"`reqdata`","res":"`body.states`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"own","name__orig":"own","Name":"Own","name_":"own","name-":"own","NAME":"OWN","index$":1}, {"active":true,"entity":"own","key$":"BasicOwnFlow","kind":"basic","name":"BasicOwnFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"own_ref01"}}],"index$":0}]}, 'Own', {"GET /states/own":{"protocol":"http","parameters":[{"name":"time","in":"query","description":"The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.","required":false,"schema":{"type":"integer"},"index$":0},{"name":"icao24","in":"query","description":"One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.","required":false,"schema":{"type":"array","items":{"type":"string"}},"explode":true,"index$":1},{"name":"serials","in":"query","description":"Retrieve only states of a subset of your receivers. You can pass this argument several times to filter state of more than one of your receivers.","required":false,"schema":{"type":"array","items":{"type":"integer"}},"explode":true,"index$":2}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +130,12 @@ describe('OwnEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

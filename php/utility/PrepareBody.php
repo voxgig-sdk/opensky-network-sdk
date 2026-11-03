@@ -3,11 +3,16 @@ declare(strict_types=1);
 
 // OpenskyNetwork SDK utility: prepare_body
 
+require_once __DIR__ . '/Media.php';
+
 class OpenskyNetworkPrepareBody
 {
     public static function call(OpenskyNetworkContext $ctx): mixed
     {
         if ($ctx->op->input === 'data') {
+            if (OpenskyNetworkMedia::isRawRequest($ctx->point)) {
+                return OpenskyNetworkMedia::rawBody($ctx->reqdata);
+            }
             $body = ($ctx->utility->transform_request)($ctx);
             // PHP cannot tell an empty map from an empty list, and this
             // vendored struct answers [] where the canonical transform

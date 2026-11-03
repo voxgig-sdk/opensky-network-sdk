@@ -10,6 +10,12 @@ const OPTION_secret = 'secret'
 const NOTFOUND = '__NOTFOUND__'
 
 
+// The client's `auth.name` option, when set, replaces the name the API declares.
+function credName(name: any): string {
+  return 'string' === typeof name && '' !== name ? name.toLowerCase() : CRED_name
+}
+
+
 function prepareAuth(ctx: Context): Spec | Error {
   const utility = ctx.utility
 
@@ -36,6 +42,12 @@ function prepareAuth(ctx: Context): Spec | Error {
   }
 
   const prefix = options.auth.prefix
+  const name = credName(options.auth.name)
+
+  // A credential left under the declared name would travel beside the renamed one.
+  if (CRED_name !== name) {
+    delprop(headers, CRED_name)
+  }
 
   const apikey = getprop(options, OPTION_apikey, NOTFOUND)
 
@@ -50,26 +62,26 @@ function prepareAuth(ctx: Context): Spec | Error {
     const pass = NOTFOUND === secret || null == secret ? '' : secret
 
     if (noApikey) {
-      delprop(headers, CRED_name)
+      delprop(headers, name)
     }
     else {
       const b64 = Buffer.from(apikey + ':' + pass).toString('base64')
       // The joined, encoded pair is a wire form neither credential's own
       // registration covers.
       utility.cleanAdd(ctx, b64)
-      setprop(headers, CRED_name, prefix ? prefix + ' ' + b64 : b64)
+      setprop(headers, name, prefix ? prefix + ' ' + b64 : b64)
     }
 
     return spec
   }
 
   if (NOTFOUND === apikey || null == apikey || '' === apikey) {
-    delprop(headers, CRED_name)
+    delprop(headers, name)
   }
   else {
     // A raw credential (empty prefix, e.g. an apiKey scheme) must go in
     // as-is; only a non-empty prefix (Bearer/Basic/OAuth) is space-joined.
-    setprop(headers, CRED_name, prefix ? prefix + ' ' + apikey : apikey)
+    setprop(headers, name, prefix ? prefix + ' ' + apikey : apikey)
   }
 
   return spec

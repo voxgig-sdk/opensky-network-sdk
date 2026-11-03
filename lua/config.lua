@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -77,6 +78,7 @@ local function make_config()
       base = "https://opensky-network.org/api",
       auth = {
         prefix = "Basic",
+        basic = true,
       },
       headers = {
         ["content-type"] = "application/json",
@@ -213,6 +215,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["reqd"] = true,
+                      ["field"] = true,
                     },
                   },
                 },
@@ -223,6 +226,10 @@ local function make_config()
                     "end",
                     "icao24",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
               {
@@ -279,6 +286,10 @@ local function make_config()
                     "end",
                   },
                 },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
               {
                 ["kind"] = "http",
@@ -334,6 +345,10 @@ local function make_config()
                     "end",
                   },
                 },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
               {
                 ["kind"] = "http",
@@ -380,6 +395,10 @@ local function make_config()
                     "begin",
                     "end",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -450,15 +469,14 @@ local function make_config()
                       ["orig"] = "time",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "icao24",
-                    "serial",
-                    "time",
-                  },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -553,19 +571,14 @@ local function make_config()
                       ["orig"] = "time",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "extended",
-                    "icao24",
-                    "lamax",
-                    "lamin",
-                    "lomax",
-                    "lomin",
-                    "time",
-                  },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -639,6 +652,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["reqd"] = true,
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "time",
@@ -654,6 +668,10 @@ local function make_config()
                     "icao24",
                     "time",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },

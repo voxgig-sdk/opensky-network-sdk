@@ -15,7 +15,7 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/opensky-network-sdk/releases)), or from a
+release tag (`ts/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/opensky-network-sdk/tags)), or from a
 clone, which carries the compiled `dist/`:
 
 ```bash
@@ -40,20 +40,6 @@ const client = new OpenskyNetworkSDK({
 })
 ```
 
-### 2. List flight records
-
-`list()` resolves to an array of Flight ENTITIES — every operation
-resolves to entities, not raw records. Iterate them directly, and call
-`.data()` on one for the record it holds:
-
-```ts
-const flights = await client.Flight().list({ begin: 1, end: 1 })
-
-for (const flight of flights) {
-  console.log(flight)
-}
-```
-
 
 ## Error handling
 
@@ -61,15 +47,16 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const tracks = await client.Track().list()
-  console.log(tracks)
+  const owns = await client.Own().list()
+  console.log(owns.map((item) => item.data()))
 } catch (err) {
   console.error('list failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -78,8 +65,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -97,9 +84,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -128,10 +112,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = OpenskyNetworkSDK.test()
 
-const track = await client.Track().list()
-// track is the entity, populated with mock response data
-// — call track.data() for the record itself
-console.log(track)
+const owns = await client.Own().list()
+// owns is an array of Own entities, one per mock record
+console.log(owns.map((own) => own.data()))
 ```
 
 You can also use the instance method:
@@ -146,7 +129,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Track()
+const entity = client.Own()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -257,7 +240,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria, one per record. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -266,8 +249,8 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
@@ -394,12 +377,6 @@ Create an instance: `const flight = client.Flight()`
 | `firstSeen` | `number` | Unix timestamp (seconds) of the first position report |
 | `icao24` | `string` | Unique ICAO 24-bit address of the transponder in hex string representation |
 | `lastSeen` | `number` | Unix timestamp (seconds) of the last position report |
-
-#### Example: List
-
-```ts
-const flights = await client.Flight().list({ begin: 1, end: 1 })
-```
 
 
 ### Own
@@ -650,11 +627,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const track = client.Track()
-await track.list()
+const own = client.Own()
+await own.list()
 
-// track.data() now returns the track data from the last `list`
-// track.match() returns the last match criteria
+// own.data() now returns the own data from the last `list`
+// own.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

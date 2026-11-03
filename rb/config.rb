@@ -79,6 +79,7 @@ module OpenskyNetworkConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -226,6 +227,7 @@ module OpenskyNetworkConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
+                        "field" => true,
                       },
                     ],
                   },
@@ -236,6 +238,10 @@ module OpenskyNetworkConfig
                       "end",
                       "icao24",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
                 {
@@ -292,6 +298,10 @@ module OpenskyNetworkConfig
                       "end",
                     ],
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -347,6 +357,10 @@ module OpenskyNetworkConfig
                       "end",
                     ],
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -393,6 +407,10 @@ module OpenskyNetworkConfig
                       "begin",
                       "end",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -463,15 +481,14 @@ module OpenskyNetworkConfig
                         "orig" => "time",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "icao24",
-                      "serial",
-                      "time",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -566,19 +583,14 @@ module OpenskyNetworkConfig
                         "orig" => "time",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "extended",
-                      "icao24",
-                      "lamax",
-                      "lamin",
-                      "lomax",
-                      "lomin",
-                      "time",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -652,6 +664,7 @@ module OpenskyNetworkConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
+                        "field" => true,
                       },
                       {
                         "name" => "time",
@@ -667,6 +680,10 @@ module OpenskyNetworkConfig
                       "icao24",
                       "time",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

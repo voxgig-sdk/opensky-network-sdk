@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.StateVector();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('state_vector hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.OpenskyNetworkSDK.test(offline).StateVector().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.OpenskyNetworkSDK.test(offline).StateVector()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.OpenskyNetworkSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.StateVector().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.OpenskyNetworkSDK.test().StateVector().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.OpenskyNetworkSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.StateVector().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.StateVector().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.OpenskyNetworkSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.StateVector().list({ "extended": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.OPENSKY_NETWORK_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "states": { "a": true, "h": "States", "n": "states", "r": false, "sh": "Array of state vectors", "t": "`$ARRAY`", "union": { "branches": 5, "count": 1, "depth": 2 }, "key$": "states", "index$": 0 }, "time": { "a": true, "h": "Time", "n": "time", "r": false, "sh": "The time which the state vectors in this response are associated with.", "t": "`$INTEGER`", "key$": "time", "index$": 1 } }, "name": "state_vector", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /states/all", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "extended", "or": "extended", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "k": "query", "n": "icao24", "or": "icao24", "r": false, "t": "`$ARRAY`", "index$": 1 }, { "a": true, "k": "query", "n": "lamax", "or": "lamax", "r": false, "t": "`$NUMBER`", "index$": 2 }, { "a": true, "k": "query", "n": "lamin", "or": "lamin", "r": false, "t": "`$NUMBER`", "index$": 3 }, { "a": true, "k": "query", "n": "lomax", "or": "lomax", "r": false, "t": "`$NUMBER`", "index$": 4 }, { "a": true, "k": "query", "n": "lomin", "or": "lomin", "r": false, "t": "`$NUMBER`", "index$": 5 }, { "a": true, "k": "query", "n": "time", "or": "time", "r": false, "t": "`$INTEGER`", "index$": 6 }] }, "k": "http", "m": "GET", "o": "/states/all", "q": { "exist": ["extended", "icao24", "lamax", "lamin", "lomax", "lomin", "time"] }, "r": {}, "s": [{ "lit": "states" }, { "lit": "all" }], "t": { "req": "`reqdata`", "res": "`body.states`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "state_vector", "name__orig": "state_vector", "Name": "StateVector", "name_": "state_vector", "name-": "state-vector", "NAME": "STATE_VECTOR", "index$": 2 }, { "active": true, "entity": "state_vector", "key$": "BasicStateVectorFlow", "kind": "basic", "name": "BasicStateVectorFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "state_vector_ref01" } }], "index$": 0 }] }, 'StateVector', { "GET /states/all": { "protocol": "http", "parameters": [{ "name": "time", "in": "query", "description": "The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.", "required": false, "schema": { "type": "integer" }, "index$": 0 }, { "name": "icao24", "in": "query", "description": "One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.", "required": false, "schema": { "type": "array", "items": { "type": "string" } }, "explode": true, "index$": 1 }, { "name": "lamin", "in": "query", "description": "Lower bound for the latitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 2 }, { "name": "lomin", "in": "query", "description": "Lower bound for the longitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 3 }, { "name": "lamax", "in": "query", "description": "Upper bound for the latitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 4 }, { "name": "lomax", "in": "query", "description": "Upper bound for the longitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 5 }, { "name": "extended", "in": "query", "description": "Set to 1 to include aircraft category information", "required": false, "schema": { "type": "integer", "enum": [0, 1] }, "index$": 6 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "states": { "a": true, "h": "States", "n": "states", "r": false, "sh": "Array of state vectors", "t": "`$ARRAY`", "union": { "branches": 5, "count": 1, "depth": 2 }, "key$": "states", "index$": 0 }, "time": { "a": true, "h": "Time", "n": "time", "r": false, "sh": "The time which the state vectors in this response are associated with.", "t": "`$INTEGER`", "key$": "time", "index$": 1 } }, "name": "state_vector", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /states/all", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "extended", "or": "extended", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "k": "query", "n": "icao24", "or": "icao24", "r": false, "t": "`$ARRAY`", "index$": 1 }, { "a": true, "k": "query", "n": "lamax", "or": "lamax", "r": false, "t": "`$NUMBER`", "index$": 2 }, { "a": true, "k": "query", "n": "lamin", "or": "lamin", "r": false, "t": "`$NUMBER`", "index$": 3 }, { "a": true, "k": "query", "n": "lomax", "or": "lomax", "r": false, "t": "`$NUMBER`", "index$": 4 }, { "a": true, "k": "query", "n": "lomin", "or": "lomin", "r": false, "t": "`$NUMBER`", "index$": 5 }, { "a": true, "k": "query", "n": "time", "or": "time", "r": false, "t": "`$INTEGER`", "index$": 6 }] }, "k": "http", "m": "GET", "o": "/states/all", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "states" }, { "lit": "all" }], "t": { "req": "`reqdata`", "res": "`body.states`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "state_vector", "name__orig": "state_vector", "Name": "StateVector", "name_": "state_vector", "name-": "state-vector", "NAME": "STATE_VECTOR", "index$": 2 }, { "active": true, "entity": "state_vector", "key$": "BasicStateVectorFlow", "kind": "basic", "name": "BasicStateVectorFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "state_vector_ref01" } }], "index$": 0 }] }, 'StateVector', { "GET /states/all": { "protocol": "http", "parameters": [{ "name": "time", "in": "query", "description": "The time in seconds since epoch (Unix timestamp) to retrieve states for. Current time will be used if omitted.", "required": false, "schema": { "type": "integer" }, "index$": 0 }, { "name": "icao24", "in": "query", "description": "One or more ICAO24 transponder addresses represented by a hex string (e.g. abc9f3). To filter multiple ICAO24 append the property once for each address. If omitted, the state vectors of all aircraft are returned.", "required": false, "schema": { "type": "array", "items": { "type": "string" } }, "explode": true, "index$": 1 }, { "name": "lamin", "in": "query", "description": "Lower bound for the latitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 2 }, { "name": "lomin", "in": "query", "description": "Lower bound for the longitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 3 }, { "name": "lamax", "in": "query", "description": "Upper bound for the latitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 4 }, { "name": "lomax", "in": "query", "description": "Upper bound for the longitude in decimal degrees", "required": false, "schema": { "type": "number", "format": "float" }, "index$": 5 }, { "name": "extended", "in": "query", "description": "Set to 1 to include aircraft category information", "required": false, "schema": { "type": "integer", "enum": [0, 1] }, "index$": 6 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const state_vector_ref01_list = (await state_vector_ref01_ent.list(state_vector_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

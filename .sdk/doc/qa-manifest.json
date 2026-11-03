@@ -3,5 +3,30 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Array of state vectors",
+      "Array of waypoints representing the aircraft trajectory",
+      "Basic authentication using OpenSky username and password (deprecated for new accounts)",
+      "Callsign of the vehicle",
+      "Callsign of the vehicle (8 chars)",
+      "Estimated arrival airport ICAO code",
+      "Horizontal distance to estimated arrival airport in meters",
+      "Number of candidates for arrival airport",
+      "Number of candidates for departure airport",
+      "OAuth2 Client Credentials Flow. Obtain access token from https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token",
+      "OpenSky Network API",
+      "Retrieve state vectors, flights, and tracks for the whole network, a particular sensor, or a specific aircraft. Rate limits apply for certain API calls, and restrictions vary for anonymous and OpenSky users.",
+      "Successful response with arrivals data",
+      "Successful response with departures data",
+      "Successful response with flights data",
+      "Successful response with state vectors",
+      "Successful response with track data",
+      "The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [time - 1, time].",
+      "Unique ICAO 24-bit address of the transponder",
+      "Unix timestamp (seconds) of the end of the track",
+      "Unix timestamp (seconds) of the start of the track"
+    ]
+  }
 }

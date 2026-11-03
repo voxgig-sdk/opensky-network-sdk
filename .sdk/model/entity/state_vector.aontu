@@ -92,16 +92,9 @@ main: kit: entity: state_vector: {
           }
           m: "GET"
           o: "/states/all"
-          q: {
-            exist: [
-              "extended"
-              "icao24"
-              "lamax"
-              "lamin"
-              "lomax"
-              "lomin"
-              "time"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

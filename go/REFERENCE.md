@@ -48,19 +48,19 @@ client := sdk.TestSDK(testopts, sdkopts)
 
 ### Instance Methods
 
-#### `Flight(data map[string]any) OpenskyNetworkEntity`
+#### `Flight(data map[string]any) OpenskyNetworkEntityBase`
 
 Create a new `Flight` entity instance. Pass `nil` for no initial data.
 
-#### `Own(data map[string]any) OpenskyNetworkEntity`
+#### `Own(data map[string]any) OpenskyNetworkEntityBase`
 
 Create a new `Own` entity instance. Pass `nil` for no initial data.
 
-#### `StateVector(data map[string]any) OpenskyNetworkEntity`
+#### `StateVector(data map[string]any) OpenskyNetworkEntityBase`
 
 Create a new `StateVector` entity instance. Pass `nil` for no initial data.
 
-#### `Track(data map[string]any) OpenskyNetworkEntity`
+#### `Track(data map[string]any) OpenskyNetworkEntityBase`
 
 Create a new `Track` entity instance. Pass `nil` for no initial data.
 
@@ -124,20 +124,6 @@ fmt.Println(flight.GetName()) // "flight"
 | `icao24` | `string` | No | Unique ICAO 24-bit address of the transponder in hex string representation |
 | `lastSeen` | `int` | No | Unix timestamp (seconds) of the last position report |
 
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.Flight(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
 ### Common Methods
 
 #### `Data(args ...any) any`
@@ -154,6 +140,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `FlightEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -180,14 +174,16 @@ fmt.Println(own.GetName()) // "own"
 
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
 results, err := client.Own(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(results)
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Common Methods
@@ -206,6 +202,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `OwnEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -232,14 +236,16 @@ fmt.Println(stateVector.GetName()) // "state_vector"
 
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
 results, err := client.StateVector(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(results)
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Common Methods
@@ -258,6 +264,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `StateVectorEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -287,14 +301,16 @@ fmt.Println(track.GetName()) // "track"
 
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.Track(nil).List(nil, nil)
+results, err := client.Track(nil).List(map[string]any{"icao24": "example", "time": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(results)
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Common Methods
@@ -313,6 +329,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `TrackEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -478,6 +502,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

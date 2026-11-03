@@ -3,6 +3,8 @@ package utility
 import (
 	"encoding/base64"
 
+	"strings"
+
 	vs "github.com/voxgig-sdk/opensky-network-sdk/go/utility/struct"
 
 	"github.com/voxgig-sdk/opensky-network-sdk/go/core"
@@ -12,6 +14,14 @@ const credName = "authorization"
 const optionApikey = "apikey"
 const optionSecret = "secret"
 const notFound = "__NOTFOUND__"
+
+// The client's auth.name option, when set, replaces the name the API declares.
+func authName(options map[string]any) string {
+	if name, ok := vs.GetPath(options, []any{"auth", "name"}).(string); ok && name != "" {
+		return strings.ToLower(name)
+	}
+	return credName
+}
 
 func prepareAuthUtil(ctx *core.Context) (*core.Spec, error) {
 	spec := ctx.Spec
@@ -27,6 +37,13 @@ func prepareAuthUtil(ctx *core.Context) (*core.Spec, error) {
 	if options["auth"] == nil {
 		delete(headers, credName)
 		return spec, nil
+	}
+
+	name := authName(options)
+
+	// A credential left under the declared name would travel beside the renamed one.
+	if name != credName {
+		delete(headers, credName)
 	}
 
 	apikey := vs.GetProp(options, optionApikey, notFound)
@@ -53,7 +70,7 @@ func prepareAuthUtil(ctx *core.Context) (*core.Spec, error) {
 		}
 
 		if skip {
-			delete(headers, credName)
+			delete(headers, name)
 		} else {
 			apikeyVal, _ := apikey.(string)
 			b64 := base64.StdEncoding.EncodeToString([]byte(apikeyVal + ":" + secretVal))
@@ -67,9 +84,9 @@ func prepareAuthUtil(ctx *core.Context) (*core.Spec, error) {
 			}
 			// Empty prefix (raw apiKey credential) must not add a leading space.
 			if basicPrefix == "" {
-				headers[credName] = b64
+				headers[name] = b64
 			} else {
-				headers[credName] = basicPrefix + " " + b64
+				headers[name] = basicPrefix + " " + b64
 			}
 		}
 
@@ -77,7 +94,7 @@ func prepareAuthUtil(ctx *core.Context) (*core.Spec, error) {
 	}
 
 	if skip {
-		delete(headers, credName)
+		delete(headers, name)
 	} else {
 		authPrefix := ""
 		if ap := vs.GetPath(options, []any{"auth", "prefix"}); ap != nil {
@@ -89,9 +106,9 @@ func prepareAuthUtil(ctx *core.Context) (*core.Spec, error) {
 		}
 		// Empty prefix (raw apiKey credential) must not add a leading space.
 		if authPrefix == "" {
-			headers[credName] = apikeyVal
+			headers[name] = apikeyVal
 		} else {
-			headers[credName] = authPrefix + " " + apikeyVal
+			headers[name] = authPrefix + " " + apikeyVal
 		}
 	}
 

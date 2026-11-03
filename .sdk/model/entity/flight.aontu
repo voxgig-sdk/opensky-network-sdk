@@ -137,6 +137,10 @@ main: kit: entity: flight: {
               "icao24"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "flights"
@@ -190,6 +194,10 @@ main: kit: entity: flight: {
               "begin"
               "end"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -245,6 +253,10 @@ main: kit: entity: flight: {
               "end"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "flights"
@@ -290,6 +302,10 @@ main: kit: entity: flight: {
               "begin"
               "end"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

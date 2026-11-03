@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { OpenskyNetworkSDK, BaseFeature, stdutil } from '../../..'
+import { OpenskyNetworkSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('TrackEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('track hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of OpenskyNetworkSDK.test(offline).Track().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of OpenskyNetworkSDK.test(offline).Track()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = OpenskyNetworkSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Track().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of OpenskyNetworkSDK.test().Track().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new OpenskyNetworkSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Track().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Track().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = OpenskyNetworkSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Track().list({"icao24":1,"time":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.OPENSKY_NETWORK_TEST_LIVE
@@ -51,7 +109,7 @@ describe('TrackEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"callsign":{"a":true,"h":"Callsign","n":"callsign","r":false,"sh":"Callsign of the vehicle","t":"`$STRING`","key$":"callsign","index$":0},"endTime":{"a":true,"h":"End Time","n":"endTime","r":false,"sh":"Unix timestamp (seconds) of the end of the track","t":"`$INTEGER`","key$":"endTime","index$":1},"icao24":{"a":true,"h":"Icao24","n":"icao24","r":false,"sh":"Unique ICAO 24-bit address of the transponder","t":"`$STRING`","key$":"icao24","index$":2},"path":{"a":true,"h":"Path","n":"path","r":false,"sh":"Array of waypoints representing the aircraft trajectory","t":"`$ARRAY`","union":{"branches":3,"count":1,"depth":2},"key$":"path","index$":3},"startTime":{"a":true,"h":"Start Time","n":"startTime","r":false,"sh":"Unix timestamp (seconds) of the start of the track","t":"`$INTEGER`","key$":"startTime","index$":4}},"name":"track","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /tracks","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"icao24","or":"icao24","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"time","or":"time","r":true,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/tracks","q":{"exist":["icao24","time"]},"r":{},"s":[{"lit":"tracks"}],"t":{"req":"`reqdata`","res":"`body.path`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"track","name__orig":"track","Name":"Track","name_":"track","name-":"track","NAME":"TRACK","index$":3}, {"active":true,"entity":"track","key$":"BasicTrackFlow","kind":"basic","name":"BasicTrackFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"track_ref01"}}],"index$":0}]}, 'Track', {"GET /tracks":{"protocol":"http","parameters":[{"name":"icao24","in":"query","description":"ICAO24 transponder address represented by a hex string","required":true,"schema":{"type":"string"},"index$":0},{"name":"time","in":"query","description":"Unix timestamp (seconds) for which the track should be retrieved","required":true,"schema":{"type":"integer"},"index$":1}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"callsign":{"a":true,"h":"Callsign","n":"callsign","r":false,"sh":"Callsign of the vehicle","t":"`$STRING`","key$":"callsign","index$":0},"endTime":{"a":true,"h":"End Time","n":"endTime","r":false,"sh":"Unix timestamp (seconds) of the end of the track","t":"`$INTEGER`","key$":"endTime","index$":1},"icao24":{"a":true,"h":"Icao24","n":"icao24","r":false,"sh":"Unique ICAO 24-bit address of the transponder","t":"`$STRING`","key$":"icao24","index$":2},"path":{"a":true,"h":"Path","n":"path","r":false,"sh":"Array of waypoints representing the aircraft trajectory","t":"`$ARRAY`","union":{"branches":3,"count":1,"depth":2},"key$":"path","index$":3},"startTime":{"a":true,"h":"Start Time","n":"startTime","r":false,"sh":"Unix timestamp (seconds) of the start of the track","t":"`$INTEGER`","key$":"startTime","index$":4}},"name":"track","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /tracks","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"icao24","or":"icao24","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"time","or":"time","r":true,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/tracks","q":{"exist":["icao24","time"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"tracks"}],"t":{"req":"`reqdata`","res":"`body.path`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"track","name__orig":"track","Name":"Track","name_":"track","name-":"track","NAME":"TRACK","index$":3}, {"active":true,"entity":"track","key$":"BasicTrackFlow","kind":"basic","name":"BasicTrackFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"track_ref01"}}],"index$":0}]}, 'Track', {"GET /tracks":{"protocol":"http","parameters":[{"name":"icao24","in":"query","description":"ICAO24 transponder address represented by a hex string","required":true,"schema":{"type":"string"},"index$":0},{"name":"time","in":"query","description":"Unix timestamp (seconds) for which the track should be retrieved","required":true,"schema":{"type":"integer"},"index$":1}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +130,12 @@ describe('TrackEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

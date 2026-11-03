@@ -22,10 +22,28 @@ const PLAN: any[] = [
       "icao24": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "icao24",
       "begin",
       "end"
+    ],
+    "queryArgs": [
+      {
+        "name": "begin",
+        "wire": "begin"
+      },
+      {
+        "name": "end",
+        "wire": "end"
+      },
+      {
+        "name": "icao24",
+        "wire": "icao24"
+      }
     ],
     "auth": [],
     "status": 200,
@@ -61,10 +79,28 @@ const PLAN: any[] = [
       "end": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "airport",
       "begin",
       "end"
+    ],
+    "queryArgs": [
+      {
+        "name": "airport",
+        "wire": "airport"
+      },
+      {
+        "name": "begin",
+        "wire": "begin"
+      },
+      {
+        "name": "end",
+        "wire": "end"
+      }
     ],
     "auth": [],
     "status": 200,
@@ -100,10 +136,28 @@ const PLAN: any[] = [
       "end": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "airport",
       "begin",
       "end"
+    ],
+    "queryArgs": [
+      {
+        "name": "airport",
+        "wire": "airport"
+      },
+      {
+        "name": "begin",
+        "wire": "begin"
+      },
+      {
+        "name": "end",
+        "wire": "end"
+      }
     ],
     "auth": [],
     "status": 200,
@@ -138,9 +192,23 @@ const PLAN: any[] = [
       "end": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "begin",
       "end"
+    ],
+    "queryArgs": [
+      {
+        "name": "begin",
+        "wire": "begin"
+      },
+      {
+        "name": "end",
+        "wire": "end"
+      }
     ],
     "auth": [],
     "status": 200,
@@ -175,10 +243,28 @@ const PLAN: any[] = [
       "time": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "time",
       "icao24",
       "serials"
+    ],
+    "queryArgs": [
+      {
+        "name": "icao24",
+        "wire": "icao24"
+      },
+      {
+        "name": "serial",
+        "wire": "serials"
+      },
+      {
+        "name": "time",
+        "wire": "time"
+      }
     ],
     "auth": [
       [
@@ -219,6 +305,10 @@ const PLAN: any[] = [
       "time": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "time",
       "icao24",
@@ -227,6 +317,36 @@ const PLAN: any[] = [
       "lamax",
       "lomax",
       "extended"
+    ],
+    "queryArgs": [
+      {
+        "name": "extended",
+        "wire": "extended"
+      },
+      {
+        "name": "icao24",
+        "wire": "icao24"
+      },
+      {
+        "name": "lamax",
+        "wire": "lamax"
+      },
+      {
+        "name": "lamin",
+        "wire": "lamin"
+      },
+      {
+        "name": "lomax",
+        "wire": "lomax"
+      },
+      {
+        "name": "lomin",
+        "wire": "lomin"
+      },
+      {
+        "name": "time",
+        "wire": "time"
+      }
     ],
     "auth": [],
     "status": 200,
@@ -254,9 +374,23 @@ const PLAN: any[] = [
       "time": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "icao24",
       "time"
+    ],
+    "queryArgs": [
+      {
+        "name": "icao24",
+        "wire": "icao24"
+      },
+      {
+        "name": "time",
+        "wire": "time"
+      }
     ],
     "auth": [],
     "status": 200,

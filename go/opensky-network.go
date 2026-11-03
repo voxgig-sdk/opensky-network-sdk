@@ -13,7 +13,12 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type OpenskyNetworkEntity = core.OpenskyNetworkEntity
+type OpenskyNetworkEntityBase = core.OpenskyNetworkEntityBase
+
+// Deprecated: use OpenskyNetworkEntityBase.
+type OpenskyNetworkEntity = core.OpenskyNetworkEntityBase
+
+type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
 type Result = core.Result
@@ -41,16 +46,16 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewFlightEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntity {
+	core.NewFlightEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntityBase {
 		return entity.NewFlightEntity(client, entopts)
 	}
-	core.NewOwnEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntity {
+	core.NewOwnEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntityBase {
 		return entity.NewOwnEntity(client, entopts)
 	}
-	core.NewStateVectorEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntity {
+	core.NewStateVectorEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntityBase {
 		return entity.NewStateVectorEntity(client, entopts)
 	}
-	core.NewTrackEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntity {
+	core.NewTrackEntityFunc = func(client *core.OpenskyNetworkSDK, entopts map[string]any) core.OpenskyNetworkEntityBase {
 		return entity.NewTrackEntity(client, entopts)
 	}
 }

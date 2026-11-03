@@ -84,6 +84,10 @@ main: kit: entity: track: {
               "time"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "tracks"

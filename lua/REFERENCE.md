@@ -120,11 +120,7 @@ local flight = client:Flight(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:Flight():list()
-```
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ### Common Methods
 
@@ -173,7 +169,7 @@ local own = client:Own(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
 local results, err = client:Own():list()
@@ -226,7 +222,7 @@ local state_vector = client:StateVector(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
 local results, err = client:StateVector():list()
@@ -282,10 +278,10 @@ local track = client:Track(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Track():list()
+local results, err = client:Track():list({ icao24 = "example", time = 1 })
 ```
 
 ### Common Methods
@@ -475,6 +471,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and
